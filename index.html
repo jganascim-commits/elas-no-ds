@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ELAS NO DS // Portal Exclusivo — Mulheres em Desenvolvimento de Sistemas</title>
+  <!-- Fontes Editoriais -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Three.js para Cenas 3D em Tempo Real -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- =========================================================
+       1. PORTAL DE ENTRADA & EXCLUSIVIDADE FEMININA (3D GATE)
+       ========================================================= -->
+  <section id="portal-gate" class="portal-gate" aria-label="Portal Exclusivo de Entrada">
+    <canvas id="portal-canvas"></canvas>
+
+    <div class="portal-left">
+      <div class="portal-badge-top">
+        <span class="pulse-dot"></span>
+        <span>ESPAÇO AFIRMATIVO &amp; EXCLUSIVO // CURSO DE DESENVOLVIMENTO DE SISTEMAS</span>
+      </div>
+
+      <div class="portal-hero-copy">
+        <h1>
+          O código nasceu<br />
+          das mãos de <em>mulheres.</em><br />
+          Este lugar é nosso.
+        </h1>
+        <p>
+          Bem-vinda ao portal oficial de acolhimento, história e redirecionamento para
+          <strong>mulheres no curso de Desenvolvimento de Sistemas (DS)</strong>.
+          Aqui celebramos quem inventou a programação, revelamos por que tentaram nos afastar
+          e conectamos você às melhores trilhas, comunidades e oportunidades.
+        </p>
+      </div>
+
+      <div class="portal-3d-hint">
+        <span>✦ CENA 3D INTERATIVA EM TEMPO REAL — MOVA O CURSOR PARA ORBITAR O CRISTAL DE CÓDIGO</span>
+      </div>
+    </div>
+
+    <div class="portal-right">
+      <div class="portal-card">
+        <h2>Credencial de Acesso</h2>
+        <p>
+          Configure seu passe para personalizar a experiência e escolha para onde deseja ser
+          redirecionada ao destravar o portal:
+        </p>
+
+        <div class="portal-field">
+          <label for="visitor-name">Como você quer ser chamada? (Opcional)</label>
+          <input type="text" id="visitor-name" placeholder="Ex: Ana, Júlia, Futura Deva..." maxlength="32" />
+        </div>
+
+        <div class="portal-field">
+          <label>Seu Perfil no Curso de DS</label>
+          <div class="role-pills" id="role-pills">
+            <button type="button" class="role-pill active" data-role="Aluna de DS">✨ Aluna de DS</button>
+            <button type="button" class="role-pill" data-role="Quero Entrar em DS">🚀 Quero cursar DS</button>
+            <button type="button" class="role-pill" data-role="Mentora / Veterana">👑 Veterana / Dev</button>
+            <button type="button" class="role-pill" data-role="Apoiadora da Inclusão">🤝 Apoiadora / Profa</button>
+          </div>
+        </div>
+
+        <div class="portal-field">
+          <label for="portal-destination">Redirecionar imediatamente para:</label>
+          <select id="portal-destination" class="portal-Destination-select">
+            <option value="#inicio">Experiência Completa (Página Principal + Palco 3D)</option>
+            <option value="#historia">A História do DS &amp; Como Mulheres Criaram o Software</option>
+            <option value="#afastamento">Por que as Mulheres Foram Afastadas da Área?</option>
+            <option value="#pioneiras">Galeria Monumental: Mulheres que Mudaram a Programação</option>
+            <option value="#inclusao">Inclusão Acima de Tudo &amp; Descubra sua Trilha em DS</option>
+            <option value="#redirecionamento">Hub de Redirecionamento Externo (Comunidades, Cursos e Vagas)</option>
+          </select>
+        </div>
+
+        <button type="button" id="btn-unlock-portal" class="btn-portal-enter">
+          <span>Destravar Portal &amp; Redirecionar</span>
+          <span>→</span>
+        </button>
+
+        <div class="portal-quick-redirects">
+          <span>Ou pule direto para um portal externo de mulheres na tecnologia:</span>
+          <div class="quick-links-row">
+            <a href="https://www.programaria.org/" target="_blank" rel="noopener noreferrer" class="quick-chip">PrograMaria ↗</a>
+            <a href="https://www.pretalab.com/" target="_blank" rel="noopener noreferrer" class="quick-chip">PretaLab ↗</a>
+            <a href="https://womakerscode.org/" target="_blank" rel="noopener noreferrer" class="quick-chip">WoMakersCode ↗</a>
+            <a href="https://reprograma.com.br/" target="_blank" rel="noopener noreferrer" class="quick-chip">Reprograma ↗</a>
+            <a href="https://meninas.sbc.org.br/" target="_blank" rel="noopener noreferrer" class="quick-chip">Meninas Digitais SBC ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       2. BARRA SUPERIOR ARQUITETÔNICA FULL-BLEED
+       ========================================================= -->
+  <header class="top-Command-bar" id="inicio">
+    <a href="#inicio" class="brand-cell">
+      <div class="brand-symbol">&lt;/&gt;</div>
+      <div class="brand-text">
+        <strong>ELAS NO DS</strong>
+        <small>Desenvolvimento de Sistemas</small>
+      </div>
+    </a>
+
+    <nav class="nav-links-strip" aria-label="Navegação Principal">
+      <a href="#historia">01. História do DS</a>
+      <a href="#afastamento">02. Por que fomos afastadas?</a>
+      <a href="#pioneiras">03. Mulheres na Programação</a>
+      <a href="#inclusao">04. Inclusão Acima de Tudo</a>
+      <a href="#trilha-ds">05. Redirecionador de Trilha</a>
+      <a href="#redirecionamento">06. Hub de Links &amp; Comunidades</a>
+    </nav>
+
+    <div class="nav-actions-cell">
+      <span id="visitor-badge" class="visitor-tag">Passe: Visitante Exclusiva</span>
+      <button type="button" id="btn-open-redirect-modal" class="btn-redirect-hub">
+        ⚡ Central de Redirecionamento
+      </button>
+      <button type="button" id="btn-reopen-portal" class="mode-btn" title="Voltar ao Portal 3D">
+        Portal 3D
+      </button>
+    </div>
+  </header>
+
+  <!-- =========================================================
+       3. HERO DE PÁGINA INTEIRA + ESCULTURA 3D INTERATIVA
+       ========================================================= -->
+  <section class="hero-fullbleed">
+    <div class="hero-editorial-col">
+      <div>
+        <div class="kicker-row">
+          <span class="tag-exclusive">EXCLUSIVIDADE FEMININA &amp; INCLUSÃO</span>
+          <span class="tag-outline">TÉCNICO &amp; GRADUAÇÃO EM DESENVOLVIMENTO DE SISTEMAS</span>
+        </div>
+
+        <h1 class="hero-headline">
+          Antes do computador ser máquina,<br />
+          <span class="italic-rose">“Computador”</span> era uma mulher.
+        </h1>
+
+        <p class="hero-sublead">
+          O curso de <strong>Desenvolvimento de Sistemas (DS)</strong> forma quem projeta a arquitetura do mundo digital:
+          web, mobile, banco de dados, inteligência artificial e segurança. Embora tenham tentado apagar nosso passado,
+          o primeiro algoritmo da história, o primeiro compilador e a própria <strong>Engenharia de Software</strong>
+          foram criados por mulheres.
+        </p>
+
+        <div class="hero-cta-cluster">
+          <a href="#pioneiras" class="btn-primary-rose">
+            <span>Conhecer as 12+ Pioneiras do Código</span>
+            <span>↓</span>
+          </a>
+          <a href="#trilha-ds" class="btn-secondary-white">
+            Descobrir Minha Área no DS &amp; Redirecionar →
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-metrics-strip">
+        <div class="metric-item">
+          <strong>1843</strong>
+          <span>Ano em que <strong>Ada Lovelace</strong> publicou o primeiro algoritmo processável por máquina da história humana.</span>
+        </div>
+        <div class="metric-item">
+          <strong>100%</strong>
+          <span>Da primeira equipe de programação do <strong>ENIAC</strong> (primeiro computador eletrônico digital) era formada por mulheres.</span>
+        </div>
+        <div class="metric-item">
+          <strong>Inclusão</strong>
+          <span>Acima de tudo: um curso de DS onde todas as mulheres — negras, indígenas, periféricas, mães, trans e neurodivergentes — pertencem.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Palco 3D WebGL Interativo -->
+    <div class="hero-3d-stage">
+      <canvas id="hero-3d-canvas"></canvas>
+
+      <div class="stage-overlay-top">
+        <span> NÚCLEO 3D INTERATIVO // ARQUITETURA DE SISTEMAS</span>
+        <div class="mode-3d-buttons">
+          <button type="button" class="mode-btn active" data-shape="crystal">Cristal DS</button>
+          <button type="button" class="mode-btn" data-shape="torus">Anel Ada</button>
+          <button type="button" class="mode-btn" data-shape="sphere">Rede Neural</button>
+        </div>
+      </div>
+
+      <div class="stage-overlay-bottom">
+        <p><strong>Interaja em 3D:</strong> Mova o mouse ou clique nos modos acima para transformar a geometria.</p>
+        <code>status: MULHERES_NO_COMANDO = true;</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       4. FAIXA CONTÍNUA DE MANIFESTO
+       ========================================================= -->
+  <div class="marquee-ribbon" aria-hidden="true">
+    <div class="marquee-track">
+      <span>✦ DESENVOLVIMENTO DE SISTEMAS É LUGAR DE MULHER</span>
+      <span>✦ ADA LOVELACE CRIOU O PRIMEIRO ALGORITMO (1843)</span>
+      <span>✦ GRACE HOPPER CRIOU O PRIMEIRO COMPILADOR (1952)</span>
+      <span>✦ MARGARET HAMILTON FUNDOU A ENGENHARIA DE SOFTWARE (1969)</span>
+      <span>✦ DOROTHY VAUGHAN LIDEROU A PROGRAMAÇÃO FORTRAN NA NASA</span>
+      <span>✦ INCLUSÃO ACIMA DE TUDO: NENHUMA MULHER FICA PARA TRÁS</span>
+      <span>✦ DESENVOLVIMENTO DE SISTEMAS É LUGAR DE MULHER</span>
+      <span>✦ ADA LOVELACE CRIOU O PRIMEIRO ALGORITMO (1843)</span>
+      <span>✦ GRACE HOPPER CRIOU O PRIMEIRO COMPILADOR (1952)</span>
+      <span>✦ MARGARET HAMILTON FUNDOU A ENGENHARIA DE SOFTWARE (1969)</span>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       5. HISTÓRIA DO DS & COMO AS MULHERES CONSTRUÍRAM TUDO
+       ========================================================= -->
+  <section id="historia" class="section-fullbleed">
+    <div class="section-header-grid">
+      <div class="section-index-cell">
+        <span class="section-number">CAPÍTULO 01 // ARQUEOLOGIA DO SOFTWARE</span>
+        <h2>A História do DS é uma história <em>feminina.</em></h2>
+      </div>
+      <div class="section-lead-cell">
+        <p>
+          O que hoje estudamos no curso de <strong>Desenvolvimento de Sistemas</strong> — lógica de programação,
+          compiladores, bancos de dados, sub-rotinas, orientação a objetos, protocolos de rede e testes de software —
+          não teve as mulheres como "convidadas". <strong>As mulheres foram as arquitetas fundadoras da disciplina.</strong>
+          Veja como cada pilar da grade curricular de DS nasceu de mentes femininas:
+        </p>
+      </div>
+    </div>
+
+    <div class="history-timeline-strip">
+      <article class="timeline-era-col">
+        <div>
+          <div class="era-year">1843</div>
+          <span class="era-tag">Lógica &amp; Algoritmos</span>
+          <h3>O Nascimento do Algoritmo</h3>
+          <p>
+            Um século antes de existir o primeiro computador moderno, <strong>Ada Lovelace</strong> percebeu que
+            a Máquina Analítica de Babbage poderia manipular símbolos, música e lógica — não apenas números.
+            Ela escreveu o primeiro algoritmo com laços de repetição (<code>loops</code>) e desvio condicional.
+          </p>
+        </div>
+        <div class="era-footnote">Matéria em DS: Lógica de Programação &amp; Algoritmos</div>
+      </article>
+
+      <article class="timeline-era-col">
+        <div>
+          <div class="era-year">1945</div>
+          <span class="era-tag">Arquitetura &amp; Debug</span>
+          <h3>As 6 Mulheres do ENIAC</h3>
+          <p>
+            Enquanto os engenheiros homens construíam os cabos e válvulas porque achavam que o hardware era o que importava,
+            seis matemáticas — <strong>Jean Bartik, Betty Holberton, Kathleen Antonelli, Marlyn Meltzer, Ruth Teitelbaum e Frances Spence</strong> —
+            programaram o primeiro computador digital da história sem nenhum manual ou linguagem prévia.
+          </p>
+        </div>
+        <div class="era-footnote">Matéria em DS: Arquitetura &amp; Manutenção de Sistemas</div>
+      </article>
+
+      <article class="timeline-era-col">
+        <div>
+          <div class="era-year">1952</div>
+          <span class="era-tag">Compiladores &amp; Linguagens</span>
+          <h3>Do Binário para o Código Humano</h3>
+          <p>
+            Diziam que computadores só entendiam números e nunca leriam palavras. <strong>Grace Hopper</strong> provou o contrário
+            ao criar o primeiro <strong>compilador (A-0)</strong> e liderar a base do <strong>COBOL</strong>, permitindo programar
+            com comandos em texto estruturado — a base de todas as linguagens modernas do curso de DS.
+          </p>
+        </div>
+        <div class="era-footnote">Matéria em DS: Linguagens de Programação &amp; Banco de Dados</div>
+      </article>
+
+      <article class="timeline-era-col">
+        <div>
+          <div class="era-year">1969</div>
+          <span class="era-tag">Engenharia de Software</span>
+          <h3>O Código que Salvou a Apollo 11</h3>
+          <p>
+            Quando o desenvolvimento de programas ainda não era respeitado como engenharia, <strong>Margaret Hamilton</strong>
+            cunhou o termo <strong>Engenharia de Software</strong> no MIT. Seu sistema assíncrono de detecção de erros
+            evitou que o módulo lunar abortasse o pouso na Lua a poucos minutos do solo.
+          </p>
+        </div>
+        <div class="era-footnote">Matéria em DS: Engenharia de Software &amp; Qualidade (QA)</div>
+      </article>
+
+      <article class="timeline-era-col">
+        <div>
+          <div class="era-year">1979–Hoje</div>
+          <span class="era-tag">Redes, Web, Jogos &amp; IA</span>
+          <h3>Interfaces Gráficas, Internet e IA</h3>
+          <p>
+            De <strong>Adele Goldberg</strong> (que estruturou a Programação Orientada a Objetos e as janelas gráficas no Smalltalk)
+            a <strong>Radia Perlman</strong> (criadora do protocolo STP que sustenta a internet), <strong>Carol Shaw</strong> (games)
+            e <strong>Fei-Fei Li</strong> (IA moderna): todo o ecossistema de DS tem DNA feminino.
+          </p>
+        </div>
+        <div class="era-footnote">Matéria em DS: POO, Redes, Desenvolvimento Web &amp; IA</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       6. POR QUE AS MULHERES FORAM TÃO AFASTADAS DA PROGRAMAÇÃO?
+       ========================================================= -->
+  <section id="afastamento" class="section-fullbleed">
+    <div class="section-header-grid">
+      <div class="section-index-cell">
+        <span class="section-number">CAPÍTULO 02 // ANÁLISE HISTÓRICA</span>
+        <h2>Por que as mulheres foram <em>afastadas</em> da área?</h2>
+      </div>
+      <div class="section-lead-cell">
+        <p>
+          Se as mulheres inventaram a programação e eram maioria nas salas de desenvolvimento até os anos 1960,
+          <strong>o que aconteceu para as turmas de computação ficarem tão masculinas nas décadas seguintes?</strong>
+          A resposta não tem nada a ver com "aptidão biológica": foi um processo histórico, cultural e mercadológico deliberado.
+        </p>
+      </div>
+    </div>
+
+    <div class="exclusion-analysis-grid">
+      <!-- 4 Fatores Históricos Reais -->
+      <div class="exclusion-reasons-col">
+        <div class="reason-row">
+          <div class="reason-num">01</div>
+          <div class="reason-content">
+            <h3>Quando programar dava pouco status, era “trabalho de mulher”</h3>
+            <p>
+              Nos anos 1940 e 1950, construir o hardware (soldar fios e válvulas) era visto como o trabalho prestigioso de engenharia masculina,
+              enquanto planejar o código e escrever instruções lógicas era comparado a "datilografia, tricô ou organização de receitas".
+              A revista <em>Cosmopolitan</em> de 1967 chegou a publicar o artigo <strong>“The Computer Girls”</strong>, onde Grace Hopper
+              dizia que programar era tão natural para mulheres quanto planejar um jantar.
+            </p>
+          </div>
+        </div>
+
+        <div class="reason-row">
+          <div class="reason-num">02</div>
+          <div class="reason-content">
+            <h3>Quando o software virou poder e dinheiro, expulsaram as pioneiras</h3>
+            <p>
+              No final dos anos 1960 e década de 1970, as empresas perceberam que o verdadeiro valor financeiro estava no <strong>software</strong>
+              e não apenas nas peças físicas. Para elevar os salários e o prestígio corporativo, executivos criaram barreiras artificiais e testes
+              psicológicos de contratação enviesados (como o teste Cannon-Perry), que selecionavam perfis que "não gostavam de interagir com pessoas" —
+              favorecendo candidatos homens e afastando mulheres.
+            </p>
+          </div>
+        </div>
+
+        <div class="reason-row">
+          <div class="reason-num">03</div>
+          <div class="reason-content">
+            <h3>O Marketing dos Anos 1980: O PC vendido como “brinquedo de menino”</h3>
+            <p>
+              Em <strong>1984</strong>, quase <strong>40% dos formandos em Computação</strong> eram mulheres. Foi exatamente quando surgiram os primeiros
+              computadores pessoais domésticos (Apple II, Commodore, IBM PC). As campanhas publicitárias passaram a vender o computador exclusivamente
+              na seção de brinquedos masculinos e jogos de guerra para meninos. Meninos chegavam às aulas técnicas já tendo um computador no quarto;
+              meninas eram desencorajadas desde a infância.
+            </p>
+          </div>
+        </div>
+
+        <div class="reason-row">
+          <div class="reason-num">04</div>
+          <div class="reason-content">
+            <h3>O mito do “Gênio Solitário” e a Síndrome da Impostora</h3>
+            <p>
+              O cinema e a mídia dos anos 1980 e 1990 fabricaram o estereótipo do programador como um garoto antissocial virando noites no escuro.
+              Esse ambiente hostil ("bro culture") fez muitas jovens acreditarem que não pertenciam ao curso de Desenvolvimento de Sistemas —
+              mesmo quando suas notas em lógica, arquitetura e resolução de problemas reais eram superiores.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gráfico Interativo da Curva Histórica -->
+      <div class="exclusion-chart-col">
+        <div class="chart-box">
+          <div class="chart-header">
+            <div>
+              <h3>Presença Feminina na Computação vs. O Corte de 1984</h3>
+              <small style="color: var(--text-muted);">Clique em cada década abaixo para ler o que aconteceu na história:</small>
+            </div>
+            <span>DADOS HISTÓRICOS</span>
+          </div>
+
+          <div class="bars-stage" id="history-bars">
+            <div class="bar-col" data-info="Anos 1945–1955: As mulheres dominavam a operação e programação dos primeiros mainframes (como o ENIAC e UNIVAC). Programar era uma profissão majoritariamente feminina.">
+              <span class="bar-value">~60%</span>
+              <div class="bar-fill" style="height: 82%;"></div>
+              <span class="bar-year">1950</span>
+            </div>
+
+            <div class="bar-col" data-info="Anos 1970: Mesmo com o início da masculinização corporativa, mulheres lideravam laboratórios na NASA, universidades e bancos operando COBOL e FORTRAN.">
+              <span class="bar-value">34%</span>
+              <div class="bar-fill" style="height: 58%;"></div>
+              <span class="bar-year">1970</span>
+            </div>
+
+            <div class="bar-col" data-info="Pico Acadêmico (1984): As mulheres atingiram quase 38% das graduações em Ciência da Computação, acompanhando o crescimento da medicina e do direito.">
+              <span class="bar-value">37.1%</span>
+              <div class="bar-fill" style="height: 66%;"></div>
+              <span class="bar-year">1984</span>
+            </div>
+
+            <div class="bar-col highlight-drop" data-info="Anos 1990 (A Queda Forçada): O marketing dos PCs apenas para meninos e o estereótipo nerd derrubaram drasticamente as matrículas femininas nos cursos técnicos e superiores.">
+              <span class="bar-value">27%</span>
+              <div class="bar-fill" style="height: 44%;"></div>
+              <span class="bar-year">1995</span>
+            </div>
+
+            <div class="bar-col highlight-drop" data-info="Anos 2010: O ponto mais crítico da desigualdade nas salas de TI, gerando sistemas e algoritmos com vieses por falta de diversidade nas equipes.">
+              <span class="bar-value">18%</span>
+              <div class="bar-fill" style="height: 29%;"></div>
+              <span class="bar-year">2012</span>
+            </div>
+
+            <div class="bar-col" data-info="HOJE (A Retomada no DS!): Movimentos afirmativos, cursos técnicos em Desenvolvimento de Sistemas, comunidades femininas e inclusão interseccional estão trazendo as mulheres de volta para liderar a tecnologia!">
+              <span class="bar-value">RETOMADA ↑</span>
+              <div class="bar-fill" style="height: 75%;"></div>
+              <span class="bar-year">HOJE</span>
+            </div>
+          </div>
+
+          <div class="chart-caption-interactive" id="chart-caption">
+            <strong>💡 Passe o mouse ou clique nas barras acima:</strong> Em 1984, a curva das mulheres na computação despencou enquanto Direito e Medicina continuaram subindo — provando que o afastamento foi fruto da indústria e do marketing da época, e não de falta de interesse feminino.
+          </div>
+        </div>
+
+        <div class="quote-editorial-box">
+          <blockquote>
+            “As mulheres não estão ‘entrando’ na tecnologia agora. Nós estamos voltando para a casa que nós mesmas construímos.”
+          </blockquote>
+          <cite>— Manifesto Elas no Desenvolvimento de Sistemas</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       7. GALERIA MONUMENTAL: MUITAS MULHERES QUE MUDARAM A PROGRAMAÇÃO
+       ========================================================= -->
+  <section id="pioneiras" class="section-fullbleed">
+    <div class="section-header-grid">
+      <div class="section-index-cell">
+        <span class="section-number">CAPÍTULO 03 // PANTEÃO DO CÓDIGO</span>
+        <h2>Mulheres que mudaram a <em>programação.</em></h2>
+      </div>
+      <div class="section-lead-cell">
+        <p>
+          Explore a história de <strong>12 mulheres e grupos históricos</strong> que criaram linguagens, compiladores,
+          protocolos de internet, jogos digitais, inteligência artificial e pesquisas antirracistas.
+          Use os filtros abaixo ou clique em qualquer card para ser <strong>redirecionada</strong> à biografia e legado completo.
+        </p>
+      </div>
+    </div>
+
+    <div class="pioneers-controls-bar">
+      <div class="filter-buttons-group" id="pioneer-filters">
+        <button type="button" class="filter-btn active" data-filter="all">Todas as Pioneiras (12)</button>
+        <button type="button" class="filter-btn" data-filter="fundadoras">Fundadoras do Código</button>
+        <button type="button" class="filter-btn" data-filter="espaco">NASA &amp; Engenharia</button>
+        <button type="button" class="filter-btn" data-filter="modernas">Internet, Jogos &amp; IA</button>
+        <button type="button" class="filter-btn" data-filter="brasil">Orgulho Brasileiro 🇧🇷</button>
+      </div>
+
+      <input
+        type="search"
+        id="pioneer-search"
+        class="pioneer-search-input"
+        placeholder="Buscar por nome, linguagem ou feito (ex: COBOL, NASA, Brasil)..."
+      />
+    </div>
+
+    <div class="pioneers-wall-grid" id="pioneers-grid">
+      <!-- Renderizado dinamicamente via script.js com efeito 3D Perspective Tilt -->
+    </div>
+  </section>
+
+  <!-- =========================================================
+       8. INCLUSÃO ACIMA DE TUDO (MANIFESTO INTERSECCIONAL)
+       ========================================================= -->
+  <section id="inclusao" class="inclusion-manifesto-banner">
+    <div class="inclusion-grid">
+      <div class="inclusion-title-col">
+        <span class="tag-exclusive">CAPÍTULO 04 // PRINCÍPIO INEGOCIÁVEL</span>
+        <h2>Inclusão <em>acima de tudo.</em></h2>
+        <p>
+          Não existe futuro no Desenvolvimento de Sistemas se o software que governa hospitais, bancos, escolas
+          e cidades continuar sendo escrito por um único grupo de pessoas.
+          Nosso compromisso no curso de DS é construir uma comunidade onde <strong>toda mulher seja acolhida, respeitada e impulsionada</strong>,
+          sem elitismo técnico e sem barreiras.
+        </p>
+      </div>
+
+      <div class="inclusion-pillars-grid">
+        <div class="pillar-cell">
+          <span>01 // EQUIDADE RACIAL &amp; ORIGEM</span>
+          <h3>Mulheres Negras, Indígenas e Periféricas</h3>
+          <p>
+            De Dorothy Vaughan na NASA a Sônia Guimarães e Nina da Hora no Brasil: combater o racismo algorítmico
+            começa garantindo protagonismo para meninas negras, indígenas e de escolas públicas no DS.
+          </p>
+        </div>
+
+        <div class="pillar-cell">
+          <span>02 // ACESSIBILIDADE &amp; NEURODIVERSIDADE</span>
+          <h3>Devas PCDs e Neurodivergentes</h3>
+          <p>
+            Mentes autistas, TDAH, disléxicas e pessoas com deficiência trazem visões únicas para arquitetura de sistemas,
+            UX acessível e resolução criativa de bugs complexos.
+          </p>
+        </div>
+
+        <div class="pillar-cell">
+          <span>03 // REDE DE APOIO REAL</span>
+          <h3>Mães, Trabalhadoras e Transição de Carreira</h3>
+          <p>
+            Programar não exige "virar madrugada". Defendemos ambientes de estudo humanos que acolham estudantes que trabalham,
+            cuidam da família ou estão recomeçando do zero.
+          </p>
+        </div>
+
+        <div class="pillar-cell">
+          <span>04 // ZERO GATEKEEPING</span>
+          <h3>Ninguém Nasce Sabendo Programar</h3>
+          <p>
+            No nosso espaço de DS, nenhuma dúvida é "boba". Substituímos a competição tóxica pela colaboração:
+            quando uma aluna aprende lógica, banco de dados ou Git, ela puxa a próxima junto.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       9. REDIRECIONADOR INTELIGENTE DE TRILHA NO CURSO DE DS
+       ========================================================= -->
+  <section id="trilha-ds" class="matcher-section">
+    <div class="matcher-left">
+      <span class="section-number">CAPÍTULO 05 // REDIRECIONAMENTO DE CARREIRA</span>
+      <h3>Qual área do DS combina com você?</h3>
+      <p>
+        O curso de <strong>Desenvolvimento de Sistemas</strong> abre portas para dezenas de carreiras diferentes.
+        Clique no que você mais gosta de fazer e nosso portal vai indicar sua trilha ideal e
+        <strong>redirecionar você</strong> para recursos gratuitos e comunidades da área:
+      </p>
+
+      <div class="interest-selector-grid" id="matcher-buttons">
+        <button type="button" class="interest-option-btn active" data-track="frontend">
+          <span>🎨 Criar interfaces visuais incríveis, animações 3D e experiências (Front-End &amp; UI/UX)</span>
+          <span>→</span>
+        </button>
+        <button type="button" class="interest-option-btn" data-track="backend">
+          <span>⚙️ Construir o cérebro invisível, regras de negócio, APIs e servidores (Back-End)</span>
+          <span>→</span>
+        </button>
+        <button type="button" class="interest-option-btn" data-track="dados">
+          <span>📊 Investigar padrões, Bancos de Dados e Inteligência Artificial Ética (Dados &amp; IA)</span>
+          <span>→</span>
+        </button>
+        <button type="button" class="interest-option-btn" data-track="seguranca">
+          <span>🛡️ Proteger sistemas contra ataques, privacidade digital e redes (Cibersegurança)</span>
+          <span>→</span>
+        </button>
+        <button type="button" class="interest-option-btn" data-track="games">
+          <span>🎮 Desenvolver jogos digitais, mundos interativos e aplicativos mobile (Games &amp; Mobile)</span>
+          <span>→</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="matcher-right">
+      <div class="matched-result-card" id="matcher-result">
+        <span class="matched-badge" id="track-badge">TRILHA RECOMENDADA NO DS // FRONT-END &amp; CRIATIVIDADE</span>
+        <h4 id="track-title">Engenharia Front-End, WebGL 3D &amp; Design de Interfaces</h4>
+        <p id="track-desc">
+          Você une sensibilidade visual com lógica de código! No curso de DS, você vai dominar HTML5, CSS moderno,
+          JavaScript, React e experiências 3D para transformar telas em obras de arte acessíveis e rápidas.
+          Sua inspiração histórica: <strong>Adele Goldberg</strong>, pioneira das interfaces gráficas!
+        </p>
+
+        <div class="matched-stack-tags" id="track-tags">
+          <span class="stack-tag">HTML5 &amp; CSS3</span>
+          <span class="stack-tag">JavaScript / TypeScript</span>
+          <span class="stack-tag">React &amp; Three.js 3D</span>
+          <span class="stack-tag">Acessibilidade Web (WCAG)</span>
+        </div>
+
+        <div class="matched-redirect-actions">
+          <a id="track-primary-link" href="https://www.programaria.org/" target="_blank" rel="noopener noreferrer" class="btn-primary-rose">
+            <span>Redirecionar para Comunidade &amp; Curso da Trilha</span>
+            <span>↗</span>
+          </a>
+          <a id="track-secondary-link" href="https://developer.mozilla.org/pt-BR/" target="_blank" rel="noopener noreferrer" class="btn-secondary-white">
+            Documentação Oficial Gratuita ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       10. HUB DE REDIRECIONAMENTO EXCLUSIVO (COMUNIDADES & CURSOS)
+       ========================================================= -->
+  <section id="redirecionamento" class="section-fullbleed">
+    <div class="section-header-grid">
+      <div class="section-index-cell">
+        <span class="section-number">CAPÍTULO 06 // PORTAL DE REDIRECIONAMENTO</span>
+        <h2>Conecte-se e seja <em>redirecionada.</em></h2>
+      </div>
+      <div class="section-lead-cell">
+        <p>
+          Este site funciona como uma <strong>ponte direta</strong> para as maiores redes de apoio, bolsas de estudo,
+          mentorias exclusivas para mulheres e plataformas de Desenvolvimento de Sistemas no Brasil.
+          Escolha seu destino abaixo para ser redirecionada imediatamente:
+        </p>
+      </div>
+    </div>
+
+    <div class="redirect-portal-grid">
+      <article class="redirect-card">
+        <div>
+          <span class="redirect-category">COMUNIDADE &amp; CURSOS AFIRMATIVOS</span>
+          <h3>PrograMaria</h3>
+          <p>
+            Uma das maiores iniciativas brasileiras para empoderar mulheres na tecnologia. Oferece cursos de programação,
+            eventos de carreira, bolsas e conteúdo sobre gênero e código.
+          </p>
+        </div>
+        <a href="https://www.programaria.org/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
+          <span>Redirecionar para PrograMaria</span>
+          <span>↗</span>
+        </a>
+      </article>
+
+      <article class="redirect-card">
+        <div>
+          <span class="redirect-category">PROTAGONISMO NEGRO &amp; INDÍGENA</span>
+          <h3>PretaLab</h3>
+          <p>
+            Plataforma que conecta mulheres negras e indígenas à tecnologia e inovação por meio de ciclos formativos gratuitos
+            em programação, dados e empreendedorismo digital.
+          </p>
+        </div>
+        <a href="https://www.pretalab.com/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
+          <span>Redirecionar para PretaLab</span>
+          <span>↗</span>
+        </a>
+      </article>
+
+      <article class="redirect-card">
+        <div>
+          <span class="redirect-category">FORMAÇÃO &amp; EMPREGABILIDADE FEMININA</span>
+          <h3>{reprograma}</h3>
+          <p>
+            Focada em diminuir o gap de gênero no setor de TI no Brasil, oferecendo bootcamps gratuitos de Front-End,
+            Back-End e conexão direta com vagas em empresas parceiras.
+          </p>
+        </div>
+        <a href="https://reprograma.com.br/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
+          <span>Redirecionar para {reprograma}</span>
+          <span>↗</span>
+        </a>
+      </article>
+
+      <article class="redirect-card">
+        <div>
+          <span class="redirect-category">MENTORIA &amp; LIDERANÇA EM CÓDIGO</span>
+          <h3>WoMakersCode</h3>
+          <p>
+            Comunidade global nascida no Brasil que já impactou dezenas de milhares de mulheres com trilhas gratuitas em Cloud,
+            Cibersegurança, Desenvolvimento de Sistemas e Git.
+          </p>
+        </div>
+        <a href="https://womakerscode.org/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
+          <span>Redirecionar para WoMakersCode</span>
+          <span>↗</span>
+        </a>
+      </article>
+
+      <article class="redirect-card">
+        <div>
+          <span class="redirect-category">SOCIEDADE BRASILEIRA DE COMPUTAÇÃO</span>
+          <h3>Meninas Digitais (SBC)</h3>
+          <p>
+            Programa institucional que incentiva alunas do ensino médio e técnico em Desenvolvimento de Sistemas a ingressarem
+            e permanecerem nas carreiras de computação em todo o Brasil.
+          </p>
+        </div>
+        <a href="https://meninas.sbc.org.br/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
+          <span>Redirecionar para Meninas Digitais</span>
+          <span>↗</span>
+        </a>
+      </article>
+
+      <article class="redirect-card">
+        <div>
+          <span class="redirect-category">COMUNIDADE PYTHON &amp; OPEN SOURCE</span>
+          <h3>PyLadies Brasil</h3>
+          <p>
+            Grupo internacional de mentoria com dezenas de capítulos no Brasil dedicado a ajudar mais mulheres a se tornarem
+            participantes ativas e líderes na comunidade Python e Software Livre.
+          </p>
+        </div>
+        <a href="https://brasil.pyladies.com/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
+          <span>Redirecionar para PyLadies Brasil</span>
+          <span>↗</span>
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       11. MODAL DE REDIRECIONAMENTO RÁPIDO
+       ========================================================= -->
+  <div class="redirect-modal-backdrop" id="redirect-modal" aria-hidden="true">
+    <div class="redirect-modal-box">
+      <div class="modal-top-bar">
+        <h3>⚡ Central de Redirecionamento Rápido</h3>
+        <button type="button" class="btn-close-modal" id="btn-close-modal">✕</button>
+      </div>
+      <p style="color: var(--text-body); font-size: 0.95rem; line-height: 1.5;">
+        Escolha para onde deseja ser redirecionada agora (portais oficiais de mulheres em DS ou seções deste projeto):
+      </p>
+
+      <div class="modal-redirect-list">
+        <a href="https://www.programaria.org/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
+          <span>PrograMaria</span><span>↗</span>
+        </a>
+        <a href="https://www.pretalab.com/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
+          <span>PretaLab</span><span>↗</span>
+        </a>
+        <a href="https://reprograma.com.br/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
+          <span>{reprograma}</span><span>↗</span>
+        </a>
+        <a href="https://womakerscode.org/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
+          <span>WoMakersCode</span><span>↗</span>
+        </a>
+        <a href="https://meninas.sbc.org.br/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
+          <span>Meninas Digitais SBC</span><span>↗</span>
+        </a>
+        <a href="https://www.freecodecamp.org/portuguese/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
+          <span>freeCodeCamp (Estudos DS)</span><span>↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       12. RODAPÉ FULL-BLEED
+       ========================================================= -->
+  <footer class="footer-fullbleed">
+    <div>
+      <strong style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--pink-primary);">
+        ELAS NO DS // DESENVOLVIMENTO DE SISTEMAS
+      </strong>
+      <p>
+        Portal exclusivo de valorização histórica, inclusão interseccional e redirecionamento para mulheres na programação.
+      </p>
+    </div>
+    <div>
+      <p style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted);">
+        ROSA &amp; BRANCO • WEBGL 3D • INCLUSÃO ACIMA DE TUDO
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
