@@ -1,669 +1,1734 @@
-// ============================================================================
-// 1. BANCO DE DADOS HISTÓRICO: 12+ MULHERES QUE MUDARAM A PROGRAMAÇÃO E O DS
-// ============================================================================
-const PIONEERS_DATA = [
+/* ==========================================================================
+   ELAS.CODE — ROSE-QUARTZ FRAGMENT STUDIO 3D ARC & WIDESCREEN PC ENGINE
+   Three.js Rose-Quartz Frosted Glass Card Helix + Lenis + GSAP ScrollTrigger
+   ========================================================================== */
+
+const INITIATIVES_DATA = [
   {
-    name: "Ada Lovelace",
-    era: "1815 – 1852",
-    initials: "AL",
-    category: "fundadoras",
-    role: "Primeira Pessoa Programadora da História",
-    bio: "Matemática visionária que enxergou muito além dos cálculos mecânicos. Em 1843, escreveu o 'Nota G' para a Máquina Analítica de Charles Babbage, contendo o primeiro algoritmo completo da história com laços de repetição (loops) e variáveis.",
-    dsImpact: "Fundou a Lógica de Programação e previu que computadores poderiam criar música, arte e sistemas simbólicos.",
-    wikiUrl: "https://pt.wikipedia.org/wiki/Ada_Lovelace"
+    id: "#ELAS-001",
+    monogram: "RP",
+    name: "Bootcamp Front-End & Back-End Afirmativo",
+    org: "{reprograma}",
+    verified: true,
+    topGroup: "bolsas",
+    category: "Educação Base",
+    status: "Inscrições Abertas",
+    reach: "150 vagas",
+    reachNumeric: 15000,
+    actionLabel: "Candidatar-se",
+    url: "https://reprograma.com.br/",
+    modality: "100% Online",
+    cost: "Bolsa 100%",
+    leadFocus: "React, TypeScript, Node.js & Git",
+    mentors: [
+      { name: "Mariana Silva", role: "Staff Software Engineer • Back-End Node.js" },
+      { name: "Camila Rocha", role: "Senior Front-End Architect • Acessibilidade & React" }
+    ],
+    sobre: {
+      summary:
+        "Formação intensiva focada em ensinar programação Front-End (React, TypeScript, Acessibilidade) e Back-End (Node.js, APIs, Bancos de Dados) para mulheres cis e trans em todo o Brasil, com prioridade para mulheres negras, indígenas e periféricas.",
+      tracks: [
+        "Desenvolvimento Web Full-Stack (React, TypeScript & Node.js)",
+        "Git, GitHub, Testes Automatizados & Metodologias Ágeis",
+        "Projetos Reais em Squads para Portfólio Técnico",
+        "Speed Hiring Direto com Empresas de Tecnologia Parceiras"
+      ],
+      audience: "Mulheres maiores de 18 anos que desejam ingressar ou migrar para o mercado de engenharia de software."
+    },
+    requisitos: [
+      "Identificar-se como mulher (cisgênero ou transgênero)",
+      "Ensino médio completo (prioridade para rede pública e baixa renda)",
+      "Disponibilidade para aulas síncronas e laboratórios práticos de código",
+      "Não é exigida experiência profissional prévia na área de TI"
+    ],
+    impacto: {
+      kpis: [
+        { label: "Taxa de Empregabilidade", value: "78% em até 6 meses" },
+        { label: "Protagonismo Negro e Indígena", value: "72% das turmas" },
+        { label: "Alunas Formadas", value: "+2.400 desenvolvedoras" }
+      ],
+      note: "Programa auditado com acompanhamento direto de inserção em equipes de engenharia de software."
+    }
   },
   {
-    name: "Grace Hopper",
-    era: "1906 – 1992",
-    initials: "GH",
-    category: "fundadoras",
-    role: "Criadora do Primeiro Compilador & Mãe do COBOL",
-    bio: "Contra-almirante e cientista da computação. Criou o primeiro compilador (A-0) em 1952, provando que era possível programar usando palavras em vez de binário puro. Sua obra deu origem ao COBOL, linguagem que estruturou bancos e sistemas comerciais no mundo todo.",
-    dsImpact: "Sem Grace Hopper, não existiriam linguagens de alto nível (Python, Java, JS, C#) nem o termo 'debugging'.",
-    wikiUrl: "https://pt.wikipedia.org/wiki/Grace_Hopper"
+    id: "#ELAS-002",
+    monogram: "WM",
+    name: "Mentoria 1-on-1 Cloud, DevOps & Cibersegurança",
+    org: "WoMakersCode",
+    verified: true,
+    topGroup: "mentoria",
+    category: "Mentoria 1-on-1",
+    status: "Inscrições Abertas",
+    reach: "500 bolsas",
+    reachNumeric: 80000,
+    actionLabel: "Candidatar-se",
+    url: "https://womakerscode.org/",
+    modality: "Remoto / Global",
+    cost: "100% Gratuito",
+    leadFocus: "AWS, Azure, Containers & DevSecOps",
+    mentors: [
+      { name: "Cynthia Zanoni", role: "Principal Cloud Advocate & Fundadora WoMakersCode" },
+      { name: "Beatriz Oliveira", role: "Lead DevSecOps & Cloud Infrastructure Engineer" }
+    ],
+    sobre: {
+      summary:
+        "Programa de aceleração técnica e mentoria individual que conecta estudantes e desenvolvedoras júnior a engenheiras sênior, Staff Engineers e especialistas em Cloud Computing (AWS/Azure), DevOps e Segurança da Informação.",
+      tracks: [
+        "Pareamento 1-on-1 com Líderes de Engenharia",
+        "Trilhas de Certificação Oficial Cloud & Linux",
+        "Code Review, Containers, CI/CD e Arquitetura Distribuída",
+        "Simulação de Entrevistas Técnicas (System Design & Live Coding)"
+      ],
+      audience: "Estudantes de tecnologia e desenvolvedoras buscando evolução acelerada para níveis Pleno e Sênior."
+    },
+    requisitos: [
+      "Conhecimento básico de lógica de programação",
+      "Comprometimento de 4 a 6 horas semanais para sessões de mentoria e laboratórios",
+      "Inscrição ativa na comunidade WoMakersCode"
+    ],
+    impacto: {
+      kpis: [
+        { label: "Mulheres Impactadas", value: "+80.000 na rede" },
+        { label: "Aceleração de Promoção", value: "+68% em 12 meses" },
+        { label: "Bolsas e Certificações", value: "+18.500 emitidas" }
+      ],
+      note: "Reconhecida internacionalmente como uma das maiores redes de capacitação feminina em infraestrutura e código."
+    }
   },
   {
-    name: "As 6 Garotas do ENIAC",
-    era: "1945",
-    initials: "E6",
-    category: "fundadoras",
-    role: "Primeira Equipe de Desenvolvimento do Mundo",
-    bio: "Jean Bartik, Betty Holberton, Kathleen Antonelli, Marlyn Meltzer, Ruth Teitelbaum e Frances Spence programaram o primeiro computador eletrônico digital de grande escala (ENIAC) sem nenhum manual, inventando sub-rotinas e pontos de parada (breakpoints).",
-    dsImpact: "Criaram na prática a profissão de Desenvolvedora de Sistemas e a depuração estruturada.",
-    wikiUrl: "https://pt.wikipedia.org/wiki/ENIAC#O_papel_das_mulheres"
+    id: "#ELAS-003",
+    monogram: "ET",
+    name: "Programa ElasTech — Formação & Contratação Direta",
+    org: "ElasTech",
+    verified: true,
+    topGroup: "vagas",
+    category: "Contratação",
+    status: "Inscrições Abertas",
+    reach: "220 vagas",
+    reachNumeric: 22000,
+    actionLabel: "Candidatar-se",
+    url: "https://www.programaria.org/",
+    modality: "100% Remoto",
+    cost: "Bolsa + Contratação",
+    leadFocus: "Java, C#, Node.js & Blind Code Review",
+    mentors: [
+      { name: "Fernanda Costa", role: "Engineering Manager • Sistemas Financeiros" },
+      { name: "Juliana Mendes", role: "Senior Back-End Engineer • Java & Microsserviços" }
+    ],
+    sobre: {
+      summary:
+        "Pipeline afirmativo de recrutamento e formação técnica desenhado em conjunto com empresas de tecnologia para contratar desenvolvedoras Júnior e Pleno através de processos seletivos às cegas (blind code review) e livres de viés.",
+      tracks: [
+        "Engenharia de Software Back-End (Java, C#, Node.js)",
+        "Qualidade de Software, TDD e Automação de Testes",
+        "Onboarding Guiado com Madrinha Técnica na Empresa",
+        "Auditoria de Equidade Salarial na Contratação"
+      ],
+      audience: "Desenvolvedoras formadas em cursos técnicos (DS), bootcamps ou graduação buscando contratação formal."
+    },
+    requisitos: [
+      "Domínio de lógica de programação e pelo menos uma linguagem orientada a objetos ou web",
+      "Projetos práticos ou acadêmicos publicados no GitHub",
+      "Disponibilidade para atuação remota em regime CLT"
+    ],
+    impacto: {
+      kpis: [
+        { label: "Redução de Viés na Triagem", value: "-54% via Blind Review" },
+        { label: "Retenção no 1º Ano", value: "94% nas squads" },
+        { label: "Paridade Salarial", value: "100% auditada" }
+      ],
+      note: "Garante bancas avaliadoras diversas e feedback técnico estruturado para 100% das participantes."
+    }
   },
   {
-    name: "Margaret Hamilton",
-    era: "1936 – Presente",
-    initials: "MH",
-    category: "espaco",
-    role: "Fundadora da Engenharia de Software (Apollo 11)",
-    bio: "Diretora da Divisão de Engenharia de Software do MIT. Liderou a equipe que escreveu o código de navegação da Apollo 11. Seu sistema de priorização assíncrona impediu que o computador travasse a 3 minutos de pousar na Lua.",
-    dsImpact: "Cunhou o termo 'Engenharia de Software' para que o desenvolvimento de sistemas fosse respeitado como ciência.",
-    wikiUrl: "https://pt.wikipedia.org/wiki/Margaret_Hamilton_(cientista_da_computa%C3%A7%C3%A3o)"
+    id: "#ELAS-004",
+    monogram: "MD",
+    name: "Meninas Digitais — Clubes de Programação & STEM",
+    org: "Meninas Digitais SBC",
+    verified: true,
+    topGroup: "bolsas",
+    category: "Educação Base",
+    status: "Ativo",
+    reach: "Nível Nacional",
+    reachNumeric: 45000,
+    actionLabel: "Acessar",
+    url: "https://meninas.sbc.org.br/",
+    modality: "Híbrido / Escolas",
+    cost: "Público / Gratuito",
+    leadFocus: "Algoritmos, Python, Robótica & Ensino Médio",
+    mentors: [
+      { name: "Comitê Gestor Meninas Digitais • SBC", role: "Sociedade Brasileira de Computação" },
+      { name: "Rede de Professoras Pesquisadoras", role: "Universidades Federais & Institutos Técnicos" }
+    ],
+    sobre: {
+      summary:
+        "Programa institucional da Sociedade Brasileira de Computação (SBC) que coordena mais de 150 projetos parceiros em universidades, Institutos Federais e escolas técnicas (Desenvolvimento de Sistemas) para incentivar alunas do Ensino Médio a ingressarem na computação.",
+      tracks: [
+        "Clubes de Algoritmos e Olimpíadas Brasileiras de Informática",
+        "Oficinas de Robótica, Jogos Digitais e Python",
+        "Bolsas de Iniciação Científica Júnior (CNPq / SBC)",
+        "Encontros Regionais e WIT (Women in Information Technology)"
+      ],
+      audience: "Alunas do Ensino Médio, estudantes de Desenvolvimento de Sistemas e calouras universitárias."
+    },
+    requisitos: [
+      "Estar matriculada no ensino básico, técnico ou superior (ou atuar como educadora)",
+      "Interesse em explorar criação de software, hardware e ciência da computação"
+    ],
+    impacto: {
+      kpis: [
+        { label: "Polos Universitários e Técnicos", value: "+150 projetos no Brasil" },
+        { label: "Retenção no 1º Ano de TI", value: "+3.2x maior" },
+        { label: "Alcance Territorial", value: "27 unidades federativas" }
+      ],
+      note: "Atua diretamente na base educacional para impedir a evasão feminina antes da universidade."
+    }
   },
   {
-    name: "Dorothy Vaughan",
-    era: "1910 – 2008",
-    initials: "DV",
-    category: "espaco",
-    role: "Pioneira Negra da NASA & Especialista em FORTRAN",
-    bio: "Primeira supervisora negra da NACA/NASA. Quando percebeu que os computadores eletrônicos IBM substituiriam o cálculo manual, aprendeu FORTRAN sozinha e ensinou toda a sua equipe de mulheres negras a programar, garantindo o futuro delas na engenharia aeroespacial.",
-    dsImpact: "Símbolo máximo de liderança técnica, requalificação em código e inclusão racial na tecnologia.",
-    wikiUrl: "https://pt.wikipedia.org/wiki/Dorothy_Vaughan"
+    id: "#ELAS-005",
+    monogram: "PL",
+    name: "Ciclo Formativo PretaLab — Dados, IA Ética & Código",
+    org: "PretaLab",
+    verified: true,
+    topGroup: "bolsas",
+    category: "Educação Base",
+    status: "Inscrições Abertas",
+    reach: "300 bolsas",
+    reachNumeric: 30000,
+    actionLabel: "Candidatar-se",
+    url: "https://www.pretalab.com/",
+    modality: "100% Online",
+    cost: "100% Gratuito",
+    leadFocus: "Python, Ciência de Dados & IA Antirracista",
+    mentors: [
+      { name: "Silvana Bahia", role: "Codiretora Executiva Olabi / PretaLab" },
+      { name: "Nina da Hora (Referência Científica)", role: "Cientista da Computação & Pesquisadora em IA Ética" }
+    ],
+    sobre: {
+      summary:
+        "Plataforma que conecta mulheres negras e indígenas à tecnologia e inovação por meio de ciclos formativos gratuitos em Python, Ciência de Dados, Inteligência Artificial Ética, Front-End e conexão com vagas afirmativas.",
+      tracks: [
+        "Python para Ciência de Dados & Machine Learning",
+        "Desenvolvimento Front-End Moderno (HTML, CSS, JS, React)",
+        "Ética Algorítmica e Combate a Vieses Discriminatórios",
+        "Conexão Direta com Banco de Talentos Corporativo"
+      ],
+      audience: "Mulheres negras (pretas e pardas) e indígenas de todas as regiões do Brasil."
+    },
+    requisitos: [
+      "Autodeclarar-se mulher negra ou indígena",
+      "Acesso básico à internet para acompanhamento das aulas síncronas e mentorias",
+      "Interesse em programação, dados ou engenharia de software"
+    ],
+    impacto: {
+      kpis: [
+        { label: "Mulheres na Rede PretaLab", value: "+12.000 mapeadas" },
+        { label: "Bolsas Concedidas", value: "100% gratuitas" },
+        { label: "Alcance Nacional", value: "Foco Norte, Nordeste e Periferias" }
+      ],
+      note: "Referência nacional na construção de uma tecnologia antirracista e interseccional."
+    }
   },
   {
-    name: "Katherine Johnson & Mary Jackson",
-    era: "1918 – 2020",
-    initials: "KJ",
-    category: "espaco",
-    role: "Matemática Orbital & Primeira Engenheira Negra da NASA",
-    bio: "Enquanto Mary Jackson enfrentou a segregação nos tribunais para se tornar a primeira engenheira negra da NASA, Katherine Johnson calculou as trajetórias exatas dos voos espaciais — e os astronautas só decolavam quando ela validava os números do computador.",
-    dsImpact: "Base da computação científica, validação de algoritmos críticos e modelagem matemática de sistemas.",
-    wikiUrl: "https://pt.wikipedia.org/wiki/Katherine_Johnson"
+    id: "#ELAS-006",
+    monogram: "PM",
+    name: "Sprint Liderança Técnica: De Sênior a Staff & CTO",
+    org: "PrograMaria",
+    verified: true,
+    topGroup: "mentoria",
+    category: "Liderança",
+    status: "Ativo",
+    reach: "80 vagas",
+    reachNumeric: 18000,
+    actionLabel: "Acessar",
+    url: "https://www.programaria.org/",
+    modality: "Online Síncrono",
+    cost: "Bolsas Integrais",
+    leadFocus: "System Design, Staff Eng & C-Level",
+    mentors: [
+      { name: "Iana Chan", role: "Fundadora e CEO da PrograMaria" },
+      { name: "Líderes Convidadas (CTOs & VPs Engineering)", role: "Mentoria Executiva em Grandes Techs" }
+    ],
+    sobre: {
+      summary:
+        "Programa avançado de mentoria executiva e arquitetura para mulheres que já atuam como desenvolvedoras Pleno/Sênior e buscam alcançar cadeiras de Tech Lead, Staff Engineer, Engineering Manager ou CTO.",
+      tracks: [
+        "Arquitetura de Sistemas Distribuídos & System Design",
+        "Liderança de Engenharia, Gestão de Squads e Métricas DORA",
+        "Submissão de Palestras Técnicas (Call for Papers / Keynotes)",
+        "Negociação Executiva e Patrocínio de Carreira (Sponsorship)"
+      ],
+      audience: "Engenheiras de software, arquitetas, cientistas de dados e Tech Leads com 3+ anos de experiência."
+    },
+    requisitos: [
+      "Atuação ativa em desenvolvimento de software, dados, segurança ou infraestrutura",
+      "Objetivo de assumir posições de Staff Engineer, Tech Lead ou diretoria técnica"
+    ],
+    impacto: {
+      kpis: [
+        { label: "Comunidade PrograMaria", value: "+30.000 mulheres" },
+        { label: "Promoções para Liderança", value: "+46% após o ciclo" },
+        { label: "Palestrantes Técnicas", value: "+420 em conferências" }
+      ],
+      note: "Atua diretamente sobre o teto de vidro onde apenas 5% dos cargos de CTO são ocupados por mulheres."
+    }
   },
   {
-    name: "Irmã Mary Kenneth Keller",
-    era: "1913 – 1985",
-    initials: "MK",
-    category: "fundadoras",
-    role: "1ª Doutora em Computação & Coautora do BASIC",
-    bio: "Primeira mulher a conquistar um PhD em Ciência da Computação nos EUA (1965). Ajudou a desenvolver a linguagem BASIC em Dartmouth com um objetivo revolucionário: permitir que qualquer estudante, e não apenas matemáticos de elite, pudesse aprender a programar.",
-    dsImpact: "Pioneira do ensino inclusivo de Desenvolvimento de Sistemas e autora de 4 livros sobre computação.",
-    wikiUrl: "https://pt.wikipedia.org/wiki/Mary_Kenneth_Keller"
+    id: "#ELAS-007",
+    monogram: "PY",
+    name: "PyLadies Brasil — Open Source, Python & Data Science",
+    org: "PyLadies",
+    verified: true,
+    topGroup: "comunidades",
+    category: "Mentoria 1-on-1",
+    status: "Ativo",
+    reach: "38 capítulos",
+    reachNumeric: 25000,
+    actionLabel: "Acessar",
+    url: "https://brasil.pyladies.com/",
+    modality: "Comunidade / Híbrido",
+    cost: "100% Aberto",
+    leadFocus: "Python, Django, FastAPI & Machine Learning",
+    mentors: [
+      { name: "Mantenedoras PyLadies Brasil", role: "Lideranças Regionais em 38 Cidades" },
+      { name: "Core Contributors Python Software Foundation", role: "Mentoras de Software Livre" }
+    ],
+    sobre: {
+      summary:
+        "Braço brasileiro da comunidade internacional PyLadies. Organiza grupos de estudo, sprints de contribuição Open Source, coding dojos e mentoria contínua para mulheres dominarem Python, Django, FastAPI e Inteligência Artificial.",
+      tracks: [
+        "Coding Dojos de Algoritmos e Estruturas de Dados em Python",
+        "Sprints Guiadas de Contribuição para Repositórios Open Source",
+        "Mentoria de Submissão para a Conferência Python Brasil",
+        "Engenharia de Dados, Pandas, PyTorch e IA"
+      ],
+      audience: "Desde estudantes dando o primeiro passo no código até mantenedoras de bibliotecas Python."
+    },
+    requisitos: [
+      "Adesão ao Código de Conduta inclusivo e colaborativo (zero gatekeeping)",
+      "Aberto a mulheres de qualquer nível de senioridade"
+    ],
+    impacto: {
+      kpis: [
+        { label: "Capítulos Ativos no País", value: "38 polos regionais" },
+        { label: "Presença Feminina na PythonBR", value: "Evoluiu de 8% para 36%" },
+        { label: "Material Didático", value: "100% Open Source" }
+      ],
+      note: "Pilar fundamental na descentralização do ensino de programação em universidades de todo o Brasil."
+    }
   },
   {
-    name: "Adele Goldberg",
-    era: "1945 – Presente",
-    initials: "AG",
-    category: "modernas",
-    role: "Pioneira de POO (Smalltalk) e Interfaces Gráficas",
-    bio: "Pesquisadora do lendário Xerox PARC, co-desenvolveu a linguagem Smalltalk-80. Seus conceitos de janelas sobrepostas, ícones, menus e Programação Orientada a Objetos (POO) serviram de modelo direto para os sistemas Apple Macintosh e Windows.",
-    dsImpact: "Criou a base da matéria de Programação Orientada a Objetos (POO) e do design de interfaces modernas.",
-    wikiUrl: "https://pt.wikipedia.org/wiki/Adele_Goldberg"
+    id: "#ELAS-008",
+    monogram: "RG",
+    name: "Rails Girls & Imersão Prática de Primeiro Deploy",
+    org: "Rails Girls",
+    verified: true,
+    topGroup: "comunidades",
+    category: "Educação Base",
+    status: "Em Expansão",
+    reach: "Nível Nacional",
+    reachNumeric: 12000,
+    actionLabel: "Acessar",
+    url: "https://railsgirls.com/",
+    modality: "Imersão Prática",
+    cost: "100% Gratuito",
+    leadFocus: "Arquitetura MVC, Web Dev & Deploy",
+    mentors: [
+      { name: "Engenheiras Voluntárias Rails Girls BR", role: "Full-Stack Developers & Tech Leads" }
+    ],
+    sobre: {
+      summary:
+        "Workshops práticos e acolhedores onde estudantes e iniciantes constroem e fazem o deploy de sua primeira aplicação web completa do zero, trabalhando em pequenos grupos com mentoras experientes.",
+      tracks: [
+        "Arquitetura Web MVC na Prática",
+        "Modelagem de Banco de Dados, Rotas e Front-End",
+        "Controle de Versão com Git e Deploy em Nuvem",
+        "Roda de Carreira com Desenvolvedoras do Mercado"
+      ],
+      audience: "Mulheres que desejam colocar a mão no código e publicar seu primeiro sistema web em ambiente seguro."
+    },
+    requisitos: [
+      "Nenhum conhecimento prévio em programação é necessário",
+      "Curiosidade e vontade de construir software em equipe"
+    ],
+    impacto: {
+      kpis: [
+        { label: "Proporção Mentora / Aluna", value: "1 mentora para 3 alunas" },
+        { label: "Índice de Confiança Técnica", value: "98% aprovação" },
+        { label: "Continuidade nos Estudos", value: "81% seguem na área" }
+      ],
+      note: "Elimina a barreira inicial de configuração de ambiente e síndrome da impostora no primeiro contato com código."
+    }
   },
   {
-    name: "Radia Perlman",
-    era: "1951 – Presente",
-    initials: "RP",
-    category: "modernas",
-    role: "A 'Mãe da Internet' & Criadora do Protocolo STP",
-    bio: "Engenheira de software e redes que inventou o Spanning Tree Protocol (STP), algoritmo fundamental que permitiu que redes locais (LANs) escalassem sem entrar em colapso, tornando possível a arquitetura da Internet moderna.",
-    dsImpact: "Detentora de mais de 100 patentes em redes de computadores, roteamento e segurança da informação.",
-    wikiUrl: "https://pt.wikipedia.org/wiki/Radia_Perlman"
+    id: "#ELAS-009",
+    monogram: "VA",
+    name: "Hub de Vagas Afirmativas — Engenharia Front/Back/QA",
+    org: "Rede Empresas Equidade",
+    verified: true,
+    topGroup: "vagas",
+    category: "Contratação",
+    status: "Inscrições Abertas",
+    reach: "95 vagas",
+    reachNumeric: 9500,
+    actionLabel: "Candidatar-se",
+    url: "https://womakerscode.org/",
+    modality: "Remoto / Híbrido",
+    cost: "Contratação CLT",
+    leadFocus: "Front-End, Back-End, QA & Equidade Salarial",
+    mentors: [
+      { name: "Tech Recruiters & Engineering Managers", role: "64 Empresas Signatárias do Pacto de Equidade" }
+    ],
+    sobre: {
+      summary:
+        "Painel unificado de vagas exclusivas e afirmativas para mulheres em empresas de tecnologia comprometidas com licença parental equitativa, faixas salariais transparentes e ambientes psicologicamente seguros.",
+      tracks: [
+        "Posições Júnior, Pleno, Sênior, Staff e Tech Lead",
+        "Front-End (React/Next/Vue), Back-End (Node/Java/Go/Python)",
+        "Engenharia de Dados, DevOps, SRE & Cibersegurança",
+        "Processos Seletivos Sem Testes Tóxicos e com Feedback Garantido"
+      ],
+      audience: "Desenvolvedoras e formandas de cursos técnicos/superiores buscando contratação imediata."
+    },
+    requisitos: [
+      "Requisitos técnicos enxutos e realistas (foco em fundamentos e resolução de problemas)",
+      "Transparência salarial garantida em todas as etapas"
+    ],
+    impacto: {
+      kpis: [
+        { label: "Empresas Auditadas", value: "64 organizações" },
+        { label: "Tempo Médio de Contratação", value: "21 dias" },
+        { label: "Bancas Entrevistadoras", value: "Mínimo 50% mulheres" }
+      ],
+      note: "Neutraliza o efeito estatístico onde mulheres deixam de aplicar para vagas com listas infladas de requisitos."
+    }
   },
   {
-    name: "Carol Shaw",
-    era: "1955 – Presente",
-    initials: "CS",
-    category: "modernas",
-    role: "Primeira Mulher Desenvolvedora de Games da História",
-    bio: "Engenheira de software na Atari e na Activision, projetou e programou sozinha o clássico 'River Raid' (1982), um marco de geração procedural de cenários e gerenciamento de memória em sistemas embarcados.",
-    dsImpact: "Derrubou o mito de que jogos digitais eram território masculino, abrindo caminho para mulheres em Game Dev.",
-    wikiUrl: "https://pt.wikipedia.org/wiki/Carol_Shaw"
+    id: "#ELAS-010",
+    monogram: "TG",
+    name: "Technovation Girls Brasil — Hackathon de IA & Mobile",
+    org: "Technovation",
+    verified: true,
+    topGroup: "bolsas",
+    category: "Educação Base",
+    status: "Inscrições Abertas",
+    reach: "400 equipes",
+    reachNumeric: 16000,
+    actionLabel: "Candidatar-se",
+    url: "https://www.technovationbrasil.org/",
+    modality: "100% Online",
+    cost: "100% Gratuito",
+    leadFocus: "Apps Mobile, Inteligência Artificial & UX",
+    mentors: [
+      { name: "Mentoras de Produto, Mobile & IA", role: "Rede Global Technovation Girls" }
+    ],
+    sobre: {
+      summary:
+        "Programa e competição global onde meninas de 8 a 18 anos formam equipes para identificar um problema real de sua comunidade e programar um aplicativo mobile ou modelo de Inteligência Artificial para resolvê-lo.",
+      tracks: [
+        "Lógica de Programação e Desenvolvimento de Apps Mobile",
+        "Treinamento de Modelos de Inteligência Artificial",
+        "Pesquisa de Usuárias, UX Design e Prototipação",
+        "Pitch de Impacto e Liderança Feminina Jovem"
+      ],
+      audience: "Estudantes de 8 a 18 anos e mentoras voluntárias da indústria de software."
+    },
+    requisitos: [
+      "Ter entre 8 e 18 anos (para alunas) ou atuar em tecnologia/educação (para mentoras)",
+      "Inscrição 100% gratuita"
+    ],
+    impacto: {
+      kpis: [
+        { label: "Ingresso Posterior em Computação", value: "76% escolhem STEM" },
+        { label: "Projetos Desenvolvidos no Brasil", value: "+1.200 aplicativos" },
+        { label: "Presença Global", value: "+100 países" }
+      ],
+      note: "Desperta a autoconfiança tecnológica antes da escolha do curso técnico ou vestibular."
+    }
   },
   {
-    name: "Fei-Fei Li",
-    era: "1976 – Presente",
-    initials: "FL",
-    category: "modernas",
-    role: "Pioneira da Visão Computacional & IA Humanizada",
-    bio: "Professora em Stanford e criadora do ImageNet, o banco de dados massivo que destravou a revolução do Deep Learning e da Inteligência Artificial moderna. Co-fundou a organização AI4ALL para aumentar a inclusão de mulheres e minorias na IA.",
-    dsImpact: "Referência mundial em Ciência de Dados, Redes Neurais e Inteligência Artificial centrada no ser humano.",
-    wikiUrl: "https://pt.wikipedia.org/wiki/Fei-Fei_Li"
+    id: "#ELAS-011",
+    monogram: "AL",
+    name: "Fellowship Ada Lovelace & Margaret Hamilton — Arquitetura Crítica",
+    org: "Consórcio Acadêmico STEM",
+    verified: true,
+    topGroup: "mentoria",
+    category: "Liderança",
+    status: "Em Expansão",
+    reach: "60 bolsas",
+    reachNumeric: 6000,
+    actionLabel: "Acessar",
+    url: "https://meninas.sbc.org.br/",
+    modality: "Nacional / Remoto",
+    cost: "Bolsa Auxílio",
+    leadFocus: "Sistemas Críticos, Compiladores & Pesquisa",
+    mentors: [
+      { name: "Pesquisadoras Doutoras em Computação", role: "Sistemas Distribuídos, Compiladores & IA" }
+    ],
+    sobre: {
+      summary:
+        "Inspirado nas pioneiras Ada Lovelace (autora do 1º algoritmo da história, 1843) e Margaret Hamilton (diretora de Engenharia de Software da Apollo 11, 1969), apoia mulheres na pesquisa avançada e arquitetura de software crítico.",
+      tracks: [
+        "Engenharia de Sistemas Distribuídos e Compiladores",
+        "Segurança Crítica, Criptografia e Protocolos de Rede",
+        "Mentoria com Pesquisadoras Doutoras e Principal Engineers",
+        "Apoio Financeiro para Publicações e Conferências"
+      ],
+      audience: "Estudantes de Desenvolvimento de Sistemas, Ciência da Computação, Engenharia e pós-graduandas."
+    },
+    requisitos: [
+      "Projeto técnico ou iniciação científica em andamento",
+      "Compromisso de amadrinhar uma estudante iniciante da rede"
+    ],
+    impacto: {
+      kpis: [
+        { label: "Pesquisas e Arquiteturas Apoiadas", value: "+95 projetos" },
+        { label: "Liderança em Laboratórios", value: "42% coordenadoras" },
+        { label: "Memória & Visibilidade", value: "Resgate das Pioneiras" }
+      ],
+      note: "Conecta o legado histórico feminino que fundou a programação às arquitetas que lideram o futuro."
+    }
   },
   {
-    name: "Nina da Hora & Sônia Guimarães",
-    era: "Brasil 🇧🇷",
-    initials: "BR",
-    category: "brasil",
-    role: "Cientistas Brasileiras, Computação & Inclusão Preta",
-    bio: "Sônia Guimarães foi a primeira mulher negra doutora em Física no Brasil e primeira professora negra do ITA, abrindo portas nas exatas. Nina da Hora é cientista da computação e pesquisadora brasileira referência em ética algorítmica, cibersegurança e tecnologia antirracista.",
-    dsImpact: "Inspiram milhares de jovens brasileiras de escolas técnicas e públicas a ocuparem o Desenvolvimento de Sistemas.",
-    wikiUrl: "https://pt.wikipedia.org/wiki/S%C3%B4nia_Guimar%C3%A3es"
+    id: "#ELAS-012",
+    monogram: "OS",
+    name: "First Pull Request — Mentoria de Contribuição Open Source",
+    org: "Comunidade Devas BR",
+    verified: true,
+    topGroup: "comunidades",
+    category: "Mentoria 1-on-1",
+    status: "Inscrições Abertas",
+    reach: "250 vagas",
+    reachNumeric: 11000,
+    actionLabel: "Candidatar-se",
+    url: "https://github.com/womakerscode",
+    modality: "100% Online / Git",
+    cost: "100% Gratuito",
+    leadFocus: "Git Avançado, Pull Requests & Open Source",
+    mentors: [
+      { name: "Mantenedoras Open Source BR", role: "JavaScript, TypeScript, Python, Go & Rust" }
+    ],
+    sobre: {
+      summary:
+        "Programa prático que pareia desenvolvedoras com mantenedoras experientes de software livre para realizar, revisar e aprovar seus primeiros Pull Requests em grandes projetos Open Source internacionais e nacionais.",
+      tracks: [
+        "Fluxo Git Avançado, Rebasing e Boas Práticas de Code Review",
+        "Curadoria de Issues Reais (Good First Issue & Bug Fixes)",
+        "Testes Unitários, CI/CD e Documentação Técnica",
+        "Construção de Portfólio Público Verificável no GitHub"
+      ],
+      audience: "Desenvolvedoras de qualquer stack que desejam destravar a participação ativa no ecossistema Open Source."
+    },
+    requisitos: [
+      "Conta ativa no GitHub e familiaridade básica com linha de comando / Git",
+      "Disponibilidade para code reviews assíncronos com a mentora"
+    ],
+    impacto: {
+      kpis: [
+        { label: "Pull Requests Aprovados", value: "+1.840 PRs merged" },
+        { label: "Novas Mantenedoras", value: "34 líderes de repositório" },
+        { label: "Visibilidade Internacional", value: "+3x convites técnicos" }
+      ],
+      note: "Aumenta diretamente a representatividade feminina nos repositórios que sustentam a infraestrutura mundial de software."
+    }
   }
 ];
 
-// ============================================================================
-// 2. RENDERIZAÇÃO DA GALERIA DE PIONEIRAS + EFEITO 3D TILT
-// ============================================================================
-const pioneersGrid = document.getElementById("pioneers-grid");
-const filterButtons = document.querySelectorAll("#pioneer-filters .filter-btn");
-const searchInput = document.getElementById("pioneer-search");
+// Global State
+const state = {
+  topFilter: "all",
+  categoryFilter: "all",
+  statusFilter: "all",
+  partnerFilter: "",
+  searchQuery: "",
+  sortBy: "featured",
+  viewMode: "table",
+  activeItem: null,
+  activeDrawerTab: "sobre"
+};
 
-let activeCategory = "all";
-let searchQuery = "";
+let lenisInstance = null;
 
-function renderPioneers() {
-  if (!pioneersGrid) return;
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof lucide !== "undefined") {
+    lucide.createIcons();
+  }
 
-  const filtered = PIONEERS_DATA.filter((item) => {
-    const matchesCategory = activeCategory === "all" || item.category === activeCategory;
-    const textBlob = `${item.name} ${item.role} ${item.bio} ${item.dsImpact}`.toLowerCase();
-    const matchesSearch = textBlob.includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
+  initLenisSmoothScroll();
+  initFragmentKineticArc3D();
+  initHeroEntranceAndStatTickers();
+  initDirectoryControls();
+  initDrawerAndModals();
+  initKeyboardShortcuts();
+  renderDirectory(true);
+});
+
+/* ==========================================================================
+   1. LENIS SMOOTH SCROLLING INTEGRATED WITH GSAP SCROLLTRIGGER
+   ========================================================================== */
+function initLenisSmoothScroll() {
+  if (typeof Lenis === "undefined") return;
+
+  lenisInstance = new Lenis({
+    duration: 1.15,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
+    wheelMultiplier: 1.0,
+    touchMultiplier: 1.5
   });
 
-  if (filtered.length === 0) {
-    pioneersGrid.innerHTML = `
-      <div style="grid-column: 1 / -1; padding: 3.5rem; text-align: center; color: var(--text-body);">
-        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 0.5rem;">Nenhuma pioneira encontrada para essa busca</h3>
-        <p>Tente buscar por termos como "Ada", "COBOL", "NASA", "Jogos" ou "Brasil".</p>
-      </div>
-    `;
+  if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+    lenisInstance.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+      lenisInstance.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    function raf(time) {
+      lenisInstance.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", (e) => {
+      const targetId = anchor.getAttribute("href");
+      if (!targetId || targetId === "#") return;
+      const targetEl = document.querySelector(targetId);
+      if (targetEl && lenisInstance) {
+        e.preventDefault();
+        lenisInstance.scrollTo(targetEl, { offset: -64 });
+      }
+    });
+  });
+}
+
+/* ==========================================================================
+   2. HERO 3D KINETIC ROSE-QUARTZ FLOATING ARC (FULL-SCREEN WIDESCREEN PC)
+   Curving Helix / Cascading Spiral of Frosted Rose Glass & Pink Polycarbonate
+   ========================================================================== */
+function initFragmentKineticArc3D() {
+  const canvas = document.getElementById("hero-arc-canvas");
+  const heroSection = document.getElementById("hero");
+  const fpsReadout = document.getElementById("webgl-fps-readout");
+
+  if (!canvas || !heroSection || typeof THREE === "undefined") return;
+
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({
+      canvas,
+      alpha: true,
+      antialias: true,
+      powerPreference: "high-performance"
+    });
+  } catch (err) {
     return;
   }
 
-  pioneersGrid.innerHTML = filtered
-    .map(
-      (p) => `
-      <article class="pioneer-card-3d" data-url="${p.wikiUrl}">
-        <div>
-          <div class="pioneer-top-meta">
-            <span class="pioneer-era-badge">${p.era}</span>
-            <div class="pioneer-avatar-monogram">${p.initials}</div>
-          </div>
-          <h3>${p.name}</h3>
-          <span class="pioneer-role-title">${p.role}</span>
-          <p>${p.bio}</p>
-        </div>
+  const setRendererSize = () => {
+    const w = heroSection.clientWidth || window.innerWidth;
+    const h = heroSection.clientHeight || window.innerHeight;
+    renderer.setSize(w, h);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    return { w, h };
+  };
 
-        <div>
-          <div class="pioneer-impact-box">
-            <strong>Legado no DS:</strong> ${p.dsImpact}
-          </div>
-          <div class="pioneer-card-footer">
-            <a href="${p.wikiUrl}" target="_blank" rel="noopener noreferrer" class="pioneer-link-redirect">
-              Redirecionar para Biografia Completa ↗
-            </a>
-          </div>
-        </div>
-      </article>
-    `
-    )
-    .join("");
+  const { w, h } = setRendererSize();
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.35;
 
-  attach3DTiltToCards();
-}
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(36, w / h, 0.1, 100);
+  camera.position.set(0, 0, 12.2);
 
-function attach3DTiltToCards() {
-  const cards = document.querySelectorAll(".pioneer-card-3d");
-  cards.forEach((card) => {
-    card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -6;
-      const rotateY = ((x - centerX) / centerX) * 6;
-      card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(6px)`;
+  // Rose-Quartz & Magenta Studio Lighting Setup
+  const ambientLight = new THREE.AmbientLight(0xffd6eb, 0.65);
+  scene.add(ambientLight);
+
+  // Key Directional Light 1 (Luminous Blush-White from Top-Right)
+  const dirLightKey = new THREE.DirectionalLight(0xffebf5, 3.6);
+  dirLightKey.position.set(7, 9, 8);
+  scene.add(dirLightKey);
+
+  // Rim Directional Light 2 (Vibrant Rose-Pink Fresnel Rim)
+  const dirLightRim = new THREE.DirectionalLight(0xff2a85, 3.4);
+  dirLightRim.position.set(-7, 5, -5);
+  scene.add(dirLightRim);
+
+  // Fill Light 3 (Warm Fuchsia-Magenta Glow from Below)
+  const pointLightFill = new THREE.PointLight(0xd946ef, 2.4, 28);
+  pointLightFill.position.set(2, -6, 6);
+  scene.add(pointLightFill);
+
+  // Dynamic Cursor Specular Light (Rose-Gold highlight that sweeps across bevels)
+  const cursorSpecularLight = new THREE.PointLight(0xff80bf, 3.4, 18);
+  cursorSpecularLight.position.set(2, 2, 5);
+  scene.add(cursorSpecularLight);
+
+  // Build Rounded Rectangular Bevelled Plate Geometry
+  function createRoundedCardGeometry(width, height, radius, depth) {
+    const shape = new THREE.Shape();
+    const x = -width / 2;
+    const y = -height / 2;
+
+    shape.moveTo(x + radius, y);
+    shape.lineTo(x + width - radius, y);
+    shape.quadraticCurveTo(x + width, y, x + width, y + radius);
+    shape.lineTo(x + width, y + height - radius);
+    shape.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    shape.lineTo(x + radius, y + height);
+    shape.quadraticCurveTo(x, y + height, x, y + height - radius);
+    shape.lineTo(x, y + radius);
+    shape.quadraticCurveTo(x, y, x + radius, y);
+
+    const extrudeSettings = {
+      depth: depth,
+      bevelEnabled: true,
+      bevelSegments: 5,
+      steps: 1,
+      bevelSize: 0.025,
+      bevelThickness: 0.025,
+      curveSegments: 16
+    };
+
+    const geo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+    geo.center();
+    return geo;
+  }
+
+  const cardGeo = createRoundedCardGeometry(2.65, 1.64, 0.2, 0.048);
+  const edgesGeo = new THREE.EdgesGeometry(cardGeo, 18);
+
+  // Frosted Rose-Quartz & Glossy Pink Polycarbonate Material
+  const rosePolycarbonateMat = new THREE.MeshPhysicalMaterial({
+    color: 0x2b0618,
+    emissive: 0x1a030f,
+    roughness: 0.14,
+    metalness: 0.18,
+    transmission: 0.56,
+    transparent: true,
+    opacity: 0.93,
+    reflectivity: 1.0,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.06
+  });
+
+  // Rose-Pink Fresnel Edge Highlight Materials
+  const roseFresnelEdgeMat = new THREE.LineBasicMaterial({
+    color: 0xf472b6,
+    transparent: true,
+    opacity: 0.34
+  });
+
+  const brightPinkEdgeMat = new THREE.LineBasicMaterial({
+    color: 0xffb3d9,
+    transparent: true,
+    opacity: 0.68
+  });
+
+  // Group Hierarchy for Widescreen Parallax & Scroll Dispersion
+  const spiralRootGroup = new THREE.Group();
+  scene.add(spiralRootGroup);
+
+  const cardsPivotGroup = new THREE.Group();
+  spiralRootGroup.add(cardsPivotGroup);
+
+  // Create the Curving Helix / Cascading Spiral of 26 Floating Rose Plates
+  const CARD_COUNT = 26;
+  const cardItems = [];
+
+  for (let i = 0; i < CARD_COUNT; i++) {
+    const t = i / (CARD_COUNT - 1); // 0.0 -> 1.0 along the widescreen arc
+
+    const cardHolder = new THREE.Group();
+    const mesh = new THREE.Mesh(cardGeo, rosePolycarbonateMat);
+    const edgeLines = new THREE.LineSegments(
+      edgesGeo,
+      i % 4 === 0 ? brightPinkEdgeMat : roseFresnelEdgeMat
+    );
+
+    mesh.add(edgeLines);
+    cardHolder.add(mesh);
+
+    // Widescreen Parametric 3D Arc: sweeps across the PC viewport from lower-center to upper-right
+    const angle = (t - 0.35) * Math.PI * 1.22;
+    const baseX = -2.4 + t * 8.4 + Math.sin(t * Math.PI) * 0.95;
+    const baseY = -1.9 + Math.pow(t, 1.02) * 5.6 + Math.sin(t * Math.PI * 1.2) * 0.6;
+    const baseZ = Math.sin(t * Math.PI * 1.4) * 2.0 - Math.pow(t - 0.5, 2) * 3.4;
+
+    const baseRotX = 0.44 - t * 0.98 + Math.cos(angle) * 0.26;
+    const baseRotY = -0.62 + t * 0.88;
+    const baseRotZ = -0.68 + t * 1.48;
+
+    cardHolder.position.set(baseX, baseY, baseZ);
+    cardHolder.rotation.set(baseRotX, baseRotY, baseRotZ);
+
+    const scaleFactor = 0.88 + Math.sin(t * Math.PI) * 0.25;
+    cardHolder.scale.setScalar(scaleFactor);
+
+    cardsPivotGroup.add(cardHolder);
+
+    cardItems.push({
+      holder: cardHolder,
+      mesh,
+      t,
+      index: i,
+      baseX,
+      baseY,
+      baseZ,
+      baseRotX,
+      baseRotY,
+      baseRotZ,
+      scaleFactor
     });
+  }
 
-    card.addEventListener("mouseleave", () => {
-      card.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0px)";
-    });
-
-    card.addEventListener("click", (e) => {
-      if (e.target.tagName.toLowerCase() !== "a") {
-        const url = card.getAttribute("data-url");
-        if (url) window.open(url, "_blank", "noopener,noreferrer");
-      }
-    });
+  // Subtle Rose-Gold Floating Stardust Particles in the 3D Stage
+  const dustCount = 140;
+  const dustGeo = new THREE.BufferGeometry();
+  const dustPositions = new Float32Array(dustCount * 3);
+  for (let i = 0; i < dustCount; i++) {
+    dustPositions[i * 3] = (Math.random() - 0.35) * 18;
+    dustPositions[i * 3 + 1] = (Math.random() - 0.4) * 12;
+    dustPositions[i * 3 + 2] = (Math.random() - 0.5) * 8;
+  }
+  dustGeo.setAttribute("position", new THREE.BufferAttribute(dustPositions, 3));
+  const dustMat = new THREE.PointsMaterial({
+    color: 0xff80bf,
+    size: 0.055,
+    transparent: true,
+    opacity: 0.55
   });
-}
+  const dustParticles = new THREE.Points(dustGeo, dustMat);
+  scene.add(dustParticles);
 
-filterButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    filterButtons.forEach((b) => b.classList.remove("active"));
-    btn.classList.add("active");
-    activeCategory = btn.getAttribute("data-filter") || "all";
-    renderPioneers();
-  });
-});
-
-if (searchInput) {
-  searchInput.addEventListener("input", (e) => {
-    searchQuery = e.target.value;
-    renderPioneers();
-  });
-}
-
-renderPioneers();
-
-// ============================================================================
-// 3. PORTAL DE ENTRADA EXCLUSIVO & SISTEMA DE REDIRECIONAMENTO
-// ============================================================================
-const portalGate = document.getElementById("portal-gate");
-const btnUnlockPortal = document.getElementById("btn-unlock-portal");
-const btnReopenPortal = document.getElementById("btn-reopen-portal");
-const visitorNameInput = document.getElementById("visitor-name");
-const portalDestSelect = document.getElementById("portal-destination");
-const visitorBadge = document.getElementById("visitor-badge");
-const rolePills = document.querySelectorAll("#role-pills .role-pill");
-
-let selectedRole = "Aluna de DS";
-
-rolePills.forEach((pill) => {
-  pill.addEventListener("click", () => {
-    rolePills.forEach((p) => p.classList.remove("active"));
-    pill.classList.add("active");
-    selectedRole = pill.getAttribute("data-role") || "Aluna de DS";
-  });
-});
-
-if (btnUnlockPortal) {
-  btnUnlockPortal.addEventListener("click", () => {
-    const rawName = visitorNameInput ? visitorNameInput.value.trim() : "";
-    const displayName = rawName ? rawName : "Deva";
-    if (visitorBadge) {
-      visitorBadge.textContent = `🌸 ${displayName} // ${selectedRole}`;
-    }
-
-    if (portalGate) {
-      portalGate.classList.add("unlocked");
-    }
-
-    const targetHash = portalDestSelect ? portalDestSelect.value : "#inicio";
-    setTimeout(() => {
-      const targetEl = document.querySelector(targetHash);
-      if (targetEl) {
-        targetEl.scrollIntoView({ behavior: "smooth" });
-      }
-    }, 350);
-  });
-}
-
-if (btnReopenPortal) {
-  btnReopenPortal.addEventListener("click", () => {
-    if (portalGate) {
-      portalGate.classList.remove("unlocked");
-    }
-  });
-}
-
-// Modal de Redirecionamento Rápido
-const redirectModal = document.getElementById("redirect-modal");
-const btnOpenModal = document.getElementById("btn-open-redirect-modal");
-const btnCloseModal = document.getElementById("btn-close-modal");
-
-if (btnOpenModal && redirectModal) {
-  btnOpenModal.addEventListener("click", () => {
-    redirectModal.classList.add("open");
-  });
-}
-
-if (btnCloseModal && redirectModal) {
-  btnCloseModal.addEventListener("click", () => {
-    redirectModal.classList.remove("open");
-  });
-}
-
-if (redirectModal) {
-  redirectModal.addEventListener("click", (e) => {
-    if (e.target === redirectModal) {
-      redirectModal.classList.remove("open");
-    }
-  });
-}
-
-// ============================================================================
-// 4. GRÁFICO INTERATIVO DO AFASTAMENTO HISTÓRICO (1950 - HOJE)
-// ============================================================================
-const barCols = document.querySelectorAll("#history-bars .bar-col");
-const chartCaption = document.getElementById("chart-caption");
-
-barCols.forEach((col) => {
-  const updateCaption = () => {
-    const info = col.getAttribute("data-info");
-    if (info && chartCaption) {
-      chartCaption.innerHTML = `<strong>📌 Fato Histórico:</strong> ${info}`;
+  const updateResponsiveArcTransform = () => {
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) {
+      spiralRootGroup.position.set(-0.5, 0.8, -2.5);
+      spiralRootGroup.scale.setScalar(0.72);
+    } else {
+      spiralRootGroup.position.set(0.25, -0.1, 0);
+      spiralRootGroup.scale.setScalar(1.04);
     }
   };
-  col.addEventListener("mouseenter", updateCaption);
-  col.addEventListener("click", updateCaption);
-});
+  updateResponsiveArcTransform();
 
-// ============================================================================
-// 5. REDIRECIONADOR INTELIGENTE DE TRILHA NO CURSO DE DS
-// ============================================================================
-const TRACKS_DATA = {
-  frontend: {
-    badge: "TRILHA RECOMENDADA NO DS // FRONT-END & CRIATIVIDADE",
-    title: "Engenharia Front-End, WebGL 3D & Design de Interfaces",
-    desc: "Você une sensibilidade visual com lógica de código! No curso de DS, você vai dominar HTML5, CSS moderno, JavaScript, React e experiências 3D para transformar telas em plataformas inclusivas e rápidas. Sua inspiração histórica: Adele Goldberg, pioneira das interfaces gráficas!",
-    tags: ["HTML5 & CSS3", "JavaScript / TypeScript", "React & Three.js 3D", "Acessibilidade Web (WCAG)"],
-    primaryText: "Redirecionar para PrograMaria (Front-End)",
-    primaryUrl: "https://www.programaria.org/",
-    secondaryText: "Guia MDN Web Docs ↗",
-    secondaryUrl: "https://developer.mozilla.org/pt-BR/"
-  },
-  backend: {
-    badge: "TRILHA RECOMENDADA NO DS // ARQUITETURA & BACK-END",
-    title: "Engenharia Back-End, APIs & Sistemas Distribuídos",
-    desc: "Você gosta de entender como tudo funciona por trás dos panos! No DS, você construirá servidores, microsserviços, regras de negócio e sistemas de alta confiabilidade. Sua inspiração histórica: Margaret Hamilton (Engenharia de Software da Apollo 11) e Grace Hopper!",
-    tags: ["Node.js / Python / Java", "APIs REST & GraphQL", "Arquitetura de Software", "Cloud & Containers"],
-    primaryText: "Redirecionar para {reprograma} & Bootcamps",
-    primaryUrl: "https://reprograma.com.br/",
-    secondaryText: "Comunidade WoMakersCode ↗",
-    secondaryUrl: "https://womakerscode.org/"
-  },
-  dados: {
-    badge: "TRILHA RECOMENDADA NO DS // DADOS & IA ÉTICA",
-    title: "Bancos de Dados, Ciência de Dados & IA Antirracista",
-    desc: "Você transforma dados brutos em decisões inteligentes e justas! No curso de DS, você aprenderá modelagem SQL/NoSQL, Python e aprendizado de máquina sem vieses discriminatórios. Sua inspiração: Dorothy Vaughan, Fei-Fei Li e Nina da Hora!",
-    tags: ["SQL & Modelagem de Dados", "Python & Pandas", "Machine Learning", "Ética Algorítmica"],
-    primaryText: "Redirecionar para PretaLab & PyLadies",
-    primaryUrl: "https://www.pretalab.com/",
-    secondaryText: "PyLadies Brasil ↗",
-    secondaryUrl: "https://brasil.pyladies.com/"
-  },
-  seguranca: {
-    badge: "TRILHA RECOMENDADA NO DS // REDES & CIBERSEGURANÇA",
-    title: "Segurança da Informação, Criptografia & Infraestrutura",
-    desc: "Você quer proteger pessoas e sistemas no mundo digital! No curso de DS, você estuda protocolos de rede, prevenção de invasões, LGPD e defesa cibernética. Sua inspiração histórica: Radia Perlman, a Mãe da Internet!",
-    tags: ["Protocolos de Rede", "Segurança Ofensiva & Defensiva", "Criptografia", "Privacidade & LGPD"],
-    primaryText: "Redirecionar para Mulheres em Cibersegurança",
-    primaryUrl: "https://womakerscode.org/",
-    secondaryText: "Meninas Digitais SBC ↗",
-    secondaryUrl: "https://meninas.sbc.org.br/"
-  },
-  games: {
-    badge: "TRILHA RECOMENDADA NO DS // GAMES & MOBILE",
-    title: "Desenvolvimento de Jogos Digitais & Aplicativos Mobile",
-    desc: "Você quer criar mundos interativos ou apps que estão no bolso de milhões de pessoas! No curso de DS, você aprende programação orientada a eventos, motores gráficos e apps nativos/híbridos. Sua inspiração histórica: Carol Shaw (criadora de River Raid)!",
-    tags: ["C# & Unity / Godot", "React Native / Flutter", "Física & Lógica 3D", "Game Design Inclusivo"],
-    primaryText: "Redirecionar para Trilhas Gratuitas (freeCodeCamp)",
-    primaryUrl: "https://www.freecodecamp.org/portuguese/",
-    secondaryText: "Meninas Digitais SBC ↗",
-    secondaryUrl: "https://meninas.sbc.org.br/"
-  }
-};
+  // Mouse & Touch Inertia State
+  let targetMouseX = 0;
+  let targetMouseY = 0;
+  let smoothMouseX = 0;
+  let smoothMouseY = 0;
 
-const matcherButtons = document.querySelectorAll("#matcher-buttons .interest-option-btn");
-const trackBadge = document.getElementById("track-badge");
-const trackTitle = document.getElementById("track-title");
-const trackDesc = document.getElementById("track-desc");
-const trackTags = document.getElementById("track-tags");
-const trackPrimaryLink = document.getElementById("track-primary-link");
-const trackSecondaryLink = document.getElementById("track-secondary-link");
+  window.addEventListener(
+    "mousemove",
+    (e) => {
+      targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
+      targetMouseY = (e.clientY / window.innerHeight) * 2 - 1;
+    },
+    { passive: true }
+  );
 
-matcherButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    matcherButtons.forEach((b) => b.classList.remove("active"));
-    btn.classList.add("active");
-    const key = btn.getAttribute("data-track") || "frontend";
-    const data = TRACKS_DATA[key];
-    if (!data) return;
+  window.addEventListener(
+    "touchmove",
+    (e) => {
+      if (e.touches && e.touches.length > 0) {
+        targetMouseX = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+        targetMouseY = (e.touches[0].clientY / window.innerHeight) * 2 - 1;
+      }
+    },
+    { passive: true }
+  );
 
-    if (trackBadge) trackBadge.textContent = data.badge;
-    if (trackTitle) trackTitle.textContent = data.title;
-    if (trackDesc) trackDesc.textContent = data.desc;
-    if (trackTags) {
-      trackTags.innerHTML = data.tags.map((t) => `<span class="stack-tag">${t}</span>`).join("");
-    }
-    if (trackPrimaryLink) {
-      trackPrimaryLink.href = data.primaryUrl;
-      trackPrimaryLink.innerHTML = `<span>${data.primaryText}</span><span>↗</span>`;
-    }
-    if (trackSecondaryLink) {
-      trackSecondaryLink.href = data.secondaryUrl;
-      trackSecondaryLink.textContent = data.secondaryText;
-    }
-  });
-});
+  // Scroll Reaction State (GSAP ScrollTrigger folds/disperses cards backwards in 3D space)
+  const scrollState = { progress: 0 };
 
-// ============================================================================
-// 6. CENAS 3D INTERATIVAS EM TEMPO REAL (THREE.JS WEBGL)
-// ============================================================================
-function initThreeScenes() {
-  if (typeof THREE === "undefined") return;
-
-  // --------------------------------------------------------------------------
-  // CENA 3D #1: PORTAL DE ENTRADA (#portal-canvas)
-  // --------------------------------------------------------------------------
-  const portalCanvas = document.getElementById("portal-canvas");
-  if (portalCanvas) {
-    const scene1 = new THREE.Scene();
-    const camera1 = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera1.position.set(1.2, 0, 8.5);
-
-    const renderer1 = new THREE.WebGLRenderer({
-      canvas: portalCanvas,
-      alpha: true,
-      antialias: true
-    });
-    renderer1.setSize(window.innerWidth, window.innerHeight);
-    renderer1.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    const ambient1 = new THREE.AmbientLight(0xfff0f5, 0.9);
-    scene1.add(ambient1);
-
-    const dirLight1 = new THREE.DirectionalLight(0xff2a7a, 1.4);
-    dirLight1.position.set(5, 6, 5);
-    scene1.add(dirLight1);
-
-    const pointLight1 = new THREE.PointLight(0xd81b60, 1.8, 20);
-    pointLight1.position.set(-4, -3, 4);
-    scene1.add(pointLight1);
-
-    const group1 = new THREE.Group();
-    group1.position.set(-1.3, 0.2, 0);
-    scene1.add(group1);
-
-    // Escultura TorusKnot Quartzo Rosa
-    const knotGeo = new THREE.TorusKnotGeometry(1.45, 0.36, 140, 24);
-    const knotMat = new THREE.MeshPhysicalMaterial({
-      color: 0xf06292,
-      emissive: 0x4a0720,
-      roughness: 0.2,
-      metalness: 0.15,
-      clearcoat: 1.0
-    });
-    const knotMesh = new THREE.Mesh(knotGeo, knotMat);
-    group1.add(knotMesh);
-
-    // Malha Wireframe Branca ao redor
-    const wireGeo = new THREE.IcosahedronGeometry(2.55, 1);
-    const wireMat = new THREE.MeshBasicMaterial({
-      color: 0xd81b60,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.22
-    });
-    const wireMesh = new THREE.Mesh(wireGeo, wireMat);
-    group1.add(wireMesh);
-
-    // Partículas Flutuantes Rosa & Branco
-    const partGeo = new THREE.BufferGeometry();
-    const partCount = 220;
-    const positions = new Float32Array(partCount * 3);
-    for (let i = 0; i < partCount * 3; i++) {
-      positions[i] = (Math.random() - 0.5) * 16;
-    }
-    partGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-    const partMat = new THREE.PointsMaterial({
-      color: 0xd81b60,
-      size: 0.065,
-      transparent: true,
-      opacity: 0.65
-    });
-    const particles1 = new THREE.Points(partGeo, partMat);
-    scene1.add(particles1);
-
-    let mouseX1 = 0;
-    let mouseY1 = 0;
-    window.addEventListener("mousemove", (e) => {
-      mouseX1 = (e.clientX / window.innerWidth - 0.5) * 2;
-      mouseY1 = (e.clientY / window.innerHeight - 0.5) * 2;
-    });
-
-    function animatePortal() {
-      requestAnimationFrame(animatePortal);
-      if (portalGate && portalGate.classList.contains("unlocked")) return;
-
-      knotMesh.rotation.x += 0.0045;
-      knotMesh.rotation.y += 0.0065;
-      wireMesh.rotation.x -= 0.002;
-      wireMesh.rotation.y -= 0.003;
-
-      group1.rotation.y += (mouseX1 * 0.5 - group1.rotation.y) * 0.05;
-      group1.rotation.x += (mouseY1 * 0.35 - group1.rotation.x) * 0.05;
-      particles1.rotation.y += 0.0008;
-
-      renderer1.render(scene1, camera1);
-    }
-    animatePortal();
-
-    window.addEventListener("resize", () => {
-      camera1.aspect = window.innerWidth / window.innerHeight;
-      camera1.updateProjectionMatrix();
-      renderer1.setSize(window.innerWidth, window.innerHeight);
+  if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+    ScrollTrigger.create({
+      trigger: heroSection,
+      start: "top top",
+      end: "bottom top",
+      scrub: 0.5,
+      onUpdate: (self) => {
+        scrollState.progress = self.progress;
+      }
     });
   }
 
-  // --------------------------------------------------------------------------
-  // CENA 3D #2: PALCO PRINCIPAL DO HERO (#hero-3d-canvas)
-  // --------------------------------------------------------------------------
-  const heroCanvas = document.getElementById("hero-3d-canvas");
-  if (heroCanvas) {
-    const stageContainer = heroCanvas.parentElement;
-    const scene2 = new THREE.Scene();
-    const camera2 = new THREE.PerspectiveCamera(
-      45,
-      stageContainer.clientWidth / stageContainer.clientHeight,
-      0.1,
-      100
+  let isHeroInView = true;
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isHeroInView = entry.isIntersecting;
+        });
+      },
+      { threshold: 0.02 }
     );
-    camera2.position.set(0, 0, 7.2);
+    observer.observe(heroSection);
+  }
 
-    const renderer2 = new THREE.WebGLRenderer({
-      canvas: heroCanvas,
-      alpha: true,
-      antialias: true
-    });
-    renderer2.setSize(stageContainer.clientWidth, stageContainer.clientHeight);
-    renderer2.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  // 60 FPS Telemetry & Render Loop
+  const clock = new THREE.Clock();
+  let frameCounter = 0;
+  let lastFpsTimestamp = performance.now();
 
-    const ambient2 = new THREE.AmbientLight(0xffffff, 0.95);
-    scene2.add(ambient2);
+  function renderKineticArc(now) {
+    requestAnimationFrame(renderKineticArc);
 
-    const dirLight2 = new THREE.DirectionalLight(0xff2a7a, 1.5);
-    dirLight2.position.set(4, 6, 5);
-    scene2.add(dirLight2);
-
-    const rimLight2 = new THREE.PointLight(0xd81b60, 2, 15);
-    rimLight2.position.set(-4, -4, 3);
-    scene2.add(rimLight2);
-
-    const mainGroup = new THREE.Group();
-    scene2.add(mainGroup);
-
-    const pinkCrystalMat = new THREE.MeshPhysicalMaterial({
-      color: 0xe91e63,
-      emissive: 0x3b0419,
-      roughness: 0.18,
-      metalness: 0.12,
-      clearcoat: 1.0,
-      flatShading: true
-    });
-
-    const whiteWireMat = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.65
-    });
-
-    const outerRingMat = new THREE.MeshStandardMaterial({
-      color: 0xd81b60,
-      roughness: 0.3,
-      metalness: 0.4
-    });
-
-    let coreMesh;
-    let cageMesh;
-
-    function buildShape(mode) {
-      while (mainGroup.children.length > 0) {
-        mainGroup.remove(mainGroup.children[0]);
+    frameCounter++;
+    if (now - lastFpsTimestamp >= 1000) {
+      const currentFps = Math.min(60, Math.round((frameCounter * 1000) / (now - lastFpsTimestamp)));
+      if (fpsReadout) {
+        fpsReadout.textContent = `${currentFps} FPS`;
       }
-
-      if (mode === "crystal") {
-        const geo = new THREE.OctahedronGeometry(1.65, 1);
-        coreMesh = new THREE.Mesh(geo, pinkCrystalMat);
-        const cageGeo = new THREE.IcosahedronGeometry(2.15, 1);
-        cageMesh = new THREE.Mesh(cageGeo, whiteWireMat);
-      } else if (mode === "torus") {
-        const geo = new THREE.TorusKnotGeometry(1.25, 0.35, 120, 20);
-        coreMesh = new THREE.Mesh(geo, pinkCrystalMat);
-        const cageGeo = new THREE.TorusGeometry(2.2, 0.04, 16, 90);
-        cageMesh = new THREE.Mesh(cageGeo, outerRingMat);
-      } else {
-        const geo = new THREE.IcosahedronGeometry(1.6, 2);
-        coreMesh = new THREE.Mesh(geo, pinkCrystalMat);
-        const cageGeo = new THREE.SphereGeometry(2.15, 16, 16);
-        cageMesh = new THREE.Mesh(cageGeo, whiteWireMat);
-      }
-
-      // Anel Orbital Rosa & Branco
-      const orbitRingGeo = new THREE.TorusGeometry(2.45, 0.035, 16, 100);
-      const orbitRing = new THREE.Mesh(orbitRingGeo, outerRingMat);
-      orbitRing.rotation.x = Math.PI / 2.6;
-
-      mainGroup.add(coreMesh);
-      mainGroup.add(cageMesh);
-      mainGroup.add(orbitRing);
+      frameCounter = 0;
+      lastFpsTimestamp = now;
     }
 
-    buildShape("crystal");
+    if (!isHeroInView) return;
 
-    // Botões de troca de geometria 3D
-    const modeButtons = document.querySelectorAll(".mode-3d-buttons .mode-btn");
-    modeButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        modeButtons.forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        const shape = btn.getAttribute("data-shape") || "crystal";
-        buildShape(shape);
+    const elapsed = clock.getElapsedTime();
+
+    // Smooth lerp damping for mouse inertia
+    smoothMouseX += (targetMouseX - smoothMouseX) * 0.045;
+    smoothMouseY += (targetMouseY - smoothMouseY) * 0.045;
+
+    // Move cursor-following rose-gold specular light in 3D space
+    cursorSpecularLight.position.x = 1.5 + smoothMouseX * 6.0;
+    cursorSpecularLight.position.y = 1.0 - smoothMouseY * 4.0;
+
+    // Tilt and shift the entire spiral with cursor inertia + scroll dispersion
+    const sp = scrollState.progress;
+    cardsPivotGroup.rotation.y = smoothMouseX * 0.28 + sp * 0.55;
+    cardsPivotGroup.rotation.x = smoothMouseY * 0.18 - sp * 0.42;
+    cardsPivotGroup.position.z = -sp * 4.5;
+    cardsPivotGroup.position.y = sp * 1.65;
+
+    dustParticles.rotation.y = elapsed * 0.025 + smoothMouseX * 0.1;
+
+    // Per-card sinusoidal levitation + cursor ripple + scroll folding
+    for (let i = 0; i < cardItems.length; i++) {
+      const c = cardItems[i];
+
+      const wave = Math.sin(elapsed * 1.25 - c.index * 0.26);
+      const secondaryWave = Math.cos(elapsed * 0.9 + c.index * 0.19);
+
+      const cursorArcPos = (smoothMouseX + 1) * 0.5;
+      const distToMouse = Math.abs(c.t - cursorArcPos);
+      const hoverLift = Math.max(0, 1 - distToMouse * 3.2) * 0.32;
+
+      const foldZ = -sp * (1.2 + c.t * 4.2);
+      const foldSpreadX = sp * (c.t - 0.35) * 2.4;
+      const foldRotX = sp * (0.65 + c.t * 0.9);
+
+      c.holder.position.x = c.baseX + foldSpreadX + secondaryWave * 0.04;
+      c.holder.position.y = c.baseY + wave * 0.12 + hoverLift * 0.4;
+      c.holder.position.z = c.baseZ + foldZ + wave * 0.08 + hoverLift;
+
+      c.holder.rotation.x = c.baseRotX + wave * 0.05 + foldRotX;
+      c.holder.rotation.y = c.baseRotY + secondaryWave * 0.04 + hoverLift * 0.22;
+      c.holder.rotation.z = c.baseRotZ + wave * 0.03 - sp * 0.35;
+    }
+
+    renderer.render(scene, camera);
+  }
+
+  requestAnimationFrame(renderKineticArc);
+
+  window.addEventListener("resize", () => {
+    const { w: nw, h: nh } = setRendererSize();
+    camera.aspect = nw / nh;
+    camera.updateProjectionMatrix();
+    updateResponsiveArcTransform();
+  });
+}
+
+/* ==========================================================================
+   3. HERO ENTRANCE & MONOSPACED NUMERICAL TICKERS
+   ========================================================================== */
+function initHeroEntranceAndStatTickers() {
+  if (typeof gsap !== "undefined") {
+    gsap.from(".hero-stagger", {
+      y: 24,
+      opacity: 0,
+      duration: 0.9,
+      stagger: 0.11,
+      ease: "power3.out",
+      delay: 0.1
+    });
+  }
+
+  const tickers = document.querySelectorAll(".stat-ticker");
+  const duration = 1000;
+  const start = performance.now();
+
+  function tickNumbers(now) {
+    const progress = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - progress, 3);
+
+    tickers.forEach((el) => {
+      const target = parseFloat(el.getAttribute("data-target") || "0");
+      const decimals = parseInt(el.getAttribute("data-decimals") || "0", 10);
+      const prefix = el.getAttribute("data-prefix") || "";
+      const suffix = el.getAttribute("data-suffix") || "";
+
+      const current = target * eased;
+      const formatted =
+        decimals > 0 ? current.toFixed(decimals) : Math.round(current).toLocaleString("pt-BR");
+      el.textContent = `${prefix}${formatted}${suffix}`;
+    });
+
+    if (progress < 1) {
+      requestAnimationFrame(tickNumbers);
+    }
+  }
+
+  requestAnimationFrame(tickNumbers);
+}
+
+/* ==========================================================================
+   4. WIDESCREEN INITIATIVES TABLE RENDERING & ROSE SPOTLIGHT
+   ========================================================================== */
+function getFilteredInitiatives() {
+  return INITIATIVES_DATA.filter((item) => {
+    if (state.topFilter !== "all" && item.topGroup !== state.topFilter) return false;
+    if (state.categoryFilter !== "all" && item.category !== state.categoryFilter) return false;
+    if (state.statusFilter !== "all" && item.status !== state.statusFilter) return false;
+    if (state.partnerFilter && !item.org.toLowerCase().includes(state.partnerFilter.toLowerCase())) {
+      return false;
+    }
+
+    if (state.searchQuery.trim() !== "") {
+      const q = state.searchQuery.toLowerCase().trim();
+      const blob = `${item.id} ${item.name} ${item.org} ${item.category} ${item.status} ${item.reach} ${item.leadFocus} ${item.sobre.summary}`.toLowerCase();
+      if (!blob.includes(q)) return false;
+    }
+    return true;
+  }).sort((a, b) => {
+    if (state.sortBy === "open") {
+      const rank = (s) => (s === "Inscrições Abertas" ? 3 : s === "Ativo" ? 2 : 1);
+      return rank(b.status) - rank(a.status);
+    }
+    if (state.sortBy === "reach") {
+      return b.reachNumeric - a.reachNumeric;
+    }
+    if (state.sortBy === "az") {
+      return a.name.localeCompare(b.name, "pt-BR");
+    }
+    return 0;
+  });
+}
+
+function getStatusPillHTML(status) {
+  if (status === "Inscrições Abertas") {
+    return `
+      <span class="status-pill status-pill-emerald">
+        <span class="dot-emerald"></span>
+        <span>Inscrições Abertas</span>
+      </span>
+    `;
+  }
+  if (status === "Ativo") {
+    return `
+      <span class="status-pill status-pill-rose">
+        <span class="dot-pink"></span>
+        <span>Ativo</span>
+      </span>
+    `;
+  }
+  return `
+    <span class="status-pill status-pill-amber">
+      <span class="dot-amber"></span>
+      <span>Em Expansão</span>
+    </span>
+  `;
+}
+
+function renderDirectory(isInitialLoad = false) {
+  const tableBody = document.getElementById("directory-table-body");
+  const tableView = document.getElementById("directory-table-view");
+  const gridView = document.getElementById("directory-grid-view");
+  const emptyState = document.getElementById("directory-empty-state");
+  const countLabel = document.getElementById("results-count-label");
+  const countAllEl = document.getElementById("count-all");
+  const clearFiltersBtn = document.getElementById("btn-clear-filters");
+
+  if (countAllEl) {
+    countAllEl.textContent = String(INITIATIVES_DATA.length);
+  }
+
+  const filtered = getFilteredInitiatives();
+
+  const hasFilters =
+    state.topFilter !== "all" ||
+    state.categoryFilter !== "all" ||
+    state.statusFilter !== "all" ||
+    state.partnerFilter !== "" ||
+    state.searchQuery.trim() !== "";
+
+  if (clearFiltersBtn) {
+    clearFiltersBtn.classList.toggle("hidden", !hasFilters);
+  }
+
+  if (countLabel) {
+    const partnerNote = state.partnerFilter ? ` • Filtro: ${state.partnerFilter}` : "";
+    countLabel.textContent = `Exibindo ${filtered.length} de ${INITIATIVES_DATA.length} iniciativas verificadas${partnerNote}`;
+  }
+
+  if (filtered.length === 0) {
+    tableView?.classList.add("hidden");
+    if (gridView) {
+      gridView.classList.add("hidden");
+      gridView.classList.remove("grid");
+    }
+    emptyState?.classList.remove("hidden");
+    return;
+  }
+
+  emptyState?.classList.add("hidden");
+
+  if (state.viewMode === "table") {
+    tableView?.classList.remove("hidden");
+    if (gridView) {
+      gridView.classList.add("hidden");
+      gridView.classList.remove("grid");
+    }
+  } else {
+    tableView?.classList.add("hidden");
+    if (gridView) {
+      gridView.classList.remove("hidden");
+      gridView.classList.add("grid");
+    }
+  }
+
+  // Render Widescreen Table Rows
+  if (tableBody) {
+    tableBody.innerHTML = filtered
+      .map(
+        (item) => `
+        <tr class="initiative-table-row" data-initiative-id="${item.id}" tabindex="0" role="button" aria-label="Abrir detalhes de ${item.name}">
+          <td data-label="Iniciativa">
+            <div class="flex items-center gap-3.5">
+              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#ff2a85]/20 to-[#d946ef]/20 border border-[#ff2a85]/35 flex items-center justify-center font-mono font-bold text-xs text-[#fbcfe8] shrink-0">
+                ${item.monogram}
+              </div>
+              <div class="min-w-0">
+                <div class="font-semibold text-white text-sm sm:text-[15px] leading-snug">
+                  ${item.name}
+                </div>
+                <div class="flex items-center gap-1.5 mt-0.5 font-mono text-[11px] text-[#b87b98]">
+                  <span class="text-[#f472b6]">${item.id}</span>
+                  <span>•</span>
+                  <span class="text-[#fce7f3]">${item.org}</span>
+                  <i data-lucide="badge-check" class="w-3.5 h-3.5 text-[#ff2a85] inline"></i>
+                </div>
+              </div>
+            </div>
+          </td>
+
+          <td data-label="Categoria">
+            <span class="category-pill">${item.category}</span>
+          </td>
+
+          <td data-label="Foco Técnico" class="hidden xl:table-cell">
+            <span class="text-xs text-[#fce7f3] font-medium block">${item.leadFocus || item.category}</span>
+            <span class="font-mono text-[11px] text-[#b87b98] block">${item.cost}</span>
+          </td>
+
+          <td data-label="Status / Impacto">
+            ${getStatusPillHTML(item.status)}
+          </td>
+
+          <td data-label="Alcance / Vagas" class="text-right font-mono-tabular">
+            <span class="text-white font-semibold text-sm block">${item.reach}</span>
+            <span class="text-[11px] text-[#b87b98] block">${item.modality}</span>
+          </td>
+
+          <td data-label="Ação" class="text-right">
+            <a
+              href="${item.url}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-row-action direct-action-link"
+            >
+              <span>${item.actionLabel}</span>
+              <span class="action-arrow font-mono">↗</span>
+            </a>
+          </td>
+        </tr>
+      `
+      )
+      .join("");
+  }
+
+  // Render Widescreen Grid Cards
+  if (gridView) {
+    gridView.innerHTML = filtered
+      .map(
+        (item) => `
+        <article
+          data-initiative-id="${item.id}"
+          tabindex="0"
+          role="button"
+          class="studio-box p-5 hover:bg-[#240919] hover:border-[#ff2a85] transition-all cursor-pointer flex flex-col justify-between space-y-5"
+        >
+          <div class="space-y-3">
+            <div class="flex items-start justify-between gap-2">
+              <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-[#ff2a85]/20 to-[#d946ef]/20 border border-[#ff2a85]/35 flex items-center justify-center font-mono font-bold text-xs text-[#fbcfe8]">
+                  ${item.monogram}
+                </div>
+                <div>
+                  <div class="flex items-center gap-1 font-mono text-[11px] text-[#fce7f3]">
+                    <span>${item.org}</span>
+                    <i data-lucide="badge-check" class="w-3.5 h-3.5 text-[#ff2a85]"></i>
+                  </div>
+                  <span class="font-mono text-[10px] text-[#b87b98]">${item.id} • ${item.modality}</span>
+                </div>
+              </div>
+              ${getStatusPillHTML(item.status)}
+            </div>
+
+            <h3 class="font-semibold text-base text-white leading-snug">
+              ${item.name}
+            </h3>
+
+            <p class="text-xs text-[#f4b8d4] line-clamp-2 leading-relaxed">
+              ${item.sobre.summary}
+            </p>
+          </div>
+
+          <div class="pt-3.5 border-t border-[#331022] flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+              <span class="category-pill">${item.category}</span>
+              <span class="font-mono-tabular text-xs font-semibold text-white">${item.reach}</span>
+            </div>
+
+            <a
+              href="${item.url}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-row-action direct-action-link"
+            >
+              <span>${item.actionLabel}</span>
+              <span class="action-arrow font-mono">↗</span>
+            </a>
+          </div>
+        </article>
+      `
+      )
+      .join("");
+  }
+
+  if (typeof lucide !== "undefined") {
+    lucide.createIcons();
+  }
+
+  attachRowInteractionsAndAnimations(isInitialLoad);
+}
+
+function attachRowInteractionsAndAnimations(isInitialLoad) {
+  const rows = document.querySelectorAll(".initiative-table-row");
+
+  // Cursor-following Rose-Pink spotlight glow on table rows
+  rows.forEach((row) => {
+    row.addEventListener("mousemove", (e) => {
+      const rect = row.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      row.style.setProperty("--row-mouse-x", `${x}px`);
+      row.style.setProperty("--row-mouse-y", `${y}px`);
+    });
+  });
+
+  // Row & Card Click to Open Drawer
+  const items = document.querySelectorAll("[data-initiative-id]");
+  items.forEach((el) => {
+    el.addEventListener("click", (e) => {
+      if (e.target.closest(".direct-action-link")) {
+        e.stopPropagation();
+        return;
+      }
+      const id = el.getAttribute("data-initiative-id");
+      openInitiativeDrawer(id);
+    });
+
+    el.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        const id = el.getAttribute("data-initiative-id");
+        openInitiativeDrawer(id);
+      }
+    });
+  });
+
+  // Staggered GSAP fade-and-slide up on table rows
+  if (typeof gsap !== "undefined" && rows.length > 0) {
+    if (isInitialLoad && typeof ScrollTrigger !== "undefined") {
+      gsap.fromTo(
+        rows,
+        { opacity: 0, y: 18 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.55,
+          stagger: 0.045,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: "#directory-table-view",
+            start: "top 86%",
+            once: true
+          }
+        }
+      );
+    } else {
+      gsap.fromTo(
+        rows,
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.32, stagger: 0.025, ease: "power2.out" }
+      );
+    }
+  }
+}
+
+/* ==========================================================================
+   5. FILTER CONTROLS & PARTNER QUICK-FILTERS
+   ========================================================================== */
+function initDirectoryControls() {
+  const topButtons = document.querySelectorAll("[data-top-filter]");
+  topButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const val = btn.getAttribute("data-top-filter") || "all";
+      state.topFilter = val;
+
+      topButtons.forEach((b) => {
+        const active = b.getAttribute("data-top-filter") === val;
+        b.classList.toggle("active", active);
+        b.setAttribute("aria-selected", String(active));
       });
-    });
 
-    let targetRotX = 0;
-    let targetRotY = 0;
+      renderDirectory(false);
 
-    stageContainer.addEventListener("mousemove", (e) => {
-      const rect = stageContainer.getBoundingClientRect();
-      const nx = (e.clientX - rect.left) / rect.width - 0.5;
-      const ny = (e.clientY - rect.top) / rect.height - 0.5;
-      targetRotY = nx * 1.4;
-      targetRotX = ny * 1.1;
-    });
-
-    function animateHero3D() {
-      requestAnimationFrame(animateHero3D);
-      if (coreMesh) {
-        coreMesh.rotation.y += 0.007;
-        coreMesh.rotation.x += 0.004;
+      const dirSection = document.getElementById("iniciativas");
+      if (dirSection && window.scrollY < dirSection.offsetTop - 120) {
+        if (lenisInstance) {
+          lenisInstance.scrollTo(dirSection, { offset: -64 });
+        } else {
+          dirSection.scrollIntoView({ behavior: "smooth" });
+        }
       }
-      if (cageMesh) {
-        cageMesh.rotation.y -= 0.004;
-        cageMesh.rotation.z += 0.003;
-      }
-      mainGroup.rotation.y += (targetRotY - mainGroup.rotation.y) * 0.06;
-      mainGroup.rotation.x += (targetRotX - mainGroup.rotation.x) * 0.06;
+    });
+  });
 
-      renderer2.render(scene2, camera2);
+  const categoryBtns = document.querySelectorAll("[data-category]");
+  categoryBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const cat = btn.getAttribute("data-category") || "all";
+      state.categoryFilter = cat;
+      categoryBtns.forEach((b) => b.classList.toggle("active", b.getAttribute("data-category") === cat));
+      renderDirectory(false);
+    });
+  });
+
+  document.getElementById("status-filter-select")?.addEventListener("change", (e) => {
+    state.statusFilter = e.target.value;
+    renderDirectory(false);
+  });
+
+  document.getElementById("sort-select")?.addEventListener("change", (e) => {
+    state.sortBy = e.target.value;
+    renderDirectory(false);
+  });
+
+  document.getElementById("global-search-input")?.addEventListener("input", (e) => {
+    state.searchQuery = e.target.value;
+    renderDirectory(false);
+  });
+
+  const viewBtnTable = document.getElementById("view-btn-table");
+  const viewBtnGrid = document.getElementById("view-btn-grid");
+
+  viewBtnTable?.addEventListener("click", () => {
+    state.viewMode = "table";
+    viewBtnTable.classList.add("active");
+    viewBtnGrid?.classList.remove("active");
+    renderDirectory(false);
+  });
+
+  viewBtnGrid?.addEventListener("click", () => {
+    state.viewMode = "grid";
+    viewBtnGrid.classList.add("active");
+    viewBtnTable?.classList.remove("active");
+    renderDirectory(false);
+  });
+
+  const partnerTiles = document.querySelectorAll("[data-partner]");
+  partnerTiles.forEach((tile) => {
+    tile.addEventListener("click", () => {
+      const pName = tile.getAttribute("data-partner") || "";
+      if (state.partnerFilter === pName) {
+        state.partnerFilter = "";
+        tile.classList.remove("border-[#ff2a85]");
+      } else {
+        state.partnerFilter = pName;
+        partnerTiles.forEach((t) => t.classList.remove("border-[#ff2a85]"));
+        tile.classList.add("border-[#ff2a85]");
+      }
+      renderDirectory(false);
+      const tableEl = document.getElementById("iniciativas");
+      if (tableEl && lenisInstance) {
+        lenisInstance.scrollTo(tableEl, { offset: -64 });
+      }
+    });
+  });
+
+  const resetAllFilters = () => {
+    state.topFilter = "all";
+    state.categoryFilter = "all";
+    state.statusFilter = "all";
+    state.partnerFilter = "";
+    state.searchQuery = "";
+
+    topButtons.forEach((b) => b.classList.toggle("active", b.getAttribute("data-top-filter") === "all"));
+    categoryBtns.forEach((b) => b.classList.toggle("active", b.getAttribute("data-category") === "all"));
+    partnerTiles.forEach((t) => t.classList.remove("border-[#ff2a85]"));
+
+    const statusSel = document.getElementById("status-filter-select");
+    if (statusSel) statusSel.value = "all";
+    const searchInp = document.getElementById("global-search-input");
+    if (searchInp) searchInp.value = "";
+
+    renderDirectory(false);
+  };
+
+  document.getElementById("btn-clear-filters")?.addEventListener("click", resetAllFilters);
+  document.getElementById("btn-empty-reset")?.addEventListener("click", resetAllFilters);
+}
+
+/* ==========================================================================
+   6. FROSTED SLIDE-OVER DETAIL DRAWER (WITH MENTOR ROSTER) & MODAL
+   ========================================================================== */
+function openInitiativeDrawer(id) {
+  const item = INITIATIVES_DATA.find((x) => x.id === id);
+  if (!item) return;
+
+  state.activeItem = item;
+  state.activeDrawerTab = "sobre";
+
+  const backdrop = document.getElementById("drawer-backdrop");
+  const drawer = document.getElementById("detail-drawer");
+
+  const iconBox = document.getElementById("drawer-icon-box");
+  const idEl = document.getElementById("drawer-id");
+  const orgEl = document.getElementById("drawer-org");
+  const titleEl = document.getElementById("drawer-title");
+  const badgesRow = document.getElementById("drawer-badges-row");
+  const reachEl = document.getElementById("drawer-reach");
+  const modalityEl = document.getElementById("drawer-modality");
+  const costEl = document.getElementById("drawer-cost");
+  const extLink = document.getElementById("drawer-external-link");
+  const ctaLabel = document.getElementById("drawer-cta-label");
+
+  if (iconBox) iconBox.textContent = item.monogram;
+  if (idEl) idEl.textContent = item.id;
+  if (orgEl) orgEl.textContent = item.org;
+  if (titleEl) titleEl.textContent = item.name;
+  if (reachEl) reachEl.textContent = item.reach;
+  if (modalityEl) modalityEl.textContent = item.modality;
+  if (costEl) costEl.textContent = item.cost;
+  if (extLink) extLink.href = item.url;
+  if (ctaLabel) ctaLabel.textContent = `${item.actionLabel} no Portal Oficial`;
+
+  if (badgesRow) {
+    badgesRow.innerHTML = `
+      ${getStatusPillHTML(item.status)}
+      <span class="category-pill">${item.category}</span>
+    `;
+  }
+
+  const drawerTabBtns = document.querySelectorAll("[data-drawer-tab]");
+  drawerTabBtns.forEach((b) => {
+    const isSobre = b.getAttribute("data-drawer-tab") === "sobre";
+    b.classList.toggle("active", isSobre);
+    b.setAttribute("aria-selected", String(isSobre));
+  });
+
+  renderDrawerTabContent();
+
+  backdrop?.classList.add("is-open");
+  if (drawer) {
+    drawer.classList.add("is-open");
+    drawer.setAttribute("aria-hidden", "false");
+  }
+}
+
+function closeInitiativeDrawer() {
+  document.getElementById("drawer-backdrop")?.classList.remove("is-open");
+  const drawer = document.getElementById("detail-drawer");
+  if (drawer) {
+    drawer.classList.remove("is-open");
+    drawer.setAttribute("aria-hidden", "true");
+  }
+  state.activeItem = null;
+}
+
+function renderDrawerTabContent() {
+  const container = document.getElementById("drawer-tab-content");
+  const item = state.activeItem;
+  if (!container || !item) return;
+
+  if (state.activeDrawerTab === "sobre") {
+    const mentorsList = (item.mentors || [])
+      .map(
+        (m) => `
+        <div class="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#ff2a85]/[0.06] border border-[#331022]">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#ff2a85] to-[#d946ef] text-white font-mono text-xs flex items-center justify-center font-bold">
+              ${m.name.slice(0, 2).toUpperCase()}
+            </div>
+            <div>
+              <div class="text-xs font-semibold text-white">${m.name}</div>
+              <div class="text-[11px] text-[#f4b8d4]">${m.role}</div>
+            </div>
+          </div>
+          <span class="font-mono text-[10px] text-[#ff2a85] uppercase font-semibold">Mentora 🌸</span>
+        </div>
+      `
+      )
+      .join("");
+
+    container.innerHTML = `
+      <div class="space-y-5">
+        <div>
+          <h4 class="font-mono text-[10px] uppercase tracking-wider text-[#f472b6] mb-2">Visão Geral do Programa</h4>
+          <p class="text-[13.5px] text-[#fce7f3] leading-relaxed">
+            ${item.sobre.summary}
+          </p>
+        </div>
+
+        <div class="bg-[#0d0208]/80 border border-[#331022] rounded-xl p-4">
+          <h4 class="font-mono text-[10px] uppercase tracking-wider text-[#fbcfe8] mb-3">Estrutura &amp; Trilhas Técnicas</h4>
+          <ul class="space-y-2 text-xs sm:text-[13px] text-[#fce7f3]">
+            ${item.sobre.tracks
+              .map(
+                (t) => `
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#ff2a85] font-mono mt-0.5">✦</span>
+                <span>${t}</span>
+              </li>
+            `
+              )
+              .join("")}
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-mono text-[10px] uppercase tracking-wider text-[#f472b6] mb-2.5">Quadro de Mentoras &amp; Liderança</h4>
+          <div class="space-y-2">
+            ${mentorsList}
+          </div>
+        </div>
+      </div>
+    `;
+  } else if (state.activeDrawerTab === "requisitos") {
+    container.innerHTML = `
+      <div class="space-y-4">
+        <h4 class="font-mono text-[10px] uppercase tracking-wider text-[#f472b6]">Critérios de Elegibilidade</h4>
+        <div class="bg-[#0d0208]/80 border border-[#331022] rounded-xl divide-y divide-[#331022]">
+          ${item.requisitos
+            .map(
+              (req, idx) => `
+            <div class="p-4 flex items-start gap-3">
+              <span class="font-mono text-xs text-[#ff2a85] font-bold">0${idx + 1}</span>
+              <span class="text-xs sm:text-[13px] text-[#fce7f3]">${req}</span>
+            </div>
+          `
+            )
+            .join("")}
+        </div>
+
+        <div class="p-4 rounded-xl bg-[#ff2a85]/[0.06] border border-[#331022] text-xs text-[#f4b8d4]">
+          <strong class="text-white block mb-1">Público Prioritário:</strong>
+          ${item.sobre.audience}
+        </div>
+      </div>
+    `;
+  } else if (state.activeDrawerTab === "impacto") {
+    container.innerHTML = `
+      <div class="space-y-4">
+        <h4 class="font-mono text-[10px] uppercase tracking-wider text-[#f472b6]">Métricas Auditadas de Impacto</h4>
+        <div class="space-y-2.5">
+          ${item.impacto.kpis
+            .map(
+              (kpi) => `
+            <div class="bg-[#0d0208]/80 border border-[#331022] rounded-xl p-4 flex items-center justify-between">
+              <span class="text-xs text-[#f4b8d4]">${kpi.label}</span>
+              <strong class="font-mono-tabular text-sm text-[#ff2a85]">${kpi.value}</strong>
+            </div>
+          `
+            )
+            .join("")}
+        </div>
+
+        <div class="bg-[#ff2a85]/[0.06] border border-[#331022] rounded-xl p-4">
+          <span class="font-mono text-[10px] uppercase text-[#fbcfe8] block mb-1">Relatório de Execução</span>
+          <p class="text-xs sm:text-[13px] text-[#fce7f3] leading-relaxed">${item.impacto.note}</p>
+        </div>
+      </div>
+    `;
+  }
+}
+
+function initDrawerAndModals() {
+  document.getElementById("btn-close-drawer")?.addEventListener("click", closeInitiativeDrawer);
+  document.getElementById("drawer-backdrop")?.addEventListener("click", closeInitiativeDrawer);
+
+  const drawerTabs = document.querySelectorAll("[data-drawer-tab]");
+  drawerTabs.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const tab = btn.getAttribute("data-drawer-tab") || "sobre";
+      state.activeDrawerTab = tab;
+      drawerTabs.forEach((b) => {
+        const active = b.getAttribute("data-drawer-tab") === tab;
+        b.classList.toggle("active", active);
+        b.setAttribute("aria-selected", String(active));
+      });
+      renderDrawerTabContent();
+    });
+  });
+
+  // Connect / Submit Modal
+  const connectModal = document.getElementById("connect-modal-backdrop");
+  const openModal = () => {
+    if (connectModal) {
+      connectModal.classList.add("is-open");
+      connectModal.setAttribute("aria-hidden", "false");
+      document.getElementById("form-name")?.focus();
     }
-    animateHero3D();
+  };
+  const closeModal = () => {
+    if (connectModal) {
+      connectModal.classList.remove("is-open");
+      connectModal.setAttribute("aria-hidden", "true");
+    }
+  };
 
-    window.addEventListener("resize", () => {
-      if (!stageContainer) return;
-      camera2.aspect = stageContainer.clientWidth / stageContainer.clientHeight;
-      camera2.updateProjectionMatrix();
-      renderer2.setSize(stageContainer.clientWidth, stageContainer.clientHeight);
+  document.getElementById("btn-open-connect-modal")?.addEventListener("click", openModal);
+  document.getElementById("btn-hero-submit")?.addEventListener("click", openModal);
+  document.getElementById("btn-submit-initiative")?.addEventListener("click", openModal);
+  document.getElementById("btn-close-connect-modal")?.addEventListener("click", closeModal);
+  document.getElementById("btn-cancel-connect-modal")?.addEventListener("click", closeModal);
+
+  connectModal?.addEventListener("click", (e) => {
+    if (e.target === connectModal) closeModal();
+  });
+
+  const form = document.getElementById("new-initiative-form");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("form-name").value.trim();
+      const org = document.getElementById("form-org").value.trim();
+      const category = document.getElementById("form-category").value;
+      const status = document.getElementById("form-status").value;
+      const reach = document.getElementById("form-reach").value.trim();
+      const url = document.getElementById("form-url").value.trim();
+
+      if (!name || !org) return;
+
+      const newId = `#ELAS-0${INITIATIVES_DATA.length + 1}`;
+      const monogram = org.slice(0, 2).toUpperCase();
+      const groupMap = {
+        "Mentoria 1-on-1": "mentoria",
+        "Educação Base": "bolsas",
+        "Contratação": "vagas",
+        "Liderança": "comunidades"
+      };
+
+      const newEntry = {
+        id: newId,
+        monogram,
+        name,
+        org,
+        verified: true,
+        topGroup: groupMap[category] || "all",
+        category,
+        status,
+        reach: reach || "100 vagas",
+        reachNumeric: 10000,
+        actionLabel: status === "Inscrições Abertas" ? "Candidatar-se" : "Acessar",
+        url: url || "https://womakerscode.org/",
+        modality: "100% Online",
+        cost: "100% Gratuito",
+        leadFocus: `${category} • Rede Feminina`,
+        mentors: [
+          { name: `Coordenação ${org}`, role: `Liderança Técnica • ${category}` }
+        ],
+        sobre: {
+          summary: `Iniciativa catalogada via diretório aberto ELAS.CODE por ${org}, focada em ${category} para impulsionar mulheres na engenharia de software.`,
+          tracks: [category, "Mentoria Prática e Acompanhamento", "Rede Aberta de Apoio"],
+          audience: "Mulheres estudantes e profissionais de tecnologia em todo o Brasil."
+        },
+        requisitos: [
+          "Inscrição aberta pelo portal oficial da organização",
+          "Adesão ao código de conduta afirmativo e inclusivo"
+        ],
+        impacto: {
+          kpis: [
+            { label: "Status de Submissão", value: "Ativo na Sessão" },
+            { label: "Capacidade / Alcance", value: reach || "Nacional" }
+          ],
+          note: "Programa adicionado dinamicamente ao índice verificado."
+        }
+      };
+
+      INITIATIVES_DATA.unshift(newEntry);
+      form.reset();
+      closeModal();
+      renderDirectory(false);
+      openInitiativeDrawer(newId);
     });
   }
 }
 
-window.addEventListener("DOMContentLoaded", initThreeScenes);
+/* ==========================================================================
+   7. KEYBOARD SHORTCUTS (⌘K SEARCH & ESC DISMISS)
+   ========================================================================== */
+function initKeyboardShortcuts() {
+  const searchInput = document.getElementById("global-search-input");
+
+  window.addEventListener("keydown", (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+      e.preventDefault();
+      if (searchInput) {
+        searchInput.focus();
+        searchInput.select();
+        const dirSection = document.getElementById("iniciativas");
+        if (dirSection && window.scrollY < dirSection.offsetTop - 200) {
+          lenisInstance?.scrollTo(dirSection, { offset: -64 });
+        }
+      }
+    }
+
+    if (e.key === "Escape") {
+      const drawer = document.getElementById("detail-drawer");
+      const modal = document.getElementById("connect-modal-backdrop");
+      if (drawer?.classList.contains("is-open")) {
+        closeInitiativeDrawer();
+        return;
+      }
+      if (modal?.classList.contains("is-open")) {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        return;
+      }
+      if (document.activeElement === searchInput) {
+        searchInput.blur();
+      }
+    }
+  });
+}

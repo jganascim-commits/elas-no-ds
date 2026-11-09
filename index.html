@@ -1,782 +1,811 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ELAS NO DS // Portal Exclusivo — Mulheres em Desenvolvimento de Sistemas</title>
-  <!-- Fontes Editoriais -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Three.js para Cenas 3D em Tempo Real -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <meta name="description" content="ELAS.CODE — Mais código escrito por mulheres. Direção clara. Execução completa. Mapeamento ativo, bolsas práticas e programas de liderança técnica." />
+  <meta name="theme-color" content="#080205" />
+  <title>ELAS.CODE 🌸 — Mulheres na Tecnologia • Direção Clara. Execução Completa.</title>
+
+  <!-- Google Fonts: Inter (Neo-Grotesque) & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            pitch: '#080205',
+            surface: '#11040b',
+            elevated: '#190611',
+            rowhover: '#240919',
+            crisp: '#331022',
+            rose: {
+              primary: '#ff2a85',
+              vivid: '#ec4899',
+              soft: '#f472b6',
+              blush: '#fbcfe8',
+              fuchsia: '#d946ef'
+            },
+            emerald: '#30d158',
+            amber: '#f59e0b'
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Helvetica Neue', 'sans-serif'],
+            mono: ['JetBrains Mono', 'SF Mono', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Three.js (WebGL 3D Kinetic Rose-Quartz Arc) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <!-- Lenis Smooth Scrolling -->
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <!-- Main Application Script -->
+  <script src="script.js" defer></script>
 </head>
-<body>
+<body class="bg-pitch text-[#fce7f3] antialiased">
 
-  <!-- =========================================================
-       1. PORTAL DE ENTRADA & EXCLUSIVIDADE FEMININA (3D GATE)
-       ========================================================= -->
-  <section id="portal-gate" class="portal-gate" aria-label="Portal Exclusivo de Entrada">
-    <canvas id="portal-canvas"></canvas>
+  <!-- =====================================================================
+       1. FULL-WIDTH WIDESCREEN STUDIO HEADER
+       ===================================================================== -->
+  <header class="studio-header">
+    <div class="widescreen-shell h-16 flex items-center justify-between gap-4">
 
-    <div class="portal-left">
-      <div class="portal-badge-top">
-        <span class="pulse-dot"></span>
-        <span>ESPAÇO AFIRMATIVO &amp; EXCLUSIVO // CURSO DE DESENVOLVIMENTO DE SISTEMAS</span>
-      </div>
-
-      <div class="portal-hero-copy">
-        <h1>
-          O código nasceu<br />
-          das mãos de <em>mulheres.</em><br />
-          Este lugar é nosso.
-        </h1>
-        <p>
-          Bem-vinda ao portal oficial de acolhimento, história e redirecionamento para
-          <strong>mulheres no curso de Desenvolvimento de Sistemas (DS)</strong>.
-          Aqui celebramos quem inventou a programação, revelamos por que tentaram nos afastar
-          e conectamos você às melhores trilhas, comunidades e oportunidades.
-        </p>
-      </div>
-
-      <div class="portal-3d-hint">
-        <span>✦ CENA 3D INTERATIVA EM TEMPO REAL — MOVA O CURSOR PARA ORBITAR O CRISTAL DE CÓDIGO</span>
-      </div>
-    </div>
-
-    <div class="portal-right">
-      <div class="portal-card">
-        <h2>Credencial de Acesso</h2>
-        <p>
-          Configure seu passe para personalizar a experiência e escolha para onde deseja ser
-          redirecionada ao destravar o portal:
-        </p>
-
-        <div class="portal-field">
-          <label for="visitor-name">Como você quer ser chamada? (Opcional)</label>
-          <input type="text" id="visitor-name" placeholder="Ex: Ana, Júlia, Futura Deva..." maxlength="32" />
-        </div>
-
-        <div class="portal-field">
-          <label>Seu Perfil no Curso de DS</label>
-          <div class="role-pills" id="role-pills">
-            <button type="button" class="role-pill active" data-role="Aluna de DS">✨ Aluna de DS</button>
-            <button type="button" class="role-pill" data-role="Quero Entrar em DS">🚀 Quero cursar DS</button>
-            <button type="button" class="role-pill" data-role="Mentora / Veterana">👑 Veterana / Dev</button>
-            <button type="button" class="role-pill" data-role="Apoiadora da Inclusão">🤝 Apoiadora / Profa</button>
+      <!-- Left: Logo ELAS.CODE + Pulsing Pink Indicator -->
+      <div class="flex items-center gap-3.5 shrink-0">
+        <a href="#hero" id="logo-reset-link" class="flex items-center gap-2.5 group focus:outline-none" aria-label="ELAS.CODE — Ir para o topo">
+          <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#ff2a85] to-[#d946ef] text-white flex items-center justify-center font-mono font-bold text-xs tracking-tighter shadow-lg shadow-[#ff2a85]/30 group-hover:scale-105 transition-transform">
+            &lt;/&gt;
           </div>
+          <span class="font-mono font-bold text-base tracking-tight text-white">
+            ELAS<span class="text-[#ff2a85]">.</span>CODE
+          </span>
+        </a>
+
+        <div class="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#190611] border border-[#331022]">
+          <span class="dot-pink"></span>
+          <span class="font-mono text-[10px] font-semibold tracking-wider text-[#fbcfe8] uppercase">
+            PORTAL FEMININO EM TECH // AO VIVO
+          </span>
+        </div>
+      </div>
+
+      <!-- Center: Segmented Filter Pills -->
+      <nav class="hidden xl:flex items-center" aria-label="Filtros rápidos de soluções">
+        <div class="segmented-control" role="tablist">
+          <button type="button" class="seg-pill active" data-top-filter="all" role="tab" aria-selected="true">
+            Todas as Soluções
+          </button>
+          <button type="button" class="seg-pill" data-top-filter="mentoria" role="tab" aria-selected="false">
+            Mentoria Feminina
+          </button>
+          <button type="button" class="seg-pill" data-top-filter="bolsas" role="tab" aria-selected="false">
+            Bolsas &amp; Bootcamps
+          </button>
+          <button type="button" class="seg-pill" data-top-filter="vagas" role="tab" aria-selected="false">
+            Vagas Afirmativas
+          </button>
+          <button type="button" class="seg-pill" data-top-filter="comunidades" role="tab" aria-selected="false">
+            Comunidades Devas
+          </button>
+        </div>
+      </nav>
+
+      <!-- Right: Search Input (⌘K) + Pink Capsule Action -->
+      <div class="flex items-center gap-3 shrink-0">
+        <div class="relative w-48 sm:w-64 lg:w-72">
+          <i data-lucide="search" class="w-3.5 h-3.5 text-[#f472b6] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+          <input
+            type="search"
+            id="global-search-input"
+            placeholder="Buscar (#ELAS, mentoria, org)..."
+            aria-label="Buscar iniciativas (Atalho Command K)"
+            class="studio-input w-full pl-9 pr-12 py-2 text-xs placeholder-[#9d5b7b]"
+          />
+          <span class="kbd-tag absolute right-3 top-1/2 -translate-y-1/2">⌘K</span>
         </div>
 
-        <div class="portal-field">
-          <label for="portal-destination">Redirecionar imediatamente para:</label>
-          <select id="portal-destination" class="portal-Destination-select">
-            <option value="#inicio">Experiência Completa (Página Principal + Palco 3D)</option>
-            <option value="#historia">A História do DS &amp; Como Mulheres Criaram o Software</option>
-            <option value="#afastamento">Por que as Mulheres Foram Afastadas da Área?</option>
-            <option value="#pioneiras">Galeria Monumental: Mulheres que Mudaram a Programação</option>
-            <option value="#inclusao">Inclusão Acima de Tudo &amp; Descubra sua Trilha em DS</option>
-            <option value="#redirecionamento">Hub de Redirecionamento Externo (Comunidades, Cursos e Vagas)</option>
-          </select>
-        </div>
-
-        <button type="button" id="btn-unlock-portal" class="btn-portal-enter">
-          <span>Destravar Portal &amp; Redirecionar</span>
-          <span>→</span>
+        <button
+          type="button"
+          id="btn-open-connect-modal"
+          class="px-4 py-2 rounded-full bg-gradient-to-r from-[#ff2a85] to-[#d946ef] text-white hover:opacity-95 font-sans text-xs font-semibold shadow-lg shadow-[#ff2a85]/25 transition-all whitespace-nowrap"
+        >
+          Conectar / Apoiar 🌸
         </button>
-
-        <div class="portal-quick-redirects">
-          <span>Ou pule direto para um portal externo de mulheres na tecnologia:</span>
-          <div class="quick-links-row">
-            <a href="https://www.programaria.org/" target="_blank" rel="noopener noreferrer" class="quick-chip">PrograMaria ↗</a>
-            <a href="https://www.pretalab.com/" target="_blank" rel="noopener noreferrer" class="quick-chip">PretaLab ↗</a>
-            <a href="https://womakerscode.org/" target="_blank" rel="noopener noreferrer" class="quick-chip">WoMakersCode ↗</a>
-            <a href="https://reprograma.com.br/" target="_blank" rel="noopener noreferrer" class="quick-chip">Reprograma ↗</a>
-            <a href="https://meninas.sbc.org.br/" target="_blank" rel="noopener noreferrer" class="quick-chip">Meninas Digitais SBC ↗</a>
-          </div>
-        </div>
       </div>
-    </div>
-  </section>
 
-  <!-- =========================================================
-       2. BARRA SUPERIOR ARQUITETÔNICA FULL-BLEED
-       ========================================================= -->
-  <header class="top-Command-bar" id="inicio">
-    <a href="#inicio" class="brand-cell">
-      <div class="brand-symbol">&lt;/&gt;</div>
-      <div class="brand-text">
-        <strong>ELAS NO DS</strong>
-        <small>Desenvolvimento de Sistemas</small>
-      </div>
-    </a>
-
-    <nav class="nav-links-strip" aria-label="Navegação Principal">
-      <a href="#historia">01. História do DS</a>
-      <a href="#afastamento">02. Por que fomos afastadas?</a>
-      <a href="#pioneiras">03. Mulheres na Programação</a>
-      <a href="#inclusao">04. Inclusão Acima de Tudo</a>
-      <a href="#trilha-ds">05. Redirecionador de Trilha</a>
-      <a href="#redirecionamento">06. Hub de Links &amp; Comunidades</a>
-    </nav>
-
-    <div class="nav-actions-cell">
-      <span id="visitor-badge" class="visitor-tag">Passe: Visitante Exclusiva</span>
-      <button type="button" id="btn-open-redirect-modal" class="btn-redirect-hub">
-        ⚡ Central de Redirecionamento
-      </button>
-      <button type="button" id="btn-reopen-portal" class="mode-btn" title="Voltar ao Portal 3D">
-        Portal 3D
-      </button>
     </div>
   </header>
 
-  <!-- =========================================================
-       3. HERO DE PÁGINA INTEIRA + ESCULTURA 3D INTERATIVA
-       ========================================================= -->
-  <section class="hero-fullbleed">
-    <div class="hero-editorial-col">
-      <div>
-        <div class="kicker-row">
-          <span class="tag-exclusive">EXCLUSIVIDADE FEMININA &amp; INCLUSÃO</span>
-          <span class="tag-outline">TÉCNICO &amp; GRADUAÇÃO EM DESENVOLVIMENTO DE SISTEMAS</span>
+  <main class="flex-1 w-full">
+
+    <!-- ===================================================================
+         2. HERO SECTION: FULL-SCREEN 100VW x 100VH 3D ROSE-QUARTZ ARC
+         =================================================================== -->
+    <section id="hero" class="hero-stage-section pt-20 pb-12 sm:pb-16 lg:pb-20" aria-labelledby="hero-headline">
+
+      <!-- Full-Viewport Three.js WebGL Canvas (Curving Helix / Cascading Spiral of Rose-Quartz & Frosted Pink Glass Cards) -->
+      <canvas id="hero-arc-canvas" aria-label="Escultura 3D cinética em arco composta por placas de quartzo rosa e vidro translúcido flutuantes"></canvas>
+
+      <!-- Subtle Vignette Gradient for High-Contrast Editorial Readability -->
+      <div class="hero-vignette-overlay" aria-hidden="true"></div>
+
+      <!-- Top Full-Width Stage Telemetry Row -->
+      <div class="relative z-10 widescreen-shell pt-4 flex items-center justify-between pointer-events-none">
+        <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#14030c]/75 backdrop-blur-md border border-[#4a1531] font-mono text-[11px] text-[#fbcfe8]">
+          <span class="dot-pink"></span>
+          <span>PROTAGONISMO FEMININO // DESENVOLVIMENTO DE SISTEMAS &amp; ENGENHARIA</span>
         </div>
 
-        <h1 class="hero-headline">
-          Antes do computador ser máquina,<br />
-          <span class="italic-rose">“Computador”</span> era uma mulher.
-        </h1>
-
-        <p class="hero-sublead">
-          O curso de <strong>Desenvolvimento de Sistemas (DS)</strong> forma quem projeta a arquitetura do mundo digital:
-          web, mobile, banco de dados, inteligência artificial e segurança. Embora tenham tentado apagar nosso passado,
-          o primeiro algoritmo da história, o primeiro compilador e a própria <strong>Engenharia de Software</strong>
-          foram criados por mulheres.
-        </p>
-
-        <div class="hero-cta-cluster">
-          <a href="#pioneiras" class="btn-primary-rose">
-            <span>Conhecer as 12+ Pioneiras do Código</span>
-            <span>↓</span>
-          </a>
-          <a href="#trilha-ds" class="btn-secondary-white">
-            Descobrir Minha Área no DS &amp; Redirecionar →
-          </a>
+        <div class="hidden sm:inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#14030c]/75 backdrop-blur-md border border-[#4a1531] font-mono text-[11px] text-[#f4b8d4] pointer-events-auto">
+          <span class="text-[#ff2a85]">●</span>
+          <span id="webgl-fps-readout">60 FPS</span>
+          <span>•</span>
+          <span>ROSE-QUARTZ 3D ARC</span>
         </div>
       </div>
 
-      <div class="hero-metrics-strip">
-        <div class="metric-item">
-          <strong>1843</strong>
-          <span>Ano em que <strong>Ada Lovelace</strong> publicou o primeiro algoritmo processável por máquina da história humana.</span>
-        </div>
-        <div class="metric-item">
-          <strong>100%</strong>
-          <span>Da primeira equipe de programação do <strong>ENIAC</strong> (primeiro computador eletrônico digital) era formada por mulheres.</span>
-        </div>
-        <div class="metric-item">
-          <strong>Inclusão</strong>
-          <span>Acima de tudo: um curso de DS onde todas as mulheres — negras, indígenas, periféricas, mães, trans e neurodivergentes — pertencem.</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Palco 3D WebGL Interativo -->
-    <div class="hero-3d-stage">
-      <canvas id="hero-3d-canvas"></canvas>
-
-      <div class="stage-overlay-top">
-        <span> NÚCLEO 3D INTERATIVO // ARQUITETURA DE SISTEMAS</span>
-        <div class="mode-3d-buttons">
-          <button type="button" class="mode-btn active" data-shape="crystal">Cristal DS</button>
-          <button type="button" class="mode-btn" data-shape="torus">Anel Ada</button>
-          <button type="button" class="mode-btn" data-shape="sphere">Rede Neural</button>
+      <!-- Mobile Touch-Friendly Parallax Carousel Fallback (Visible on < 768px) -->
+      <div class="relative z-10 widescreen-shell my-auto md:hidden">
+        <div class="mobile-kinetic-strip" aria-label="Destaques de iniciativas em cartões translúcidos">
+          <div class="mobile-kinetic-card">
+            <span class="font-mono text-[10px] text-[#f472b6] block">#ELAS-001 • {reprograma}</span>
+            <strong class="text-xs text-white font-medium block mt-1">Bootcamp Full-Stack Afirmativo</strong>
+            <span class="font-mono text-[11px] text-[#30d158] block mt-2">● 150 vagas abertas</span>
+          </div>
+          <div class="mobile-kinetic-card">
+            <span class="font-mono text-[10px] text-[#f472b6] block">#ELAS-002 • WoMakersCode</span>
+            <strong class="text-xs text-white font-medium block mt-1">Mentoria 1-on-1 Cloud &amp; DevOps</strong>
+            <span class="font-mono text-[11px] text-[#30d158] block mt-2">● 500 bolsas ativas</span>
+          </div>
+          <div class="mobile-kinetic-card">
+            <span class="font-mono text-[10px] text-[#f472b6] block">#ELAS-003 • ElasTech</span>
+            <strong class="text-xs text-white font-medium block mt-1">Formação &amp; Contratação Direta</strong>
+            <span class="font-mono text-[11px] text-[#f472b6] block mt-2">● 220 vagas remotas</span>
+          </div>
+          <div class="mobile-kinetic-card">
+            <span class="font-mono text-[10px] text-[#f472b6] block">#ELAS-005 • PretaLab</span>
+            <strong class="text-xs text-white font-medium block mt-1">Ciclo Formativo Dados &amp; IA</strong>
+            <span class="font-mono text-[11px] text-[#30d158] block mt-2">● 300 bolsas gratuitas</span>
+          </div>
         </div>
       </div>
 
-      <div class="stage-overlay-bottom">
-        <p><strong>Interaja em 3D:</strong> Mova o mouse ou clique nos modos acima para transformar a geometria.</p>
-        <code>status: MULHERES_NO_COMANDO = true;</code>
-      </div>
-    </div>
-  </section>
+      <!-- Hero Content Overlay (Full-Screen Widescreen Bottom Grid) -->
+      <div class="relative z-10 widescreen-shell mt-auto pt-24 sm:pt-36">
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-8 items-end">
 
-  <!-- =========================================================
-       4. FAIXA CONTÍNUA DE MANIFESTO
-       ========================================================= -->
-  <div class="marquee-ribbon" aria-hidden="true">
-    <div class="marquee-track">
-      <span>✦ DESENVOLVIMENTO DE SISTEMAS É LUGAR DE MULHER</span>
-      <span>✦ ADA LOVELACE CRIOU O PRIMEIRO ALGORITMO (1843)</span>
-      <span>✦ GRACE HOPPER CRIOU O PRIMEIRO COMPILADOR (1952)</span>
-      <span>✦ MARGARET HAMILTON FUNDOU A ENGENHARIA DE SOFTWARE (1969)</span>
-      <span>✦ DOROTHY VAUGHAN LIDEROU A PROGRAMAÇÃO FORTRAN NA NASA</span>
-      <span>✦ INCLUSÃO ACIMA DE TUDO: NENHUMA MULHER FICA PARA TRÁS</span>
-      <span>✦ DESENVOLVIMENTO DE SISTEMAS É LUGAR DE MULHER</span>
-      <span>✦ ADA LOVELACE CRIOU O PRIMEIRO ALGORITMO (1843)</span>
-      <span>✦ GRACE HOPPER CRIOU O PRIMEIRO COMPILADOR (1952)</span>
-      <span>✦ MARGARET HAMILTON FUNDOU A ENGENHARIA DE SOFTWARE (1969)</span>
-    </div>
-  </div>
+          <!-- Bottom-Left: Main Editorial Statement & Pink Capsule CTAs -->
+          <div class="xl:col-span-8 space-y-6">
+            <!-- Clean Pink Badge / Tag -->
+            <div class="hero-stagger inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#ff2a85]/15 backdrop-blur-md border border-[#ff2a85]/40">
+              <span class="dot-pink"></span>
+              <span class="font-mono text-xs font-semibold tracking-[0.08em] text-[#fbcfe8] uppercase">
+                INICIATIVA ABERTA // EQUIDADE E PROTAGONISMO FEMININO EM TECH
+              </span>
+            </div>
 
-  <!-- =========================================================
-       5. HISTÓRIA DO DS & COMO AS MULHERES CONSTRUÍRAM TUDO
-       ========================================================= -->
-  <section id="historia" class="section-fullbleed">
-    <div class="section-header-grid">
-      <div class="section-index-cell">
-        <span class="section-number">CAPÍTULO 01 // ARQUEOLOGIA DO SOFTWARE</span>
-        <h2>A História do DS é uma história <em>feminina.</em></h2>
-      </div>
-      <div class="section-lead-cell">
-        <p>
-          O que hoje estudamos no curso de <strong>Desenvolvimento de Sistemas</strong> — lógica de programação,
-          compiladores, bancos de dados, sub-rotinas, orientação a objetos, protocolos de rede e testes de software —
-          não teve as mulheres como "convidadas". <strong>As mulheres foram as arquitetas fundadoras da disciplina.</strong>
-          Veja como cada pilar da grade curricular de DS nasceu de mentes femininas:
-        </p>
-      </div>
-    </div>
+            <!-- Large Tight Neo-Grotesque Headline (-0.035em) -->
+            <h1 id="hero-headline" class="hero-stagger hero-display-headline text-4xl sm:text-6xl xl:text-[72px] 2xl:text-[80px] text-white max-w-5xl">
+              Mais código escrito por <span class="text-rose-gradient">mulheres.</span> Direção clara. Execução completa.
+            </h1>
 
-    <div class="history-timeline-strip">
-      <article class="timeline-era-col">
-        <div>
-          <div class="era-year">1843</div>
-          <span class="era-tag">Lógica &amp; Algoritmos</span>
-          <h3>O Nascimento do Algoritmo</h3>
-          <p>
-            Um século antes de existir o primeiro computador moderno, <strong>Ada Lovelace</strong> percebeu que
-            a Máquina Analítica de Babbage poderia manipular símbolos, música e lógica — não apenas números.
-            Ela escreveu o primeiro algoritmo com laços de repetição (<code>loops</code>) e desvio condicional.
-          </p>
-        </div>
-        <div class="era-footnote">Matéria em DS: Lógica de Programação &amp; Algoritmos</div>
-      </article>
-
-      <article class="timeline-era-col">
-        <div>
-          <div class="era-year">1945</div>
-          <span class="era-tag">Arquitetura &amp; Debug</span>
-          <h3>As 6 Mulheres do ENIAC</h3>
-          <p>
-            Enquanto os engenheiros homens construíam os cabos e válvulas porque achavam que o hardware era o que importava,
-            seis matemáticas — <strong>Jean Bartik, Betty Holberton, Kathleen Antonelli, Marlyn Meltzer, Ruth Teitelbaum e Frances Spence</strong> —
-            programaram o primeiro computador digital da história sem nenhum manual ou linguagem prévia.
-          </p>
-        </div>
-        <div class="era-footnote">Matéria em DS: Arquitetura &amp; Manutenção de Sistemas</div>
-      </article>
-
-      <article class="timeline-era-col">
-        <div>
-          <div class="era-year">1952</div>
-          <span class="era-tag">Compiladores &amp; Linguagens</span>
-          <h3>Do Binário para o Código Humano</h3>
-          <p>
-            Diziam que computadores só entendiam números e nunca leriam palavras. <strong>Grace Hopper</strong> provou o contrário
-            ao criar o primeiro <strong>compilador (A-0)</strong> e liderar a base do <strong>COBOL</strong>, permitindo programar
-            com comandos em texto estruturado — a base de todas as linguagens modernas do curso de DS.
-          </p>
-        </div>
-        <div class="era-footnote">Matéria em DS: Linguagens de Programação &amp; Banco de Dados</div>
-      </article>
-
-      <article class="timeline-era-col">
-        <div>
-          <div class="era-year">1969</div>
-          <span class="era-tag">Engenharia de Software</span>
-          <h3>O Código que Salvou a Apollo 11</h3>
-          <p>
-            Quando o desenvolvimento de programas ainda não era respeitado como engenharia, <strong>Margaret Hamilton</strong>
-            cunhou o termo <strong>Engenharia de Software</strong> no MIT. Seu sistema assíncrono de detecção de erros
-            evitou que o módulo lunar abortasse o pouso na Lua a poucos minutos do solo.
-          </p>
-        </div>
-        <div class="era-footnote">Matéria em DS: Engenharia de Software &amp; Qualidade (QA)</div>
-      </article>
-
-      <article class="timeline-era-col">
-        <div>
-          <div class="era-year">1979–Hoje</div>
-          <span class="era-tag">Redes, Web, Jogos &amp; IA</span>
-          <h3>Interfaces Gráficas, Internet e IA</h3>
-          <p>
-            De <strong>Adele Goldberg</strong> (que estruturou a Programação Orientada a Objetos e as janelas gráficas no Smalltalk)
-            a <strong>Radia Perlman</strong> (criadora do protocolo STP que sustenta a internet), <strong>Carol Shaw</strong> (games)
-            e <strong>Fei-Fei Li</strong> (IA moderna): todo o ecossistema de DS tem DNA feminino.
-          </p>
-        </div>
-        <div class="era-footnote">Matéria em DS: POO, Redes, Desenvolvimento Web &amp; IA</div>
-      </article>
-    </div>
-  </section>
-
-  <!-- =========================================================
-       6. POR QUE AS MULHERES FORAM TÃO AFASTADAS DA PROGRAMAÇÃO?
-       ========================================================= -->
-  <section id="afastamento" class="section-fullbleed">
-    <div class="section-header-grid">
-      <div class="section-index-cell">
-        <span class="section-number">CAPÍTULO 02 // ANÁLISE HISTÓRICA</span>
-        <h2>Por que as mulheres foram <em>afastadas</em> da área?</h2>
-      </div>
-      <div class="section-lead-cell">
-        <p>
-          Se as mulheres inventaram a programação e eram maioria nas salas de desenvolvimento até os anos 1960,
-          <strong>o que aconteceu para as turmas de computação ficarem tão masculinas nas décadas seguintes?</strong>
-          A resposta não tem nada a ver com "aptidão biológica": foi um processo histórico, cultural e mercadológico deliberado.
-        </p>
-      </div>
-    </div>
-
-    <div class="exclusion-analysis-grid">
-      <!-- 4 Fatores Históricos Reais -->
-      <div class="exclusion-reasons-col">
-        <div class="reason-row">
-          <div class="reason-num">01</div>
-          <div class="reason-content">
-            <h3>Quando programar dava pouco status, era “trabalho de mulher”</h3>
-            <p>
-              Nos anos 1940 e 1950, construir o hardware (soldar fios e válvulas) era visto como o trabalho prestigioso de engenharia masculina,
-              enquanto planejar o código e escrever instruções lógicas era comparado a "datilografia, tricô ou organização de receitas".
-              A revista <em>Cosmopolitan</em> de 1967 chegou a publicar o artigo <strong>“The Computer Girls”</strong>, onde Grace Hopper
-              dizia que programar era tão natural para mulheres quanto planejar um jantar.
+            <!-- Clean Editorial Subtitle -->
+            <p class="hero-stagger text-base sm:text-xl text-[#f4b8d4] font-normal leading-relaxed max-w-2xl">
+              Mapeamento ativo, bolsas práticas, comunidades acolhedoras e programas de liderança técnica para transformar o ecossistema de software.
             </p>
-          </div>
-        </div>
 
-        <div class="reason-row">
-          <div class="reason-num">02</div>
-          <div class="reason-content">
-            <h3>Quando o software virou poder e dinheiro, expulsaram as pioneiras</h3>
-            <p>
-              No final dos anos 1960 e década de 1970, as empresas perceberam que o verdadeiro valor financeiro estava no <strong>software</strong>
-              e não apenas nas peças físicas. Para elevar os salários e o prestígio corporativo, executivos criaram barreiras artificiais e testes
-              psicológicos de contratação enviesados (como o teste Cannon-Perry), que selecionavam perfis que "não gostavam de interagir com pessoas" —
-              favorecendo candidatos homens e afastando mulheres.
-            </p>
-          </div>
-        </div>
+            <!-- Minimalist Capsule Action Button Group -->
+            <div class="hero-stagger pt-2 flex flex-wrap items-center gap-4">
+              <a href="#iniciativas" id="btn-hero-explore" class="btn-capsule-rose">
+                <span>Explorar Iniciativas</span>
+                <span class="font-mono text-sm">↓</span>
+              </a>
 
-        <div class="reason-row">
-          <div class="reason-num">03</div>
-          <div class="reason-content">
-            <h3>O Marketing dos Anos 1980: O PC vendido como “brinquedo de menino”</h3>
-            <p>
-              Em <strong>1984</strong>, quase <strong>40% dos formandos em Computação</strong> eram mulheres. Foi exatamente quando surgiram os primeiros
-              computadores pessoais domésticos (Apple II, Commodore, IBM PC). As campanhas publicitárias passaram a vender o computador exclusivamente
-              na seção de brinquedos masculinos e jogos de guerra para meninos. Meninos chegavam às aulas técnicas já tendo um computador no quarto;
-              meninas eram desencorajadas desde a infância.
-            </p>
-          </div>
-        </div>
-
-        <div class="reason-row">
-          <div class="reason-num">04</div>
-          <div class="reason-content">
-            <h3>O mito do “Gênio Solitário” e a Síndrome da Impostora</h3>
-            <p>
-              O cinema e a mídia dos anos 1980 e 1990 fabricaram o estereótipo do programador como um garoto antissocial virando noites no escuro.
-              Esse ambiente hostil ("bro culture") fez muitas jovens acreditarem que não pertenciam ao curso de Desenvolvimento de Sistemas —
-              mesmo quando suas notas em lógica, arquitetura e resolução de problemas reais eram superiores.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Gráfico Interativo da Curva Histórica -->
-      <div class="exclusion-chart-col">
-        <div class="chart-box">
-          <div class="chart-header">
-            <div>
-              <h3>Presença Feminina na Computação vs. O Corte de 1984</h3>
-              <small style="color: var(--text-muted);">Clique em cada década abaixo para ler o que aconteceu na história:</small>
-            </div>
-            <span>DADOS HISTÓRICOS</span>
-          </div>
-
-          <div class="bars-stage" id="history-bars">
-            <div class="bar-col" data-info="Anos 1945–1955: As mulheres dominavam a operação e programação dos primeiros mainframes (como o ENIAC e UNIVAC). Programar era uma profissão majoritariamente feminina.">
-              <span class="bar-value">~60%</span>
-              <div class="bar-fill" style="height: 82%;"></div>
-              <span class="bar-year">1950</span>
-            </div>
-
-            <div class="bar-col" data-info="Anos 1970: Mesmo com o início da masculinização corporativa, mulheres lideravam laboratórios na NASA, universidades e bancos operando COBOL e FORTRAN.">
-              <span class="bar-value">34%</span>
-              <div class="bar-fill" style="height: 58%;"></div>
-              <span class="bar-year">1970</span>
-            </div>
-
-            <div class="bar-col" data-info="Pico Acadêmico (1984): As mulheres atingiram quase 38% das graduações em Ciência da Computação, acompanhando o crescimento da medicina e do direito.">
-              <span class="bar-value">37.1%</span>
-              <div class="bar-fill" style="height: 66%;"></div>
-              <span class="bar-year">1984</span>
-            </div>
-
-            <div class="bar-col highlight-drop" data-info="Anos 1990 (A Queda Forçada): O marketing dos PCs apenas para meninos e o estereótipo nerd derrubaram drasticamente as matrículas femininas nos cursos técnicos e superiores.">
-              <span class="bar-value">27%</span>
-              <div class="bar-fill" style="height: 44%;"></div>
-              <span class="bar-year">1995</span>
-            </div>
-
-            <div class="bar-col highlight-drop" data-info="Anos 2010: O ponto mais crítico da desigualdade nas salas de TI, gerando sistemas e algoritmos com vieses por falta de diversidade nas equipes.">
-              <span class="bar-value">18%</span>
-              <div class="bar-fill" style="height: 29%;"></div>
-              <span class="bar-year">2012</span>
-            </div>
-
-            <div class="bar-col" data-info="HOJE (A Retomada no DS!): Movimentos afirmativos, cursos técnicos em Desenvolvimento de Sistemas, comunidades femininas e inclusão interseccional estão trazendo as mulheres de volta para liderar a tecnologia!">
-              <span class="bar-value">RETOMADA ↑</span>
-              <div class="bar-fill" style="height: 75%;"></div>
-              <span class="bar-year">HOJE</span>
+              <button type="button" id="btn-hero-submit" class="btn-capsule-ghost">
+                <span>Catalogar Programa</span>
+                <span class="font-mono text-xs text-[#f472b6]">+</span>
+              </button>
             </div>
           </div>
 
-          <div class="chart-caption-interactive" id="chart-caption">
-            <strong>💡 Passe o mouse ou clique nas barras acima:</strong> Em 1984, a curva das mulheres na computação despencou enquanto Direito e Medicina continuaram subindo — provando que o afastamento foi fruto da indústria e do marketing da época, e não de falta de interesse feminino.
+          <!-- Bottom-Right (PC Widescreen): Floating Rose Glass Pioneer & Telemetry Highlights -->
+          <div class="hidden xl:flex xl:col-span-4 flex-col gap-3 hero-stagger">
+            <div class="p-5 rounded-2xl bg-[#16040e]/80 backdrop-blur-xl border border-[#4a1531] shadow-2xl">
+              <div class="flex items-center justify-between font-mono text-[11px] text-[#f472b6] mb-1.5">
+                <span>LEGADO FEMININO NO CÓDIGO</span>
+                <span>1843 → 2026</span>
+              </div>
+              <p class="text-xs text-[#fce7f3] leading-relaxed">
+                De <strong>Ada Lovelace</strong> (1º algoritmo) e <strong>Margaret Hamilton</strong> (Engenharia de Software Apollo 11) às milhares de desenvolvedoras brasileiras liderando Front-End, Back-End, Dados e IA hoje.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3">
+              <div class="p-3.5 rounded-xl bg-[#16040e]/80 backdrop-blur-xl border border-[#4a1531]">
+                <span class="font-mono text-[10px] text-[#f4b8d4] uppercase block">Bolsas Ativas</span>
+                <strong class="font-mono text-lg text-white">+1.820</strong>
+              </div>
+              <div class="p-3.5 rounded-xl bg-[#16040e]/80 backdrop-blur-xl border border-[#4a1531]">
+                <span class="font-mono text-[10px] text-[#f4b8d4] uppercase block">Mentoria 1:1</span>
+                <strong class="font-mono text-lg text-[#ff2a85]">100% Free</strong>
+              </div>
+              <div class="p-3.5 rounded-xl bg-[#16040e]/80 backdrop-blur-xl border border-[#4a1531]">
+                <span class="font-mono text-[10px] text-[#f4b8d4] uppercase block">Rede Brasil</span>
+                <strong class="font-mono text-lg text-[#30d158]">27 Estados</strong>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ===================================================================
+         3. INITIATIVES & OPPORTUNITIES SECTION (FULL-SCREEN WIDESCREEN PC)
+         =================================================================== -->
+    <section id="iniciativas" class="py-16 sm:py-24 bg-pitch relative z-10 w-full" aria-labelledby="directory-heading">
+      <div class="widescreen-shell space-y-8">
+
+        <!-- Section Header & Real-Time Tabular Stats Strip -->
+        <div class="flex flex-col xl:flex-row xl:items-end justify-between gap-6 pb-8 border-b border-[#331022]">
+          <div class="space-y-2 max-w-2xl">
+            <div class="font-mono text-xs uppercase tracking-widest text-[#ff2a85] flex items-center gap-2">
+              <span class="dot-pink"></span>
+              <span>DIRETÓRIO VERIFICADO // INFRAESTRUTURA DE OPORTUNIDADES PARA MULHERES</span>
+            </div>
+            <h2 id="directory-heading" class="section-display-title text-3xl sm:text-4xl lg:text-5xl text-white">
+              Programas ativos, bolsas de estudo e <span class="text-rose-gradient">pipelines de contratação.</span>
+            </h2>
+          </div>
+
+          <!-- Tabular Monospace Telemetry Strip -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full xl:w-auto">
+            <div class="studio-box px-5 py-3.5">
+              <span class="font-mono text-[10px] uppercase text-[#f4b8d4] block">Cadeiras Tech BR</span>
+              <strong class="font-mono-tabular text-xl sm:text-2xl font-semibold text-white mt-0.5 block">
+                <span class="stat-ticker" data-target="15.2" data-decimals="1" data-suffix="%">15.2%</span>
+              </strong>
+            </div>
+            <div class="studio-box px-5 py-3.5">
+              <span class="font-mono text-[10px] uppercase text-[#f4b8d4] block">Devas Mapeadas</span>
+              <strong class="font-mono-tabular text-xl sm:text-2xl font-semibold text-[#ff2a85] mt-0.5 block">
+                <span class="stat-ticker" data-target="2840" data-decimals="0" data-prefix="+">+2.840</span>
+              </strong>
+            </div>
+            <div class="studio-box px-5 py-3.5">
+              <span class="font-mono text-[10px] uppercase text-[#f4b8d4] block">Hubs Parceiros</span>
+              <strong class="font-mono-tabular text-xl sm:text-2xl font-semibold text-white mt-0.5 block">
+                <span class="stat-ticker" data-target="48" data-decimals="0">48</span>
+              </strong>
+            </div>
+            <div class="studio-box px-5 py-3.5">
+              <span class="font-mono text-[10px] uppercase text-[#f4b8d4] block">Acesso Gratuito</span>
+              <strong class="font-mono-tabular text-xl sm:text-2xl font-semibold text-[#30d158] mt-0.5 block">
+                <span class="stat-ticker" data-target="100" data-decimals="0" data-suffix="%">100%</span>
+              </strong>
+            </div>
           </div>
         </div>
 
-        <div class="quote-editorial-box">
-          <blockquote>
-            “As mulheres não estão ‘entrando’ na tecnologia agora. Nós estamos voltando para a casa que nós mesmas construímos.”
-          </blockquote>
-          <cite>— Manifesto Elas no Desenvolvimento de Sistemas</cite>
+        <!-- Filter & View Controls Bar -->
+        <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+          <!-- Left: Category Filter Pills -->
+          <div class="flex items-center gap-2 overflow-x-auto pb-1 lg:pb-0" id="category-filter-pills" role="group" aria-label="Filtrar por pilar">
+            <button type="button" class="seg-pill seg-pill-subtle active" data-category="all">
+              <span>Todas as Categorias</span>
+              <span class="font-mono text-[11px] text-[#f472b6]" id="count-all">12</span>
+            </button>
+            <button type="button" class="seg-pill seg-pill-subtle" data-category="Educação Base">
+              <span>Educação Base</span>
+            </button>
+            <button type="button" class="seg-pill seg-pill-subtle" data-category="Mentoria 1-on-1">
+              <span>Mentoria 1-on-1</span>
+            </button>
+            <button type="button" class="seg-pill seg-pill-subtle" data-category="Contratação">
+              <span>Contratação</span>
+            </button>
+            <button type="button" class="seg-pill seg-pill-subtle" data-category="Liderança">
+              <span>Liderança</span>
+            </button>
+          </div>
+
+          <!-- Right: Status Filter + Sort Select + View Mode -->
+          <div class="flex flex-wrap items-center justify-between sm:justify-end gap-2.5">
+            <select
+              id="status-filter-select"
+              aria-label="Filtrar por status"
+              class="studio-input px-4 py-2 text-xs text-[#fce7f3] cursor-pointer"
+            >
+              <option value="all">Status: Todos</option>
+              <option value="Inscrições Abertas">● Inscrições Abertas</option>
+              <option value="Ativo">● Ativo</option>
+              <option value="Em Expansão">● Em Expansão</option>
+            </select>
+
+            <select
+              id="sort-select"
+              aria-label="Ordenar iniciativas"
+              class="studio-input px-4 py-2 text-xs text-[#fce7f3] cursor-pointer"
+            >
+              <option value="featured">Ordenar: Destaque</option>
+              <option value="open">Inscrições Abertas Primeiro</option>
+              <option value="reach">Maior Alcance / Vagas</option>
+              <option value="az">Ordem Alfabética (A–Z)</option>
+            </select>
+
+            <div class="segmented-control" role="group" aria-label="Alternar visualização">
+              <button type="button" id="view-btn-table" class="seg-pill active !px-3.5 !py-1.5" title="Visualização em Tabela Widescreen">
+                <i data-lucide="list" class="w-3.5 h-3.5"></i>
+                <span class="text-xs">Tabela</span>
+              </button>
+              <button type="button" id="view-btn-grid" class="seg-pill !px-3.5 !py-1.5" title="Visualização em Cards">
+                <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+                <span class="text-xs">Cards</span>
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- =========================================================
-       7. GALERIA MONUMENTAL: MUITAS MULHERES QUE MUDARAM A PROGRAMAÇÃO
-       ========================================================= -->
-  <section id="pioneiras" class="section-fullbleed">
-    <div class="section-header-grid">
-      <div class="section-index-cell">
-        <span class="section-number">CAPÍTULO 03 // PANTEÃO DO CÓDIGO</span>
-        <h2>Mulheres que mudaram a <em>programação.</em></h2>
-      </div>
-      <div class="section-lead-cell">
-        <p>
-          Explore a história de <strong>12 mulheres e grupos históricos</strong> que criaram linguagens, compiladores,
-          protocolos de internet, jogos digitais, inteligência artificial e pesquisas antirracistas.
-          Use os filtros abaixo ou clique em qualquer card para ser <strong>redirecionada</strong> à biografia e legado completo.
-        </p>
-      </div>
-    </div>
+        <!-- Status Strip Above Table -->
+        <div class="flex items-center justify-between text-xs font-mono text-[#b87b98] px-1">
+          <div class="flex items-center gap-2">
+            <span id="results-count-label">Exibindo 12 iniciativas verificadas</span>
+            <button type="button" id="btn-clear-filters" class="hidden text-[#ff2a85] hover:underline">
+              [Limpar filtros ✕]
+            </button>
+          </div>
+          <span class="hidden sm:inline text-[#f472b6]">Clique em qualquer linha para abrir o painel de mentoras, requisitos e inscrição →</span>
+        </div>
 
-    <div class="pioneers-controls-bar">
-      <div class="filter-buttons-group" id="pioneer-filters">
-        <button type="button" class="filter-btn active" data-filter="all">Todas as Pioneiras (12)</button>
-        <button type="button" class="filter-btn" data-filter="fundadoras">Fundadoras do Código</button>
-        <button type="button" class="filter-btn" data-filter="espaco">NASA &amp; Engenharia</button>
-        <button type="button" class="filter-btn" data-filter="modernas">Internet, Jogos &amp; IA</button>
-        <button type="button" class="filter-btn" data-filter="brasil">Orgulho Brasileiro 🇧🇷</button>
-      </div>
+        <!-- FULL-WIDTH WIDESCREEN TABLE VIEW -->
+        <div id="directory-table-view" class="studio-table-wrap">
+          <table class="studio-table" aria-label="Tabela de iniciativas e oportunidades para mulheres na tecnologia">
+            <thead>
+              <tr>
+                <th class="w-[30%]">Iniciativa / Solução</th>
+                <th class="w-[14%]">Categoria</th>
+                <th class="w-[22%] hidden xl:table-cell">Liderança &amp; Foco Técnico</th>
+                <th class="w-[14%]">Status / Impacto</th>
+                <th class="w-[10%] text-right">Alcance / Vagas</th>
+                <th class="w-[10%] text-right">Ação</th>
+              </tr>
+            </thead>
+            <tbody id="directory-table-body">
+              <!-- Populated via script.js with staggered GSAP entrance & rose cursor spotlight -->
+            </tbody>
+          </table>
+        </div>
 
-      <input
-        type="search"
-        id="pioneer-search"
-        class="pioneer-search-input"
-        placeholder="Buscar por nome, linguagem ou feito (ex: COBOL, NASA, Brasil)..."
-      />
-    </div>
+        <!-- GRID CARDS VIEW (4 columns on large widescreen PC) -->
+        <div id="directory-grid-view" class="hidden grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+          <!-- Populated via script.js -->
+        </div>
 
-    <div class="pioneers-wall-grid" id="pioneers-grid">
-      <!-- Renderizado dinamicamente via script.js com efeito 3D Perspective Tilt -->
-    </div>
-  </section>
-
-  <!-- =========================================================
-       8. INCLUSÃO ACIMA DE TUDO (MANIFESTO INTERSECCIONAL)
-       ========================================================= -->
-  <section id="inclusao" class="inclusion-manifesto-banner">
-    <div class="inclusion-grid">
-      <div class="inclusion-title-col">
-        <span class="tag-exclusive">CAPÍTULO 04 // PRINCÍPIO INEGOCIÁVEL</span>
-        <h2>Inclusão <em>acima de tudo.</em></h2>
-        <p>
-          Não existe futuro no Desenvolvimento de Sistemas se o software que governa hospitais, bancos, escolas
-          e cidades continuar sendo escrito por um único grupo de pessoas.
-          Nosso compromisso no curso de DS é construir uma comunidade onde <strong>toda mulher seja acolhida, respeitada e impulsionada</strong>,
-          sem elitismo técnico e sem barreiras.
-        </p>
-      </div>
-
-      <div class="inclusion-pillars-grid">
-        <div class="pillar-cell">
-          <span>01 // EQUIDADE RACIAL &amp; ORIGEM</span>
-          <h3>Mulheres Negras, Indígenas e Periféricas</h3>
-          <p>
-            De Dorothy Vaughan na NASA a Sônia Guimarães e Nina da Hora no Brasil: combater o racismo algorítmico
-            começa garantindo protagonismo para meninas negras, indígenas e de escolas públicas no DS.
+        <!-- EMPTY STATE -->
+        <div id="directory-empty-state" class="hidden studio-box p-12 text-center space-y-3">
+          <div class="w-10 h-10 rounded-full bg-[#190611] border border-[#331022] mx-auto flex items-center justify-center text-[#f472b6]">
+            <i data-lucide="search-x" class="w-5 h-5"></i>
+          </div>
+          <div class="text-sm font-medium text-white">Nenhuma iniciativa corresponde aos filtros selecionados</div>
+          <p class="text-xs text-[#b87b98] max-w-md mx-auto">
+            Tente buscar por outra palavra-chave ou clique abaixo para restaurar a listagem completa.
           </p>
+          <button type="button" id="btn-empty-reset" class="btn-row-action mx-auto mt-2">
+            Restaurar Iniciativas
+          </button>
         </div>
 
-        <div class="pillar-cell">
-          <span>02 // ACESSIBILIDADE &amp; NEURODIVERSIDADE</span>
-          <h3>Devas PCDs e Neurodivergentes</h3>
-          <p>
-            Mentes autistas, TDAH, disléxicas e pessoas com deficiência trazem visões únicas para arquitetura de sistemas,
-            UX acessível e resolução criativa de bugs complexos.
-          </p>
+        <!-- ===============================================================
+             COMMUNITY ROADMAP & PARTNER ECOSYSTEM BENTO BLOCK (FULL WIDTH)
+             =============================================================== -->
+        <div id="contribution-bento" class="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-6">
+
+          <!-- Left Card: Submit Initiative -->
+          <div class="lg:col-span-5 studio-box p-7 sm:p-8 flex flex-col justify-between space-y-6">
+            <div class="space-y-3.5">
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-xs uppercase tracking-wider text-[#f472b6]">
+                  OPEN DIRECTORY // CONTRIBUIÇÃO FEMININA
+                </span>
+                <span class="status-pill status-pill-rose !py-0.5 !px-2.5 !text-[10px] font-mono">
+                  <span class="dot-pink"></span>
+                  <span>Catálogo Aberto</span>
+                </span>
+              </div>
+
+              <h3 class="section-display-title text-2xl sm:text-3xl text-white">
+                Submeter programa, bolsa ou vaga afirmativa.
+              </h3>
+
+              <p class="text-sm text-[#f4b8d4] leading-relaxed">
+                Empresas de tecnologia, universidades e coletivos femininos podem publicar novas oportunidades gratuitamente no índice <strong class="text-white">ELAS.CODE</strong> via formulário rápido ou Pull Request.
+              </p>
+
+              <div class="bg-[#080205] border border-[#331022] rounded-xl p-4 font-mono text-xs text-[#fbcfe8] overflow-x-auto">
+                <div class="flex items-center justify-between text-[#b87b98] pb-1.5 mb-1.5 border-b border-[#331022]">
+                  <span>registry/initiatives.json</span>
+                  <span class="text-[#ff2a85]">● Verified Schema</span>
+                </div>
+                <code>{ "id": "#ELAS-013", "status": "Inscrições Abertas", "verified": true }</code>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3 pt-3 border-t border-[#331022]">
+              <button type="button" id="btn-submit-initiative" class="btn-capsule-rose !py-3 !px-6 !text-xs">
+                <span>Cadastrar Programa Agora</span>
+                <span>+</span>
+              </button>
+              <a
+                href="https://github.com/womakerscode"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-row-action !py-3 !px-5"
+              >
+                <i data-lucide="github" class="w-4 h-4"></i>
+                <span>GitHub PR ↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Card: Verified Partner Organizations -->
+          <div class="lg:col-span-7 studio-box p-7 sm:p-8 flex flex-col justify-between space-y-6">
+            <div class="space-y-4">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <span class="font-mono text-xs uppercase tracking-wider text-[#f472b6]">
+                    ECOSSISTEMA VERIFICADO // PARCEIRAS
+                  </span>
+                  <h3 class="section-display-title text-2xl sm:text-3xl text-white mt-0.5">
+                    Organizações &amp; Comunidades de Mulheres em Tech
+                  </h3>
+                </div>
+                <span class="font-mono text-xs text-[#f4b8d4]">
+                  Clique para filtrar na tabela ↑
+                </span>
+              </div>
+
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="partner-badges-grid">
+                <button type="button" class="partner-tile text-left" data-partner="reprograma">
+                  <div>
+                    <div class="font-mono font-semibold text-xs text-white flex items-center gap-1.5">
+                      <span>{reprograma}</span>
+                      <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-[#ff2a85]"></i>
+                    </div>
+                    <span class="font-mono text-[10px] text-[#b87b98] block mt-0.5">Bootcamps &amp; TI</span>
+                  </div>
+                </button>
+
+                <button type="button" class="partner-tile text-left" data-partner="WoMakersCode">
+                  <div>
+                    <div class="font-mono font-semibold text-xs text-white flex items-center gap-1.5">
+                      <span>WoMakersCode</span>
+                      <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-[#ff2a85]"></i>
+                    </div>
+                    <span class="font-mono text-[10px] text-[#b87b98] block mt-0.5">Cloud &amp; Mentoria</span>
+                  </div>
+                </button>
+
+                <button type="button" class="partner-tile text-left" data-partner="ElasTech">
+                  <div>
+                    <div class="font-mono font-semibold text-xs text-white flex items-center gap-1.5">
+                      <span>ElasTech</span>
+                      <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-[#ff2a85]"></i>
+                    </div>
+                    <span class="font-mono text-[10px] text-[#b87b98] block mt-0.5">Contratação</span>
+                  </div>
+                </button>
+
+                <button type="button" class="partner-tile text-left" data-partner="Meninas Digitais">
+                  <div>
+                    <div class="font-mono font-semibold text-xs text-white flex items-center gap-1.5">
+                      <span>Meninas Digitais</span>
+                      <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-[#ff2a85]"></i>
+                    </div>
+                    <span class="font-mono text-[10px] text-[#b87b98] block mt-0.5">SBC / Educação</span>
+                  </div>
+                </button>
+
+                <button type="button" class="partner-tile text-left" data-partner="PrograMaria">
+                  <div>
+                    <div class="font-mono font-semibold text-xs text-white flex items-center gap-1.5">
+                      <span>PrograMaria</span>
+                      <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-[#ff2a85]"></i>
+                    </div>
+                    <span class="font-mono text-[10px] text-[#b87b98] block mt-0.5">Liderança Tech</span>
+                  </div>
+                </button>
+
+                <button type="button" class="partner-tile text-left" data-partner="PretaLab">
+                  <div>
+                    <div class="font-mono font-semibold text-xs text-white flex items-center gap-1.5">
+                      <span>PretaLab</span>
+                      <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-[#ff2a85]"></i>
+                    </div>
+                    <span class="font-mono text-[10px] text-[#b87b98] block mt-0.5">Dados &amp; IA</span>
+                  </div>
+                </button>
+
+                <button type="button" class="partner-tile text-left" data-partner="PyLadies">
+                  <div>
+                    <div class="font-mono font-semibold text-xs text-white flex items-center gap-1.5">
+                      <span>PyLadies BR</span>
+                      <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-[#ff2a85]"></i>
+                    </div>
+                    <span class="font-mono text-[10px] text-[#b87b98] block mt-0.5">Comunidade Python</span>
+                  </div>
+                </button>
+
+                <button type="button" class="partner-tile text-left" data-partner="Rails Girls">
+                  <div>
+                    <div class="font-mono font-semibold text-xs text-white flex items-center gap-1.5">
+                      <span>Rails Girls</span>
+                      <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-[#ff2a85]"></i>
+                    </div>
+                    <span class="font-mono text-[10px] text-[#b87b98] block mt-0.5">Open Source</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <div class="pt-3 border-t border-[#331022] grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs">
+              <div class="bg-[#080205] border border-[#331022] rounded-xl px-4 py-2.5 flex items-center justify-between">
+                <span class="text-[#f4b8d4]">01. Mapeamento</span>
+                <span class="text-[#30d158]">ATIVO</span>
+              </div>
+              <div class="bg-[#080205] border border-[#331022] rounded-xl px-4 py-2.5 flex items-center justify-between">
+                <span class="text-[#f4b8d4]">02. Mentoria 1:1</span>
+                <span class="text-[#ff2a85]">OPERACIONAL</span>
+              </div>
+              <div class="bg-[#080205] border border-[#331022] rounded-xl px-4 py-2.5 flex items-center justify-between">
+                <span class="text-[#f4b8d4]">03. Blind Hiring</span>
+                <span class="text-[#fbbf24]">EXPANSÃO</span>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        <div class="pillar-cell">
-          <span>03 // REDE DE APOIO REAL</span>
-          <h3>Mães, Trabalhadoras e Transição de Carreira</h3>
-          <p>
-            Programar não exige "virar madrugada". Defendemos ambientes de estudo humanos que acolham estudantes que trabalham,
-            cuidam da família ou estão recomeçando do zero.
-          </p>
-        </div>
-
-        <div class="pillar-cell">
-          <span>04 // ZERO GATEKEEPING</span>
-          <h3>Ninguém Nasce Sabendo Programar</h3>
-          <p>
-            No nosso espaço de DS, nenhuma dúvida é "boba". Substituímos a competição tóxica pela colaboração:
-            quando uma aluna aprende lógica, banco de dados ou Git, ela puxa a próxima junto.
-          </p>
-        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- =========================================================
-       9. REDIRECIONADOR INTELIGENTE DE TRILHA NO CURSO DE DS
-       ========================================================= -->
-  <section id="trilha-ds" class="matcher-section">
-    <div class="matcher-left">
-      <span class="section-number">CAPÍTULO 05 // REDIRECIONAMENTO DE CARREIRA</span>
-      <h3>Qual área do DS combina com você?</h3>
-      <p>
-        O curso de <strong>Desenvolvimento de Sistemas</strong> abre portas para dezenas de carreiras diferentes.
-        Clique no que você mais gosta de fazer e nosso portal vai indicar sua trilha ideal e
-        <strong>redirecionar você</strong> para recursos gratuitos e comunidades da área:
-      </p>
+  </main>
 
-      <div class="interest-selector-grid" id="matcher-buttons">
-        <button type="button" class="interest-option-btn active" data-track="frontend">
-          <span>🎨 Criar interfaces visuais incríveis, animações 3D e experiências (Front-End &amp; UI/UX)</span>
-          <span>→</span>
-        </button>
-        <button type="button" class="interest-option-btn" data-track="backend">
-          <span>⚙️ Construir o cérebro invisível, regras de negócio, APIs e servidores (Back-End)</span>
-          <span>→</span>
-        </button>
-        <button type="button" class="interest-option-btn" data-track="dados">
-          <span>📊 Investigar padrões, Bancos de Dados e Inteligência Artificial Ética (Dados &amp; IA)</span>
-          <span>→</span>
-        </button>
-        <button type="button" class="interest-option-btn" data-track="seguranca">
-          <span>🛡️ Proteger sistemas contra ataques, privacidade digital e redes (Cibersegurança)</span>
-          <span>→</span>
-        </button>
-        <button type="button" class="interest-option-btn" data-track="games">
-          <span>🎮 Desenvolver jogos digitais, mundos interativos e aplicativos mobile (Games &amp; Mobile)</span>
-          <span>→</span>
-        </button>
+  <!-- =====================================================================
+       FULL-WIDTH ROSE-OBSIDIAN FOOTER
+       ===================================================================== -->
+  <footer class="border-t border-[#331022] bg-pitch py-8 w-full">
+    <div class="widescreen-shell flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#b87b98]">
+      <div class="flex items-center gap-3 font-mono">
+        <span class="text-[#ff2a85] font-bold">ELAS.CODE 🌸</span>
+        <span>—</span>
+        <span class="text-[#fce7f3]">Mais código escrito por mulheres. Direção clara. Execução completa.</span>
       </div>
-    </div>
-
-    <div class="matcher-right">
-      <div class="matched-result-card" id="matcher-result">
-        <span class="matched-badge" id="track-badge">TRILHA RECOMENDADA NO DS // FRONT-END &amp; CRIATIVIDADE</span>
-        <h4 id="track-title">Engenharia Front-End, WebGL 3D &amp; Design de Interfaces</h4>
-        <p id="track-desc">
-          Você une sensibilidade visual com lógica de código! No curso de DS, você vai dominar HTML5, CSS moderno,
-          JavaScript, React e experiências 3D para transformar telas em obras de arte acessíveis e rápidas.
-          Sua inspiração histórica: <strong>Adele Goldberg</strong>, pioneira das interfaces gráficas!
-        </p>
-
-        <div class="matched-stack-tags" id="track-tags">
-          <span class="stack-tag">HTML5 &amp; CSS3</span>
-          <span class="stack-tag">JavaScript / TypeScript</span>
-          <span class="stack-tag">React &amp; Three.js 3D</span>
-          <span class="stack-tag">Acessibilidade Web (WCAG)</span>
-        </div>
-
-        <div class="matched-redirect-actions">
-          <a id="track-primary-link" href="https://www.programaria.org/" target="_blank" rel="noopener noreferrer" class="btn-primary-rose">
-            <span>Redirecionar para Comunidade &amp; Curso da Trilha</span>
-            <span>↗</span>
-          </a>
-          <a id="track-secondary-link" href="https://developer.mozilla.org/pt-BR/" target="_blank" rel="noopener noreferrer" class="btn-secondary-white">
-            Documentação Oficial Gratuita ↗
-          </a>
-        </div>
+      <div class="flex items-center gap-4 font-mono text-[11px]">
+        <span>Busca Rápida: <strong class="text-[#fbcfe8]">⌘K</strong></span>
+        <span>•</span>
+        <a href="#hero" class="text-[#f472b6] hover:text-white transition-colors">Voltar ao Topo ↑</a>
       </div>
-    </div>
-  </section>
-
-  <!-- =========================================================
-       10. HUB DE REDIRECIONAMENTO EXCLUSIVO (COMUNIDADES & CURSOS)
-       ========================================================= -->
-  <section id="redirecionamento" class="section-fullbleed">
-    <div class="section-header-grid">
-      <div class="section-index-cell">
-        <span class="section-number">CAPÍTULO 06 // PORTAL DE REDIRECIONAMENTO</span>
-        <h2>Conecte-se e seja <em>redirecionada.</em></h2>
-      </div>
-      <div class="section-lead-cell">
-        <p>
-          Este site funciona como uma <strong>ponte direta</strong> para as maiores redes de apoio, bolsas de estudo,
-          mentorias exclusivas para mulheres e plataformas de Desenvolvimento de Sistemas no Brasil.
-          Escolha seu destino abaixo para ser redirecionada imediatamente:
-        </p>
-      </div>
-    </div>
-
-    <div class="redirect-portal-grid">
-      <article class="redirect-card">
-        <div>
-          <span class="redirect-category">COMUNIDADE &amp; CURSOS AFIRMATIVOS</span>
-          <h3>PrograMaria</h3>
-          <p>
-            Uma das maiores iniciativas brasileiras para empoderar mulheres na tecnologia. Oferece cursos de programação,
-            eventos de carreira, bolsas e conteúdo sobre gênero e código.
-          </p>
-        </div>
-        <a href="https://www.programaria.org/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
-          <span>Redirecionar para PrograMaria</span>
-          <span>↗</span>
-        </a>
-      </article>
-
-      <article class="redirect-card">
-        <div>
-          <span class="redirect-category">PROTAGONISMO NEGRO &amp; INDÍGENA</span>
-          <h3>PretaLab</h3>
-          <p>
-            Plataforma que conecta mulheres negras e indígenas à tecnologia e inovação por meio de ciclos formativos gratuitos
-            em programação, dados e empreendedorismo digital.
-          </p>
-        </div>
-        <a href="https://www.pretalab.com/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
-          <span>Redirecionar para PretaLab</span>
-          <span>↗</span>
-        </a>
-      </article>
-
-      <article class="redirect-card">
-        <div>
-          <span class="redirect-category">FORMAÇÃO &amp; EMPREGABILIDADE FEMININA</span>
-          <h3>{reprograma}</h3>
-          <p>
-            Focada em diminuir o gap de gênero no setor de TI no Brasil, oferecendo bootcamps gratuitos de Front-End,
-            Back-End e conexão direta com vagas em empresas parceiras.
-          </p>
-        </div>
-        <a href="https://reprograma.com.br/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
-          <span>Redirecionar para {reprograma}</span>
-          <span>↗</span>
-        </a>
-      </article>
-
-      <article class="redirect-card">
-        <div>
-          <span class="redirect-category">MENTORIA &amp; LIDERANÇA EM CÓDIGO</span>
-          <h3>WoMakersCode</h3>
-          <p>
-            Comunidade global nascida no Brasil que já impactou dezenas de milhares de mulheres com trilhas gratuitas em Cloud,
-            Cibersegurança, Desenvolvimento de Sistemas e Git.
-          </p>
-        </div>
-        <a href="https://womakerscode.org/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
-          <span>Redirecionar para WoMakersCode</span>
-          <span>↗</span>
-        </a>
-      </article>
-
-      <article class="redirect-card">
-        <div>
-          <span class="redirect-category">SOCIEDADE BRASILEIRA DE COMPUTAÇÃO</span>
-          <h3>Meninas Digitais (SBC)</h3>
-          <p>
-            Programa institucional que incentiva alunas do ensino médio e técnico em Desenvolvimento de Sistemas a ingressarem
-            e permanecerem nas carreiras de computação em todo o Brasil.
-          </p>
-        </div>
-        <a href="https://meninas.sbc.org.br/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
-          <span>Redirecionar para Meninas Digitais</span>
-          <span>↗</span>
-        </a>
-      </article>
-
-      <article class="redirect-card">
-        <div>
-          <span class="redirect-category">COMUNIDADE PYTHON &amp; OPEN SOURCE</span>
-          <h3>PyLadies Brasil</h3>
-          <p>
-            Grupo internacional de mentoria com dezenas de capítulos no Brasil dedicado a ajudar mais mulheres a se tornarem
-            participantes ativas e líderes na comunidade Python e Software Livre.
-          </p>
-        </div>
-        <a href="https://brasil.pyladies.com/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
-          <span>Redirecionar para PyLadies Brasil</span>
-          <span>↗</span>
-        </a>
-      </article>
-    </div>
-  </section>
-
-  <!-- =========================================================
-       11. MODAL DE REDIRECIONAMENTO RÁPIDO
-       ========================================================= -->
-  <div class="redirect-modal-backdrop" id="redirect-modal" aria-hidden="true">
-    <div class="redirect-modal-box">
-      <div class="modal-top-bar">
-        <h3>⚡ Central de Redirecionamento Rápido</h3>
-        <button type="button" class="btn-close-modal" id="btn-close-modal">✕</button>
-      </div>
-      <p style="color: var(--text-body); font-size: 0.95rem; line-height: 1.5;">
-        Escolha para onde deseja ser redirecionada agora (portais oficiais de mulheres em DS ou seções deste projeto):
-      </p>
-
-      <div class="modal-redirect-list">
-        <a href="https://www.programaria.org/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
-          <span>PrograMaria</span><span>↗</span>
-        </a>
-        <a href="https://www.pretalab.com/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
-          <span>PretaLab</span><span>↗</span>
-        </a>
-        <a href="https://reprograma.com.br/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
-          <span>{reprograma}</span><span>↗</span>
-        </a>
-        <a href="https://womakerscode.org/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
-          <span>WoMakersCode</span><span>↗</span>
-        </a>
-        <a href="https://meninas.sbc.org.br/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
-          <span>Meninas Digitais SBC</span><span>↗</span>
-        </a>
-        <a href="https://www.freecodecamp.org/portuguese/" target="_blank" rel="noopener noreferrer" class="btn-external-redirect">
-          <span>freeCodeCamp (Estudos DS)</span><span>↗</span>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- =========================================================
-       12. RODAPÉ FULL-BLEED
-       ========================================================= -->
-  <footer class="footer-fullbleed">
-    <div>
-      <strong style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--pink-primary);">
-        ELAS NO DS // DESENVOLVIMENTO DE SISTEMAS
-      </strong>
-      <p>
-        Portal exclusivo de valorização histórica, inclusão interseccional e redirecionamento para mulheres na programação.
-      </p>
-    </div>
-    <div>
-      <p style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted);">
-        ROSA &amp; BRANCO • WEBGL 3D • INCLUSÃO ACIMA DE TUDO
-      </p>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- =====================================================================
+       4. INTERACTIVE DETAIL DRAWER / QUICK VIEW (FROSTED BACKDROP-BLUR-XL)
+       ===================================================================== -->
+  <div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+
+  <aside
+    id="detail-drawer"
+    class="drawer-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="drawer-title"
+    aria-hidden="true"
+  >
+    <!-- Drawer Header -->
+    <div class="p-6 border-b border-[#331022] flex items-start justify-between gap-4">
+      <div class="flex items-start gap-3.5">
+        <div id="drawer-icon-box" class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#ff2a85]/25 to-[#d946ef]/25 border border-[#ff2a85]/40 flex items-center justify-center font-mono font-bold text-sm text-[#fbcfe8] shrink-0">
+          RP
+        </div>
+        <div>
+          <div class="flex flex-wrap items-center gap-2">
+            <span id="drawer-id" class="font-mono text-[11px] text-[#f472b6]">#ELAS-001</span>
+            <span class="text-[#6b1d45]">•</span>
+            <span id="drawer-org" class="font-mono text-[11px] text-white font-semibold">{reprograma}</span>
+            <i data-lucide="badge-check" class="w-3.5 h-3.5 text-[#ff2a85]" title="Verificado"></i>
+          </div>
+          <h3 id="drawer-title" class="text-lg font-semibold text-white tracking-tight leading-snug mt-1">
+            Bootcamp Front-End &amp; Back-End Afirmativo
+          </h3>
+          <div class="flex flex-wrap items-center gap-2 mt-2.5" id="drawer-badges-row">
+            <!-- Status and Category pills -->
+          </div>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        id="btn-close-drawer"
+        class="p-2 rounded-full bg-white/5 border border-[#331022] text-[#f4b8d4] hover:text-white hover:border-[#ff2a85] transition-colors"
+        aria-label="Fechar painel (Esc)"
+      >
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+    <!-- Drawer Telemetry Strip -->
+    <div class="grid grid-cols-3 border-b border-[#331022] bg-[#0d0208]/70 divide-x divide-[#331022] font-mono">
+      <div class="p-3.5">
+        <span class="text-[10px] uppercase text-[#b87b98] block">Alcance / Vagas</span>
+        <strong id="drawer-reach" class="text-xs sm:text-sm text-white mt-0.5 block">150 vagas</strong>
+      </div>
+      <div class="p-3.5">
+        <span class="text-[10px] uppercase text-[#b87b98] block">Modalidade</span>
+        <strong id="drawer-modality" class="text-xs sm:text-sm text-white mt-0.5 block">100% Online</strong>
+      </div>
+      <div class="p-3.5">
+        <span class="text-[10px] uppercase text-[#b87b98] block">Custo / Bolsa</span>
+        <strong id="drawer-cost" class="text-xs sm:text-sm text-[#ff2a85] mt-0.5 block">Bolsa 100%</strong>
+      </div>
+    </div>
+
+    <!-- Drawer Tabs: Sobre, Requisitos, Mentoras & Impacto -->
+    <div class="px-6 pt-4 pb-3 border-b border-[#331022]">
+      <div class="segmented-control w-full grid grid-cols-3" id="drawer-tabs" role="tablist">
+        <button type="button" class="seg-pill active justify-center" data-drawer-tab="sobre" role="tab" aria-selected="true">
+          Sobre &amp; Mentoras
+        </button>
+        <button type="button" class="seg-pill justify-center" data-drawer-tab="requisitos" role="tab" aria-selected="false">
+          Elegibilidade
+        </button>
+        <button type="button" class="seg-pill justify-center" data-drawer-tab="impacto" role="tab" aria-selected="false">
+          Impacto Real
+        </button>
+      </div>
+    </div>
+
+    <!-- Drawer Scrollable Content -->
+    <div class="flex-1 overflow-y-auto p-6 space-y-5 text-sm text-[#fce7f3]" id="drawer-tab-content" data-lenis-prevent>
+      <!-- Injected dynamically via script.js -->
+    </div>
+
+    <!-- Drawer Footer CTA -->
+    <div class="p-5 border-t border-[#331022] bg-[#0d0208]/90 flex items-center justify-between gap-3">
+      <div class="font-mono text-[11px] text-[#b87b98]">
+        Tecla <kbd class="kbd-tag">Esc</kbd> para fechar
+      </div>
+      <a
+        id="drawer-external-link"
+        href="https://reprograma.com.br/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-capsule-rose !py-2.5 !px-6 !text-xs"
+      >
+        <span id="drawer-cta-label">Candidatar-se no Portal Oficial</span>
+        <span>↗</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- =====================================================================
+       5. MODAL: CATALOGAR PROGRAMA / CONECTAR
+       ===================================================================== -->
+  <div id="connect-modal-backdrop" class="modal-backdrop" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="connect-modal-title">
+      <div class="px-6 py-4 border-b border-[#331022] flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <span class="dot-pink"></span>
+          <h3 id="connect-modal-title" class="text-sm font-semibold text-white">
+            Catalogar Nova Iniciativa ou Vaga Afirmativa 🌸
+          </h3>
+        </div>
+        <button type="button" id="btn-close-connect-modal" class="text-[#f4b8d4] hover:text-white">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <form id="new-initiative-form" class="p-6 space-y-4 text-xs">
+        <p class="text-[#f4b8d4] leading-relaxed">
+          Adicione um programa de mentoria feminina, bolsa de estudos ou vaga afirmativa diretamente à tabela ativa:
+        </p>
+
+        <div class="space-y-1.5">
+          <label for="form-name" class="block font-mono text-[10px] text-[#fbcfe8] uppercase">Nome da Iniciativa / Programa *</label>
+          <input
+            type="text"
+            id="form-name"
+            required
+            placeholder="Ex: Mentoria Engenharia de Dados & IA para Mulheres"
+            class="studio-input w-full !rounded-xl px-3.5 py-2.5"
+          />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="space-y-1.5">
+            <label for="form-org" class="block font-mono text-[10px] text-[#fbcfe8] uppercase">Organização *</label>
+            <input
+              type="text"
+              id="form-org"
+              required
+              placeholder="Ex: Devas Data BR"
+              class="studio-input w-full !rounded-xl px-3.5 py-2.5"
+            />
+          </div>
+
+          <div class="space-y-1.5">
+            <label for="form-category" class="block font-mono text-[10px] text-[#fbcfe8] uppercase">Categoria *</label>
+            <select id="form-category" class="studio-input w-full !rounded-xl px-3.5 py-2.5">
+              <option value="Mentoria 1-on-1">Mentoria 1-on-1</option>
+              <option value="Educação Base">Educação Base</option>
+              <option value="Contratação">Contratação</option>
+              <option value="Liderança">Liderança</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="space-y-1.5">
+            <label for="form-status" class="block font-mono text-[10px] text-[#fbcfe8] uppercase">Status *</label>
+            <select id="form-status" class="studio-input w-full !rounded-xl px-3.5 py-2.5">
+              <option value="Inscrições Abertas">Inscrições Abertas</option>
+              <option value="Ativo">Ativo</option>
+              <option value="Em Expansão">Em Expansão</option>
+            </select>
+          </div>
+
+          <div class="space-y-1.5">
+            <label for="form-reach" class="block font-mono text-[10px] text-[#fbcfe8] uppercase">Alcance / Vagas *</label>
+            <input
+              type="text"
+              id="form-reach"
+              required
+              placeholder="Ex: 120 vagas"
+              class="studio-input w-full !rounded-xl px-3.5 py-2.5 font-mono"
+            />
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <label for="form-url" class="block font-mono text-[10px] text-[#fbcfe8] uppercase">Link Oficial de Inscrição *</label>
+          <input
+            type="url"
+            id="form-url"
+            required
+            value="https://womakerscode.org/"
+            class="studio-input w-full !rounded-xl px-3.5 py-2.5 font-mono"
+          />
+        </div>
+
+        <div class="pt-3 flex items-center justify-end gap-2.5 border-t border-[#331022]">
+          <button type="button" id="btn-cancel-connect-modal" class="btn-row-action !py-2 !px-4">
+            Cancelar
+          </button>
+          <button type="submit" class="btn-capsule-rose !py-2 !px-5 !text-xs">
+            <span>Publicar Iniciativa</span>
+            <span>→</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
 </body>
 </html>
