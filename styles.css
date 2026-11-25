@@ -703,3 +703,96 @@ body {
   border-color: var(--rose-primary);
   box-shadow: 0 0 20px rgba(255, 42, 133, 0.18);
 }
+
+/* ==========================================================================
+   INSPIRATION & INCENTIVE COMPONENTS
+   ========================================================================== */
+
+/* 1. Myth Buster Cards */
+.myth-card {
+  background: linear-gradient(165deg, rgba(28, 7, 20, 0.85) 0%, rgba(13, 3, 9, 0.95) 100%);
+  border: 1px solid var(--border-crisp);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.myth-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--rose-primary);
+  box-shadow: 0 16px 40px rgba(255, 42, 133, 0.18);
+}
+
+.myth-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--rose-primary), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.myth-card:hover::before {
+  opacity: 1;
+}
+
+/* 2. Interactive Vibe Selector Cards */
+.vibe-selector-card {
+  background-color: #12040c;
+  border: 1px solid var(--border-crisp);
+  border-radius: 16px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.vibe-selector-card:hover {
+  background-color: #200717;
+  border-color: var(--rose-soft);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(255, 42, 133, 0.2);
+}
+
+.vibe-selector-card.is-active {
+  background: linear-gradient(145deg, #28081c 0%, #170410 100%);
+  border-color: var(--rose-primary);
+  box-shadow: 0 0 28px rgba(255, 42, 133, 0.32), inset 0 0 20px rgba(255, 42, 133, 0.08);
+  transform: translateY(-2px);
+}
+
+/* 3. Pioneer Cards */
+.pioneer-card {
+  background: linear-gradient(160deg, rgba(25, 6, 17, 0.8) 0%, rgba(10, 2, 7, 0.92) 100%);
+  border: 1px solid var(--border-crisp);
+  border-radius: 18px;
+  padding: 24px;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pioneer-card:hover {
+  border-color: var(--rose-soft);
+  box-shadow: 0 14px 36px rgba(217, 70, 239, 0.16);
+  transform: translateY(-3px);
+}
+
+/* 4. Glow Utilities */
+.glow-pink-text {
+  text-shadow: 0 0 24px rgba(255, 42, 133, 0.55);
+}
+
+.manifesto-gradient-banner {
+  background: linear-gradient(135deg, rgba(255, 42, 133, 0.18) 0%, rgba(217, 70, 239, 0.14) 50%, rgba(8, 2, 5, 0.9) 100%);
+  border: 1px solid rgba(255, 42, 133, 0.35);
+  box-shadow: 0 20px 60px rgba(255, 42, 133, 0.15);
+}
+
