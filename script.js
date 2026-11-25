@@ -206,7 +206,7 @@ function initLenisSmoothScroll() {
 }
 
 // ==========================================================================
-// 2. HERO THREE.JS 3D KINETIC ROSE-QUARTZ ARC
+// 2. HERO THREE.JS 3D IRIDESCENT LIQUID ROSE-QUARTZ SCULPTURE
 // ==========================================================================
 function initKineticArc3D() {
   const canvas = document.getElementById("hero-arc-canvas");
@@ -237,134 +237,480 @@ function initKineticArc3D() {
 
   const { w, h } = setRendererSize();
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.35;
+  renderer.toneMappingExposure = 1.25;
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(36, w / h, 0.1, 100);
-  camera.position.set(0, 0, 12.2);
+  const camera = new THREE.PerspectiveCamera(40, w / h, 0.1, 100);
+  camera.position.set(0, 0, 11.5);
 
-  // Lighting
-  const ambientLight = new THREE.AmbientLight(0xffd6eb, 0.7);
-  scene.add(ambientLight);
+  // Root sculpture group with responsive placement
+  const sculptureGroup = new THREE.Group();
+  scene.add(sculptureGroup);
 
-  const dirLightKey = new THREE.DirectionalLight(0xffebf5, 3.6);
-  dirLightKey.position.set(7, 9, 8);
-  scene.add(dirLightKey);
+  function updateResponsiveLayout(width) {
+    if (width >= 1280) {
+      sculptureGroup.position.set(2.55, 0.35, 0);
+      sculptureGroup.scale.setScalar(1.05);
+    } else if (width >= 900) {
+      sculptureGroup.position.set(1.85, 0.35, 0);
+      sculptureGroup.scale.setScalar(0.9);
+    } else {
+      sculptureGroup.position.set(0.0, 0.85, -1.0);
+      sculptureGroup.scale.setScalar(0.72);
+    }
+  }
+  updateResponsiveLayout(w);
 
-  const dirLightRim = new THREE.DirectionalLight(0xff2a85, 3.5);
-  dirLightRim.position.set(-7, 5, -5);
-  scene.add(dirLightRim);
-
-  const pointLightFill = new THREE.PointLight(0xd946ef, 2.5, 28);
-  pointLightFill.position.set(2, -6, 6);
-  scene.add(pointLightFill);
-
-  const cursorSpecularLight = new THREE.PointLight(0xff80bf, 3.5, 18);
-  cursorSpecularLight.position.set(2, 2, 5);
-  scene.add(cursorSpecularLight);
-
-  // Card geometry builder
-  function createRoundedCardGeometry(width, height, radius, depth) {
-    const shape = new THREE.Shape();
-    const x = -width / 2;
-    const y = -height / 2;
-
-    shape.moveTo(x + radius, y);
-    shape.lineTo(x + width - radius, y);
-    shape.quadraticCurveTo(x + width, y, x + width, y + radius);
-    shape.lineTo(x + width, y + height - radius);
-    shape.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-    shape.lineTo(x + radius, y + height);
-    shape.quadraticCurveTo(x, y + height, x, y + height - radius);
-    shape.lineTo(x, y + radius);
-    shape.quadraticCurveTo(x, y, x + radius, y);
-
-    const extrudeSettings = {
-      depth: depth,
-      bevelEnabled: true,
-      bevelSegments: 5,
-      steps: 1,
-      bevelSize: 0.025,
-      bevelThickness: 0.025,
-      curveSegments: 16
-    };
-
-    const geo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-    geo.center();
-    return geo;
+  // Procedural soft radial glow texture helper
+  function createGlowTexture(stops) {
+    const texCanvas = document.createElement("canvas");
+    texCanvas.width = 128;
+    texCanvas.height = 128;
+    const ctx = texCanvas.getContext("2d");
+    const grad = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+    stops.forEach(([offset, color]) => grad.addColorStop(offset, color));
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 128, 128);
+    const texture = new THREE.CanvasTexture(texCanvas);
+    texture.needsUpdate = true;
+    return texture;
   }
 
-  const cardGeo = createRoundedCardGeometry(2.65, 1.64, 0.2, 0.048);
-  const edgesGeo = new THREE.EdgesGeometry(cardGeo, 18);
-
-  const rosePolycarbonateMat = new THREE.MeshPhysicalMaterial({
-    color: 0x2b0618,
-    emissive: 0x1a030f,
-    roughness: 0.14,
-    metalness: 0.18,
-    transmission: 0.56,
+  // Soft ambient aura backdrop behind the liquid sculpture
+  const auraTexture = createGlowTexture([
+    [0, "rgba(255, 42, 133, 0.45)"],
+    [0.35, "rgba(217, 70, 239, 0.22)"],
+    [0.7, "rgba(120, 16, 90, 0.06)"],
+    [1, "rgba(0, 0, 0, 0)"]
+  ]);
+  const auraMaterial = new THREE.SpriteMaterial({
+    map: auraTexture,
+    blending: THREE.AdditiveBlending,
     transparent: true,
-    opacity: 0.93,
-    reflectivity: 1.0,
-    clearcoat: 1.0,
-    clearcoatRoughness: 0.06
+    opacity: 0.55,
+    depthWrite: false
   });
+  const auraSprite = new THREE.Sprite(auraMaterial);
+  auraSprite.position.set(0, 0, -2.2);
+  auraSprite.scale.set(9.5, 9.5, 1);
+  sculptureGroup.add(auraSprite);
 
-  const roseFresnelEdgeMat = new THREE.LineBasicMaterial({
+  // ------------------------------------------------------------------------
+  // Centerpiece: Custom GLSL Iridescent Morphing Liquid Rose-Quartz Orb
+  // ------------------------------------------------------------------------
+  const orbVertexShader = `
+    uniform float uTime;
+    uniform vec2 uMouse;
+
+    varying vec3 vNormal;
+    varying vec3 vViewPos;
+    varying float vDisp;
+    varying vec3 vLocalNormal;
+
+    // 3D Simplex Noise (Ashima Arts)
+    vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+    vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+    vec4 permute(vec4 x) { return mod289(((x * 34.0) + 1.0) * x); }
+    vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
+
+    float snoise(vec3 v) {
+      const vec2 C = vec2(1.0 / 6.0, 1.0 / 3.0);
+      const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
+
+      vec3 i  = floor(v + dot(v, C.yyy));
+      vec3 x0 = v - i + dot(i, C.xxx);
+
+      vec3 g = step(x0.yzx, x0.xyz);
+      vec3 l = 1.0 - g;
+      vec3 i1 = min(g.xyz, l.zxy);
+      vec3 i2 = max(g.xyz, l.zxy);
+
+      vec3 x1 = x0 - i1 + C.xxx;
+      vec3 x2 = x0 - i2 + C.yyy;
+      vec3 x3 = x0 - D.yyy;
+
+      i = mod289(i);
+      vec4 p = permute(permute(permute(
+                i.z + vec4(0.0, i1.z, i2.z, 1.0))
+              + i.y + vec4(0.0, i1.y, i2.y, 1.0))
+              + i.x + vec4(0.0, i1.x, i2.x, 1.0));
+
+      float n_ = 0.142857142857;
+      vec3 ns = n_ * D.wyz - D.xzx;
+
+      vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
+
+      vec4 x_ = floor(j * ns.z);
+      vec4 y_ = floor(j - 7.0 * x_);
+
+      vec4 x = x_ * ns.x + ns.yyyy;
+      vec4 y = y_ * ns.x + ns.yyyy;
+      vec4 h = 1.0 - abs(x) - abs(y);
+
+      vec4 b0 = vec4(x.xy, y.xy);
+      vec4 b1 = vec4(x.zw, y.zw);
+
+      vec4 s0 = floor(b0) * 2.0 + 1.0;
+      vec4 s1 = floor(b1) * 2.0 + 1.0;
+      vec4 sh = -step(h, vec4(0.0));
+
+      vec4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
+      vec4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
+
+      vec3 p0 = vec3(a0.xy, h.x);
+      vec3 p1 = vec3(a0.zw, h.y);
+      vec3 p2 = vec3(a1.xy, h.z);
+      vec3 p3 = vec3(a1.zw, h.w);
+
+      vec4 norm = taylorInvSqrt(vec4(dot(p0, p0), dot(p1, p1), dot(p2, p2), dot(p3, p3)));
+      p0 *= norm.x;
+      p1 *= norm.y;
+      p2 *= norm.z;
+      p3 *= norm.w;
+
+      vec4 m = max(0.6 - vec4(dot(x0, x0), dot(x1, x1), dot(x2, x2), dot(x3, x3)), 0.0);
+      m = m * m;
+      return 42.0 * dot(m * m, vec4(dot(p0, x0), dot(p1, x1), dot(p2, x2), dot(p3, x3)));
+    }
+
+    float getDisplacement(vec3 dir, float t) {
+      float n1 = snoise(dir * 1.15 + vec3(t * 0.22, -t * 0.16, t * 0.18));
+      float n2 = snoise(dir * 2.35 + vec3(-t * 0.28, t * 0.24, -t * 0.14));
+      float mouseRipple = sin(dot(dir.xy, uMouse) * 4.2 - t * 2.1) * 0.028 * clamp(length(uMouse), 0.0, 1.0);
+      return n1 * 0.28 + n2 * 0.085 + mouseRipple;
+    }
+
+    void main() {
+      vec3 n = normalize(position);
+      vec3 up = abs(n.y) < 0.99 ? vec3(0.0, 1.0, 0.0) : vec3(1.0, 0.0, 0.0);
+      vec3 tangent = normalize(cross(up, n));
+      vec3 bitangent = normalize(cross(n, tangent));
+
+      float eps = 0.015;
+      vec3 dir1 = normalize(n + tangent * eps);
+      vec3 dir2 = normalize(n + bitangent * eps);
+
+      float d0 = getDisplacement(n, uTime);
+      float d1 = getDisplacement(dir1, uTime);
+      float d2 = getDisplacement(dir2, uTime);
+
+      float baseRadius = 2.05;
+      vec3 p0 = n * (baseRadius + d0);
+      vec3 p1 = dir1 * (baseRadius + d1);
+      vec3 p2 = dir2 * (baseRadius + d2);
+
+      vec3 displacedNormal = normalize(cross(p1 - p0, p2 - p0));
+
+      vec4 mvPosition = modelViewMatrix * vec4(p0, 1.0);
+      vNormal = normalize(normalMatrix * displacedNormal);
+      vViewPos = -mvPosition.xyz;
+      vDisp = d0;
+      vLocalNormal = displacedNormal;
+
+      gl_Position = projectionMatrix * mvPosition;
+    }
+  `;
+
+  const orbFragmentShader = `
+    uniform float uTime;
+
+    varying vec3 vNormal;
+    varying vec3 vViewPos;
+    varying float vDisp;
+    varying vec3 vLocalNormal;
+
+    void main() {
+      vec3 N = normalize(vNormal);
+      vec3 V = normalize(vViewPos);
+
+      float ndotv = clamp(dot(N, V), 0.0, 1.0);
+      float fresnel = pow(1.0 - ndotv, 2.5);
+      float secondaryFresnel = pow(1.0 - ndotv, 1.35);
+
+      // Virtual studio 3-point lighting
+      vec3 L1 = normalize(vec3(0.7, 0.8, 0.9));    // Key top-right
+      vec3 L2 = normalize(vec3(-0.85, -0.4, 0.35)); // Rim bottom-left
+      vec3 L3 = normalize(vec3(-0.5, 0.9, 0.4));    // Accent top-left
+
+      float wrap1 = clamp((dot(N, L1) + 0.45) / 1.45, 0.0, 1.0);
+      float wrap2 = clamp((dot(N, L2) + 0.35) / 1.35, 0.0, 1.0);
+      float wrap3 = clamp((dot(N, L3) + 0.3) / 1.3, 0.0, 1.0);
+
+      vec3 H1 = normalize(L1 + V);
+      vec3 H2 = normalize(L2 + V);
+      vec3 H3 = normalize(L3 + V);
+
+      float specSharp = pow(max(dot(N, H1), 0.0), 72.0);
+      float sheenBroad = pow(max(dot(N, H1), 0.0), 14.0);
+      float specRim = pow(max(dot(N, H2), 0.0), 32.0);
+      float specAccent = pow(max(dot(N, H3), 0.0), 26.0);
+
+      // Iridescent Rose-Quartz Palette
+      vec3 colObsidian = vec3(0.078, 0.012, 0.055);  // #14030e
+      vec3 colMagenta  = vec3(0.753, 0.149, 0.827);  // #c026d3
+      vec3 colFuchsia  = vec3(0.851, 0.275, 0.937);  // #d946ef
+      vec3 colRose     = vec3(1.0, 0.165, 0.522);    // #ff2a85
+      vec3 colViolet   = vec3(0.545, 0.361, 0.965);  // #8b5cf6
+      vec3 colPearl    = vec3(1.0, 0.894, 0.949);    // #ffe4f2
+
+      float dispNorm = clamp(vDisp * 2.2 + 0.5, 0.0, 1.0);
+      float iridShift = 0.5 + 0.5 * sin(vLocalNormal.y * 3.0 + vLocalNormal.x * 2.0 + uTime * 0.45);
+
+      vec3 baseColor = mix(colObsidian, colMagenta, wrap1 * 0.55 + dispNorm * 0.28);
+      baseColor = mix(baseColor, colFuchsia, wrap3 * 0.32 * iridShift);
+      baseColor = mix(baseColor, colViolet, secondaryFresnel * 0.34 * (1.0 - iridShift));
+      baseColor = mix(baseColor, colRose, fresnel * 0.78 + dispNorm * wrap2 * 0.28);
+
+      // Luminous silk sheen & specular highlights
+      baseColor += colRose * sheenBroad * 0.42;
+      baseColor += colFuchsia * specRim * 0.55;
+      baseColor += colViolet * specAccent * 0.35;
+      baseColor += colPearl * (fresnel * 0.58 + specSharp * 1.15);
+
+      gl_FragColor = vec4(baseColor, 1.0);
+    }
+  `;
+
+  const orbGeo = new THREE.SphereGeometry(2.05, 112, 112);
+  const orbUniforms = {
+    uTime: { value: 0 },
+    uMouse: { value: new THREE.Vector2(0, 0) }
+  };
+  const orbMat = new THREE.ShaderMaterial({
+    vertexShader: orbVertexShader,
+    fragmentShader: orbFragmentShader,
+    uniforms: orbUniforms
+  });
+  const orbMesh = new THREE.Mesh(orbGeo, orbMat);
+  sculptureGroup.add(orbMesh);
+
+  // Subtle Outer Tech Wireframe Lattice
+  const latticeGeo = new THREE.IcosahedronGeometry(2.58, 2);
+  const latticeMat = new THREE.MeshBasicMaterial({
     color: 0xf472b6,
+    wireframe: true,
     transparent: true,
-    opacity: 0.35
+    opacity: 0.075,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
   });
+  const latticeMesh = new THREE.Mesh(latticeGeo, latticeMat);
+  sculptureGroup.add(latticeMesh);
 
-  const brightPinkEdgeMat = new THREE.LineBasicMaterial({
-    color: 0xffb3d9,
-    transparent: true,
-    opacity: 0.7
-  });
+  // ------------------------------------------------------------------------
+  // 3 Flowing Fiber-Optic Orbital Rings + 6 Glowing Satellite Sparks
+  // ------------------------------------------------------------------------
+  const ringVertexShader = `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `;
 
-  const spiralRootGroup = new THREE.Group();
-  scene.add(spiralRootGroup);
+  const ringFragmentShader = `
+    uniform float uTime;
+    uniform float uSpeed;
+    uniform vec3 uColorA;
+    uniform vec3 uColorB;
 
-  const cardsPivotGroup = new THREE.Group();
-  spiralRootGroup.add(cardsPivotGroup);
+    varying vec2 vUv;
 
-  const CARD_COUNT = 24;
-  const cardItems = [];
+    void main() {
+      float phase = vUv.x * 6.2831853 * 2.0 - uTime * uSpeed;
+      float pulse = pow(0.5 + 0.5 * sin(phase), 6.0);
+      float alpha = mix(0.14, 0.95, pulse);
+      vec3 col = mix(uColorA, uColorB, pulse);
+      gl_FragColor = vec4(col, alpha);
+    }
+  `;
 
-  for (let i = 0; i < CARD_COUNT; i++) {
-    const t = i / (CARD_COUNT - 1);
-    const cardHolder = new THREE.Group();
-    const mesh = new THREE.Mesh(cardGeo, rosePolycarbonateMat);
-    const edgeLines = new THREE.LineSegments(
-      edgesGeo,
-      i % 4 === 0 ? brightPinkEdgeMat : roseFresnelEdgeMat
-    );
-    cardHolder.add(mesh);
-    cardHolder.add(edgeLines);
+  const sparkTexture = createGlowTexture([
+    [0, "rgba(255, 255, 255, 1.0)"],
+    [0.22, "rgba(255, 180, 222, 0.9)"],
+    [0.5, "rgba(255, 42, 133, 0.45)"],
+    [1, "rgba(0, 0, 0, 0)"]
+  ]);
 
-    // Dynamic parametric helix arc curve across the widescreen viewport
-    const arcAngle = (t - 0.5) * Math.PI * 1.5;
-    const radiusX = 6.2;
-    const radiusY = 2.8;
+  const ringConfigs = [
+    {
+      radius: 2.85,
+      tilt: [0.95, 0.35, 0.2],
+      speed: 1.6,
+      spinZ: 0.14,
+      colorA: 0xff2a85,
+      colorB: 0xffe4f2,
+      sparkScale: 0.34
+    },
+    {
+      radius: 3.25,
+      tilt: [-0.75, 0.65, -0.4],
+      speed: -1.25,
+      spinZ: -0.1,
+      colorA: 0xd946ef,
+      colorB: 0xfbcfe8,
+      sparkScale: 0.3
+    },
+    {
+      radius: 3.65,
+      tilt: [0.45, -0.85, 0.7],
+      speed: 1.05,
+      spinZ: 0.08,
+      colorA: 0xf472b6,
+      colorB: 0xffffff,
+      sparkScale: 0.28
+    }
+  ];
 
-    const posX = Math.cos(arcAngle) * radiusX + 3.2;
-    const posY = Math.sin(arcAngle) * radiusY + (1.0 - t) * 1.6 - 0.3;
-    const posZ = Math.sin(arcAngle * 1.8) * 2.2 - (1.0 - t) * 1.2;
+  const orbitalRings = [];
 
-    cardHolder.position.set(posX, posY, posZ);
-    cardHolder.rotation.x = 0.2 + (t - 0.5) * 0.4;
-    cardHolder.rotation.y = -arcAngle * 0.75;
-    cardHolder.rotation.z = (t - 0.5) * 0.3;
+  ringConfigs.forEach((cfg, idx) => {
+    const ringPivot = new THREE.Group();
+    ringPivot.rotation.set(cfg.tilt[0], cfg.tilt[1], cfg.tilt[2]);
+    sculptureGroup.add(ringPivot);
 
-    cardsPivotGroup.add(cardHolder);
-    cardItems.push({
-      holder: cardHolder,
-      basePos: cardHolder.position.clone(),
-      baseRot: cardHolder.rotation.clone(),
-      phase: t * Math.PI * 2,
-      floatSpeed: 0.9 + (i % 5) * 0.18
+    const ringGeo = new THREE.TorusGeometry(cfg.radius, 0.014, 12, 180);
+    const ringUniforms = {
+      uTime: { value: 0 },
+      uSpeed: { value: cfg.speed },
+      uColorA: { value: new THREE.Color(cfg.colorA) },
+      uColorB: { value: new THREE.Color(cfg.colorB) }
+    };
+    const ringMat = new THREE.ShaderMaterial({
+      vertexShader: ringVertexShader,
+      fragmentShader: ringFragmentShader,
+      uniforms: ringUniforms,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
     });
+    const ringMesh = new THREE.Mesh(ringGeo, ringMat);
+    ringPivot.add(ringMesh);
+
+    const sparks = [];
+    for (let s = 0; s < 2; s++) {
+      const spriteMat = new THREE.SpriteMaterial({
+        map: sparkTexture,
+        color: s === 0 ? 0xffffff : cfg.colorA,
+        blending: THREE.AdditiveBlending,
+        transparent: true,
+        opacity: 0.95,
+        depthWrite: false
+      });
+      const sprite = new THREE.Sprite(spriteMat);
+      const scale = cfg.sparkScale + (s === 0 ? 0.04 : 0);
+      sprite.scale.set(scale, scale, 1);
+      ringPivot.add(sprite);
+      sparks.push({
+        sprite,
+        offsetAngle: s * Math.PI + idx * 0.6
+      });
+    }
+
+    orbitalRings.push({
+      pivot: ringPivot,
+      uniforms: ringUniforms,
+      radius: cfg.radius,
+      speed: cfg.speed,
+      spinZ: cfg.spinZ,
+      sparks
+    });
+  });
+
+  // ------------------------------------------------------------------------
+  // Soft Bokeh 3D Stardust Particle Field
+  // ------------------------------------------------------------------------
+  const PARTICLE_COUNT = 240;
+  const positions = new Float32Array(PARTICLE_COUNT * 3);
+  const sizes = new Float32Array(PARTICLE_COUNT);
+  const phases = new Float32Array(PARTICLE_COUNT);
+  const colors = new Float32Array(PARTICLE_COUNT * 3);
+
+  const palette = [
+    new THREE.Color(0xff2a85),
+    new THREE.Color(0xf472b6),
+    new THREE.Color(0xd946ef),
+    new THREE.Color(0xfbcfe8),
+    new THREE.Color(0xa855f7)
+  ];
+
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+    positions[i * 3] = (Math.random() - 0.5) * 18;      // [-9, 9]
+    positions[i * 3 + 1] = (Math.random() - 0.5) * 11;  // [-5.5, 5.5]
+    positions[i * 3 + 2] = Math.random() * 9.5 - 6.0;   // [-6, 3.5]
+
+    sizes[i] = 14 + Math.random() * 28;
+    phases[i] = Math.random() * Math.PI * 2;
+
+    const c = palette[i % palette.length];
+    colors[i * 3] = c.r;
+    colors[i * 3 + 1] = c.g;
+    colors[i * 3 + 2] = c.b;
   }
+
+  const particleGeo = new THREE.BufferGeometry();
+  particleGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+  particleGeo.setAttribute("aSize", new THREE.BufferAttribute(sizes, 1));
+  particleGeo.setAttribute("aPhase", new THREE.BufferAttribute(phases, 1));
+  particleGeo.setAttribute("aColor", new THREE.BufferAttribute(colors, 3));
+
+  const particleVertexShader = `
+    uniform float uTime;
+    uniform float uPixelRatio;
+
+    attribute float aSize;
+    attribute float aPhase;
+    attribute vec3 aColor;
+
+    varying vec3 vColor;
+    varying float vPhase;
+
+    void main() {
+      vColor = aColor;
+      vPhase = aPhase;
+
+      vec3 pos = position;
+      pos.y += sin(uTime * 0.45 + aPhase) * 0.18;
+      pos.x += cos(uTime * 0.35 + aPhase * 1.3) * 0.14;
+
+      vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+      gl_PointSize = aSize * uPixelRatio * (8.0 / max(-mvPosition.z, 1.0));
+      gl_Position = projectionMatrix * mvPosition;
+    }
+  `;
+
+  const particleFragmentShader = `
+    uniform float uTime;
+
+    varying vec3 vColor;
+    varying float vPhase;
+
+    void main() {
+      float dist = length(gl_PointCoord - vec2(0.5));
+      float disc = smoothstep(0.5, 0.08, dist);
+      float twinkle = 0.55 + 0.45 * sin(uTime * 1.4 + vPhase);
+      float alpha = disc * twinkle * 0.72;
+      if (alpha < 0.01) discard;
+      gl_FragColor = vec4(vColor, alpha);
+    }
+  `;
+
+  const particleUniforms = {
+    uTime: { value: 0 },
+    uPixelRatio: { value: Math.min(window.devicePixelRatio || 1, 2) }
+  };
+
+  const particleMat = new THREE.ShaderMaterial({
+    vertexShader: particleVertexShader,
+    fragmentShader: particleFragmentShader,
+    uniforms: particleUniforms,
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+
+  const particlePoints = new THREE.Points(particleGeo, particleMat);
+  scene.add(particlePoints);
 
   // Pointer tracking
   let mouseTargetX = 0;
@@ -377,12 +723,32 @@ function initKineticArc3D() {
     mouseTargetY = -(e.clientY / window.innerHeight) * 2 + 1;
   });
 
+  // Visibility pause when hero is scrolled completely out of view
+  let isHeroVisible = true;
+  if (typeof IntersectionObserver !== "undefined") {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isHeroVisible = entry.isIntersecting;
+        });
+      },
+      { threshold: 0.02 }
+    );
+    observer.observe(heroSection);
+  }
+
   let lastTime = performance.now();
   let frameCount = 0;
   let fpsTimer = 0;
 
   function animate(now) {
     requestAnimationFrame(animate);
+
+    if (!isHeroVisible) {
+      lastTime = now;
+      return;
+    }
+
     const delta = Math.min((now - lastTime) / 1000, 0.1);
     lastTime = now;
 
@@ -397,25 +763,47 @@ function initKineticArc3D() {
       fpsTimer = 0;
     }
 
+    const timeSec = now * 0.001;
+
     // Smooth cursor interpolation
     mouseCurrentX += (mouseTargetX - mouseCurrentX) * 0.05;
     mouseCurrentY += (mouseTargetY - mouseCurrentY) * 0.05;
 
-    // Move specular light
-    cursorSpecularLight.position.x = mouseCurrentX * 8 + 2;
-    cursorSpecularLight.position.y = mouseCurrentY * 6 + 1;
+    // Update Orb shader & gentle rotation
+    orbUniforms.uTime.value = timeSec;
+    orbUniforms.uMouse.value.set(mouseCurrentX, mouseCurrentY);
+    orbMesh.rotation.y = timeSec * 0.12;
+    orbMesh.rotation.x = Math.sin(timeSec * 0.2) * 0.08;
 
-    // Subtle parallax tilt
-    cardsPivotGroup.rotation.y = mouseCurrentX * 0.22;
-    cardsPivotGroup.rotation.x = -mouseCurrentY * 0.16;
+    // Counter-rotate outer tech wireframe lattice
+    latticeMesh.rotation.y = -timeSec * 0.08;
+    latticeMesh.rotation.z = timeSec * 0.05;
 
-    // Float each card
-    const timeSec = now * 0.001;
-    cardItems.forEach((item) => {
-      const floatY = Math.sin(timeSec * item.floatSpeed + item.phase) * 0.12;
-      const floatRot = Math.cos(timeSec * 0.8 + item.phase) * 0.04;
-      item.holder.position.y = item.basePos.y + floatY;
-      item.holder.rotation.z = item.baseRot.z + floatRot;
+    // Subtle parallax tilt on root sculpture & stardust
+    sculptureGroup.rotation.y = mouseCurrentX * 0.24;
+    sculptureGroup.rotation.x = -mouseCurrentY * 0.18;
+
+    particlePoints.rotation.y = mouseCurrentX * 0.06;
+    particlePoints.rotation.x = -mouseCurrentY * 0.04;
+    particleUniforms.uTime.value = timeSec;
+
+    // Pulse aura gently
+    const auraScale = 9.5 + Math.sin(timeSec * 1.1) * 0.45;
+    auraSprite.scale.set(auraScale, auraScale, 1);
+
+    // Animate orbital rings & satellite sparks
+    orbitalRings.forEach((ring) => {
+      ring.uniforms.uTime.value = timeSec;
+      ring.pivot.rotation.z += delta * ring.spinZ;
+
+      ring.sparks.forEach((spark) => {
+        const angle = (timeSec * ring.speed * 0.5) + spark.offsetAngle;
+        spark.sprite.position.set(
+          Math.cos(angle) * ring.radius,
+          Math.sin(angle) * ring.radius,
+          0
+        );
+      });
     });
 
     renderer.render(scene, camera);
@@ -424,9 +812,11 @@ function initKineticArc3D() {
   requestAnimationFrame(animate);
 
   window.addEventListener("resize", () => {
-    const { w, h } = setRendererSize();
-    camera.aspect = w / h;
+    const { w: newW, h: newH } = setRendererSize();
+    camera.aspect = newW / newH;
     camera.updateProjectionMatrix();
+    particleUniforms.uPixelRatio.value = Math.min(window.devicePixelRatio || 1, 2);
+    updateResponsiveLayout(newW);
   });
 }
 

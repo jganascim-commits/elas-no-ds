@@ -173,8 +173,9 @@ body {
   z-index: 2;
   pointer-events: none;
   background:
-    radial-gradient(circle at 70% 35%, transparent 25%, rgba(8, 2, 5, 0.52) 78%, #080205 100%),
-    linear-gradient(to top, #080205 0%, rgba(8, 2, 5, 0.68) 26%, transparent 64%);
+    radial-gradient(circle at 72% 40%, transparent 28%, rgba(8, 2, 5, 0.45) 75%, #080205 100%),
+    linear-gradient(to right, rgba(8, 2, 5, 0.72) 0%, rgba(8, 2, 5, 0.28) 46%, transparent 72%),
+    linear-gradient(to top, #080205 0%, rgba(8, 2, 5, 0.62) 24%, transparent 60%);
 }
 
 /* Luminous Pink Capsule Button */
